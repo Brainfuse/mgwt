@@ -27,10 +27,6 @@ import com.google.gwt.dom.client.Style.Display;
 import com.google.gwt.dom.client.Style.Float;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.dom.client.StyleInjector;
-import com.google.gwt.event.logical.shared.CloseEvent;
-import com.google.gwt.event.logical.shared.CloseHandler;
-import com.google.gwt.event.logical.shared.ResizeEvent;
-import com.google.gwt.event.logical.shared.ResizeHandler;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.event.shared.SimpleEventBus;
@@ -38,13 +34,12 @@ import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.RootPanel;
-
 import com.googlecode.mgwt.dom.client.event.orientation.OrientationChangeEvent;
 import com.googlecode.mgwt.dom.client.event.orientation.OrientationChangeEvent.ORIENTATION;
 import com.googlecode.mgwt.dom.client.event.orientation.OrientationChangeHandler;
 import com.googlecode.mgwt.ui.client.MGWTSettings.ViewPort;
-import com.googlecode.mgwt.ui.client.theme.base.UtilCss;
 import com.googlecode.mgwt.ui.client.util.AddressBarUtil;
+import com.googlecode.mgwt.ui.client.util.OrientationHandler;
 
 /**
  * The MGWT Object is used to apply settings for an MGWT App. It also provides an instance of
@@ -60,15 +55,25 @@ public class MGWT {
 
   private static EventBus manager;
 
-  private static ORIENTATION currentOrientation;
+ 
   private static Timer timer;
 
   private static boolean scrollingDisabled;
   private static JavaScriptObject nativeJsFunction;
 
   private static AddressBarUtil addressBarUtil;
+  
+  private static OrientationHandler orientationHandler;
 
-  /**
+  public static OrientationHandler getOrientationHandler() {
+	  if ( orientationHandler == null){
+		  orientationHandler = GWT.create(OrientationHandler.class);
+		  
+	  }
+	return orientationHandler;
+}
+
+/**
    * Add a orientation handler to detect the device orientation
    * 
    * @param handler the handler to add
@@ -76,7 +81,7 @@ public class MGWT {
    * @return a {@link com.google.gwt.event.shared.HandlerRegistration} object.
    */
   public static HandlerRegistration addOrientationChangeHandler(OrientationChangeHandler handler) {
-    maybeSetupOrientation();
+    getOrientationHandler().maybeSetupOrientation(getManager());
     return getManager().addHandler(OrientationChangeEvent.getType(), handler);
   }
 
@@ -252,51 +257,8 @@ public class MGWT {
     return OS_DETECTION;
   }
 
-  /**
-   * Get the current orientation of the device
-   * 
-   * @return the current orientation of the device
-   */
-  public static ORIENTATION getOrientation() {
+  
 
-    if (!orientationSupport()) {
-      int height = Window.getClientHeight();
-      int width = Window.getClientWidth();
-
-      if (width > height) {
-        return ORIENTATION.LANDSCAPE;
-      } else {
-        return ORIENTATION.PORTRAIT;
-      }
-
-    } else {
-      int orientation = getOrientation0();
-
-      ORIENTATION o;
-      switch (orientation) {
-        case 0:
-        case 180:
-          o = ORIENTATION.PORTRAIT;
-          break;
-
-        case 90:
-        case -90:
-          o = ORIENTATION.LANDSCAPE;
-          break;
-
-        default:
-          throw new IllegalStateException("this should not happen!?");
-      }
-
-      return o;
-    }
-
-  }
-
-  private static void fireOrientationChangedEvent(ORIENTATION orientation) {
-    setClasses(orientation);
-    getManager().fireEvent(new OrientationChangeEvent(orientation));
-  }
 
   private static Element getHead() {
     NodeList<Element> elementsByTagName = Document.get().getElementsByTagName("head");
@@ -308,121 +270,8 @@ public class MGWT {
     return elementsByTagName.getItem(0);
   }
 
-  private static native int getOrientation0()/*-{
-		if (typeof ($wnd.orientation) == 'undefined') {
-			return 0;
-		}
-
-		return $wnd.orientation;
-  }-*/;
-
-  private static void onorientationChange(int orientation) {
-
-    ORIENTATION o;
-    switch (orientation) {
-      case 0:
-      case 180:
-        o = ORIENTATION.PORTRAIT;
-        break;
-
-      case 90:
-      case -90:
-        o = ORIENTATION.LANDSCAPE;
-        break;
-
-      default:
-        o = ORIENTATION.PORTRAIT;
-        break;
-    }
-    currentOrientation = o;
-    fireOrientationChangedEvent(o);
-
-  }
-
-  // update styles on body
-  private static void setClasses(ORIENTATION o) {
-    UtilCss utilCss = MGWTStyle.getTheme().getMGWTClientBundle().getUtilCss();
-    switch (o) {
-
-      case PORTRAIT:
-        Document.get().getBody().addClassName(utilCss.portrait());
-        Document.get().getBody().removeClassName(utilCss.landscape());
-        break;
-      case LANDSCAPE:
-        Document.get().getBody().addClassName(utilCss.landscape());
-        Document.get().getBody().removeClassName(utilCss.portrait());
-        break;
-
-      default:
-        break;
-    }
-  }
-
-  private native static boolean orientationSupport()/*-{
-		var ua = window.navigator.userAgent.toLowerCase();
-		if (ua.indexOf('android') != -1) {
-			return false;
-		}
-		if (ua.indexOf('iphone') != -1) {
-			return true;
-		}
-		if (ua.indexOf('ipad') != -1) {
-			return true;
-		}
-
-		return false;
-  }-*/;
-
-  private static boolean orientationInitialized;
-
-  private static void maybeSetupOrientation() {
-    if (orientationInitialized)
-      return;
-    if (!GWT.isClient()) {
-      return;
-    }
-
-    if (!orientationSupport()) {
-      Window.addResizeHandler(new ResizeHandler() {
-
-        @Override
-        public void onResize(ResizeEvent event) {
-          ORIENTATION orientation = getOrientation();
-          if (orientation != currentOrientation) {
-            currentOrientation = orientation;
-            fireOrientationChangedEvent(orientation);
-          }
-        }
-      });
-    } else {
-      nativeJsFunction = setupOrientation0();
-      Window.addCloseHandler(new CloseHandler<Window>() {
-
-        @Override
-        public void onClose(CloseEvent<Window> event) {
-          destroyOrientation(nativeJsFunction);
-
-        }
-      });
-    }
-
-  }
-
-  private static native JavaScriptObject setupOrientation0()/*-{
-
-		var func = $entry(function() {
-			@com.googlecode.mgwt.ui.client.MGWT::onorientationChange(I)($wnd.orientation);
-		});
-		$doc.body.onorientationchange = func;
-		$doc.addEventListener("orientationChanged", func);
-		return func;
-  }-*/;
-
-  private static native void destroyOrientation(JavaScriptObject o)/*-{
-		$doc.body.onorientationchange = null;
-		$doc.removeEventListener("orientationChanged", o);
-  }-*/;
-
+  
+ 
   private static native void setupPreventScrolling(Element el)/*-{
 		var func = function(event) {
 			event.preventDefault();
@@ -478,6 +327,10 @@ public class MGWT {
       manager = new SimpleEventBus();
     }
     return manager;
+  }
+  
+  public static ORIENTATION getOrientation(){
+	  return getOrientationHandler().getOrientation();
   }
 
 }
