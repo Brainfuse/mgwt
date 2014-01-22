@@ -41,9 +41,10 @@
 
 
 	<scm>
-		<url>https://code.google.com/p/mgwt/</url>
-		<connection>scm:git:https://code.google.com/p/mgwt/</connection>
-		<developerConnection>scm:git:https://code.google.com/p/mgwt/</developerConnection>
+		<url>https://github.com/Brainfuse/mgwt/</url>
+		<connection>scm:git:https://github.com/Brainfuse/mgwt</connection>
+        <developerConnection>scm:git:git@github.com:Brainfuse/mgwt.git</developerConnection>
+    
 	</scm>
 
 
@@ -115,6 +116,14 @@
 
 				</configuration>
 			</plugin>
+			 <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <version>2.7</version>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
 			
 			
 
