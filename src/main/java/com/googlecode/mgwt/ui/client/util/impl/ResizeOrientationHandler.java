@@ -1,5 +1,6 @@
 package com.googlecode.mgwt.ui.client.util.impl;
 
+import com.gargoylesoftware.htmlunit.javascript.host.Screen;
 import com.google.gwt.event.logical.shared.ResizeEvent;
 import com.google.gwt.event.logical.shared.ResizeHandler;
 import com.google.gwt.user.client.Window;
@@ -33,6 +34,16 @@ public class ResizeOrientationHandler extends BaseOrientationHandler implements
 	private native static boolean orientationEventSupported()/*-{
 		return "onorientationchange" in $wnd;
 	}-*/;
+	
+	private native static int getScreenWidth()/*-{
+		return screen.width;
+	}-*/;
+	
+	private native static int getScreenHeight()/*-{
+		return screen.height;
+	}-*/;
+	
+	
 
 	/**
 	 * Get the current orientation of the device
@@ -41,18 +52,19 @@ public class ResizeOrientationHandler extends BaseOrientationHandler implements
 	 */
 	public ORIENTATION getOrientation() {
 
-		if (!orientationSupport()) {
-			int height = Window.getClientHeight();
-			int width = Window.getClientWidth();
+		/**
+		 * Android devices ASUS, Samsung report a value that is shifted 90
+		 * degrees on various devices. This is why I changed to use the
+		 * screen.height instead of the value of window.orientation.
+		 */
+		int height = getScreenHeight();
 
-			if (width > height) {
-				return ORIENTATION.LANDSCAPE;
-			} else {
-				return ORIENTATION.PORTRAIT;
-			}
+		int width = getScreenWidth();
 
+		if (width > height) {
+			return ORIENTATION.LANDSCAPE;
 		} else {
-			return getBrowserOrientation();
+			return ORIENTATION.PORTRAIT;
 		}
 
 	}
