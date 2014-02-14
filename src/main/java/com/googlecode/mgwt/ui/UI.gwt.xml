@@ -204,10 +204,10 @@ under * the License.
         <when-type-is class="com.googlecode.mgwt.ui.client.widget.menu.SwipeMenuAppearance" />
     </replace-with>
     
-    <replace-with class="com.googlecode.mgwt.ui.client.util.impl.IOSOrientationHandler">
+    <replace-with class="com.googlecode.mgwt.ui.client.util.impl.ResizeOrientationHandler">
         <when-type-is class="com.googlecode.mgwt.ui.client.util.OrientationHandler" />
     </replace-with>
-    <!-- 
+   
     <replace-with class="com.googlecode.mgwt.ui.client.util.impl.IOSOrientationHandler">
         <when-type-is class="com.googlecode.mgwt.ui.client.util.OrientationHandler" />
             <any>
@@ -216,7 +216,7 @@ under * the License.
                 <when-property-is name="mgwt.os" value="retina" />
                 <when-property-is name="mgwt.os" value="ipad_retina"/>
             </any>
-    </replace-with> -->
+    </replace-with> 
 
 	<source path="client" />
 </module>
