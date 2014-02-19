@@ -8,5 +8,10 @@ public interface OrientationHandler {
 	public abstract ORIENTATION getOrientation();
 
 	void maybeSetupOrientation(EventBus manager);
+	/**
+	 * javascript callback for the orientationChange event.
+	 * @param orientation
+	 */
+	void onorientationChange(int orientation);
 	
 }

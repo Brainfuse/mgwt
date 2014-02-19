@@ -39,7 +39,12 @@ public abstract class BaseOrientationHandler implements OrientationHandler {
 	}
 	
 	protected abstract void doSetupOrientation();
-	
+	public void onorientationChange(int orientation) {
+
+		ORIENTATION o = getOrientation();
+		fireOrientationChangedEvent(o);
+
+	}
 	
 	void fireOrientationChangedEvent(ORIENTATION orientation) {
 		setClasses(orientation);

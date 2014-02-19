@@ -14,6 +14,7 @@ public class IOSOrientationHandler extends BaseOrientationHandler implements
 	@Override
 	public ORIENTATION getOrientation() {
 		return getBrowserOrientation();
+		
 	}
 
 	
