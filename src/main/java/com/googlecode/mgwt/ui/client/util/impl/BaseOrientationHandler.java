@@ -25,24 +25,25 @@ public abstract class BaseOrientationHandler implements OrientationHandler {
 		this.manager = manager;
 		if (orientationInitialized)
 			return;
+		initializeOrientation();
+	}
+
+	protected void initializeOrientation() {
 		if (!GWT.isClient()) {
 			return;
 		}
 		doSetupOrientation();
+		
+		currentOrientation = getOrientation();
 		orientationInitialized = true;
 	}
 	
 	protected abstract void doSetupOrientation();
 	
-	private void onorientationChange(int orientation) {
-
-		ORIENTATION o = getOrientation();
-		fireOrientationChangedEvent(o);
-
-	}
 	
 	void fireOrientationChangedEvent(ORIENTATION orientation) {
 		setClasses(orientation);
+		currentOrientation = orientation;
 		manager.fireEvent(new OrientationChangeEvent(orientation));
 	}
 
@@ -94,5 +95,41 @@ public abstract class BaseOrientationHandler implements OrientationHandler {
 		$doc.removeEventListener("orientationChanged", o);
 	}-*/;
 
+
+	protected static native int getOrientation0()/*-{
+		if (typeof ($wnd.orientation) == 'undefined') {
+			return 0;
+		}
+
+		return $wnd.orientation;
+	}-*/;
+	
+
+	protected static ORIENTATION getBrowserOrientation() {
+		int orientation = getOrientation0();
+	
+	      return getBrowserOrientationByAngle(orientation);
+	}
+
+	protected static ORIENTATION getBrowserOrientationByAngle(int orientation) {
+		ORIENTATION o;
+	      switch (orientation) {
+	        case 0:
+	        case 180:
+	          o = ORIENTATION.PORTRAIT;
+	          break;
+	
+	        case 90:
+	        case -90:
+	          o = ORIENTATION.LANDSCAPE;
+	          break;
+	
+	        default:
+	          throw new IllegalStateException("this should not happen!?");
+	      }
+	
+	      return o;
+	}
+	
 
 }
