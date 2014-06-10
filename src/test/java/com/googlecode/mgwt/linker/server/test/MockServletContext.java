@@ -4,12 +4,21 @@ import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Enumeration;
+import java.util.EventListener;
+import java.util.Map;
 import java.util.Set;
 
+import javax.servlet.Filter;
+import javax.servlet.FilterRegistration;
+import javax.servlet.FilterRegistration.Dynamic;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.Servlet;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.ServletRegistration;
+import javax.servlet.SessionCookieConfig;
+import javax.servlet.SessionTrackingMode;
+import javax.servlet.descriptor.JspConfigDescriptor;
 
 public class MockServletContext implements ServletContext {
 
@@ -20,7 +29,7 @@ public class MockServletContext implements ServletContext {
 	}
 
 	@Override
-	public Enumeration<?> getAttributeNames() {
+	public Enumeration<String> getAttributeNames() {
 
 		return null;
 	}
@@ -44,7 +53,7 @@ public class MockServletContext implements ServletContext {
 	}
 
 	@Override
-	public Enumeration<?> getInitParameterNames() {
+	public Enumeration<String> getInitParameterNames() {
 
 		return null;
 	}
@@ -98,7 +107,7 @@ public class MockServletContext implements ServletContext {
 	}
 
 	@Override
-	public Set<?> getResourcePaths(String arg0) {
+	public Set<String> getResourcePaths(String arg0) {
 
 		return null;
 	}
@@ -122,13 +131,13 @@ public class MockServletContext implements ServletContext {
 	}
 
 	@Override
-	public Enumeration<?> getServletNames() {
+	public Enumeration<String> getServletNames() {
 
 		return null;
 	}
 
 	@Override
-	public Enumeration<?> getServlets() {
+	public Enumeration<Servlet> getServlets() {
 
 		return null;
 	}
@@ -156,6 +165,246 @@ public class MockServletContext implements ServletContext {
 	@Override
 	public void setAttribute(String arg0, Object arg1) {
 
+	}
+
+	/* (non-Javadoc)
+	 * @see javax.servlet.ServletContext#addFilter(java.lang.String, java.lang.String)
+	 */
+	@Override
+	public Dynamic addFilter(String arg0, String arg1) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see javax.servlet.ServletContext#addFilter(java.lang.String, javax.servlet.Filter)
+	 */
+	@Override
+	public Dynamic addFilter(String arg0, Filter arg1) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see javax.servlet.ServletContext#addFilter(java.lang.String, java.lang.Class)
+	 */
+	@Override
+	public Dynamic addFilter(String arg0, Class<? extends Filter> arg1) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see javax.servlet.ServletContext#addListener(java.lang.String)
+	 */
+	@Override
+	public void addListener(String arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	/* (non-Javadoc)
+	 * @see javax.servlet.ServletContext#addListener(java.util.EventListener)
+	 */
+	@Override
+	public <T extends EventListener> void addListener(T arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	/* (non-Javadoc)
+	 * @see javax.servlet.ServletContext#addListener(java.lang.Class)
+	 */
+	@Override
+	public void addListener(Class<? extends EventListener> arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	/* (non-Javadoc)
+	 * @see javax.servlet.ServletContext#addServlet(java.lang.String, java.lang.String)
+	 */
+	@Override
+	public javax.servlet.ServletRegistration.Dynamic addServlet(String arg0,
+			String arg1) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see javax.servlet.ServletContext#addServlet(java.lang.String, javax.servlet.Servlet)
+	 */
+	@Override
+	public javax.servlet.ServletRegistration.Dynamic addServlet(String arg0,
+			Servlet arg1) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see javax.servlet.ServletContext#addServlet(java.lang.String, java.lang.Class)
+	 */
+	@Override
+	public javax.servlet.ServletRegistration.Dynamic addServlet(String arg0,
+			Class<? extends Servlet> arg1) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see javax.servlet.ServletContext#createFilter(java.lang.Class)
+	 */
+	@Override
+	public <T extends Filter> T createFilter(Class<T> arg0)
+			throws ServletException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see javax.servlet.ServletContext#createListener(java.lang.Class)
+	 */
+	@Override
+	public <T extends EventListener> T createListener(Class<T> arg0)
+			throws ServletException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see javax.servlet.ServletContext#createServlet(java.lang.Class)
+	 */
+	@Override
+	public <T extends Servlet> T createServlet(Class<T> arg0)
+			throws ServletException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see javax.servlet.ServletContext#declareRoles(java.lang.String[])
+	 */
+	@Override
+	public void declareRoles(String... arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	/* (non-Javadoc)
+	 * @see javax.servlet.ServletContext#getClassLoader()
+	 */
+	@Override
+	public ClassLoader getClassLoader() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see javax.servlet.ServletContext#getDefaultSessionTrackingModes()
+	 */
+	@Override
+	public Set<SessionTrackingMode> getDefaultSessionTrackingModes() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see javax.servlet.ServletContext#getEffectiveMajorVersion()
+	 */
+	@Override
+	public int getEffectiveMajorVersion() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	/* (non-Javadoc)
+	 * @see javax.servlet.ServletContext#getEffectiveMinorVersion()
+	 */
+	@Override
+	public int getEffectiveMinorVersion() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	/* (non-Javadoc)
+	 * @see javax.servlet.ServletContext#getEffectiveSessionTrackingModes()
+	 */
+	@Override
+	public Set<SessionTrackingMode> getEffectiveSessionTrackingModes() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see javax.servlet.ServletContext#getFilterRegistration(java.lang.String)
+	 */
+	@Override
+	public FilterRegistration getFilterRegistration(String arg0) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see javax.servlet.ServletContext#getFilterRegistrations()
+	 */
+	@Override
+	public Map<String, ? extends FilterRegistration> getFilterRegistrations() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see javax.servlet.ServletContext#getJspConfigDescriptor()
+	 */
+	@Override
+	public JspConfigDescriptor getJspConfigDescriptor() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see javax.servlet.ServletContext#getServletRegistration(java.lang.String)
+	 */
+	@Override
+	public ServletRegistration getServletRegistration(String arg0) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see javax.servlet.ServletContext#getServletRegistrations()
+	 */
+	@Override
+	public Map<String, ? extends ServletRegistration> getServletRegistrations() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see javax.servlet.ServletContext#getSessionCookieConfig()
+	 */
+	@Override
+	public SessionCookieConfig getSessionCookieConfig() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see javax.servlet.ServletContext#setInitParameter(java.lang.String, java.lang.String)
+	 */
+	@Override
+	public boolean setInitParameter(String arg0, String arg1) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	/* (non-Javadoc)
+	 * @see javax.servlet.ServletContext#setSessionTrackingModes(java.util.Set)
+	 */
+	@Override
+	public void setSessionTrackingModes(Set<SessionTrackingMode> arg0) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
