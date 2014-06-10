@@ -4,15 +4,24 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.security.Principal;
+import java.util.Collection;
 import java.util.Enumeration;
 import java.util.Locale;
 import java.util.Map;
 
+import javax.servlet.AsyncContext;
+import javax.servlet.DispatcherType;
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
 import javax.servlet.ServletInputStream;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 public class MockServletRequest implements HttpServletRequest {
 
@@ -23,7 +32,7 @@ public class MockServletRequest implements HttpServletRequest {
 	}
 
 	@Override
-	public Enumeration<?> getAttributeNames() {
+	public Enumeration<String> getAttributeNames() {
 
 		return null;
 	}
@@ -77,7 +86,7 @@ public class MockServletRequest implements HttpServletRequest {
 	}
 
 	@Override
-	public Enumeration<?> getLocales() {
+	public Enumeration<Locale> getLocales() {
 
 		return null;
 	}
@@ -89,13 +98,13 @@ public class MockServletRequest implements HttpServletRequest {
 	}
 
 	@Override
-	public Map<?, ?> getParameterMap() {
+	public Map<String, String[]> getParameterMap() {
 
 		return null;
 	}
 
 	@Override
-	public Enumeration<?> getParameterNames() {
+	public Enumeration<String> getParameterNames() {
 
 		return null;
 	}
@@ -218,13 +227,13 @@ public class MockServletRequest implements HttpServletRequest {
 	}
 
 	@Override
-	public Enumeration<?> getHeaderNames() {
+	public Enumeration<String> getHeaderNames() {
 
 		return null;
 	}
 
 	@Override
-	public Enumeration<?> getHeaders(String arg0) {
+	public Enumeration<String> getHeaders(String arg0) {
 
 		return null;
 	}
@@ -347,6 +356,116 @@ public class MockServletRequest implements HttpServletRequest {
 	public void setServletPath(String servletPath) {
 		this.servletPath = servletPath;
 
+	}
+
+	/* (non-Javadoc)
+	 * @see javax.servlet.ServletRequest#getAsyncContext()
+	 */
+	@Override
+	public AsyncContext getAsyncContext() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see javax.servlet.ServletRequest#getDispatcherType()
+	 */
+	@Override
+	public DispatcherType getDispatcherType() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see javax.servlet.ServletRequest#getServletContext()
+	 */
+	@Override
+	public ServletContext getServletContext() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see javax.servlet.ServletRequest#isAsyncStarted()
+	 */
+	@Override
+	public boolean isAsyncStarted() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	/* (non-Javadoc)
+	 * @see javax.servlet.ServletRequest#isAsyncSupported()
+	 */
+	@Override
+	public boolean isAsyncSupported() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	/* (non-Javadoc)
+	 * @see javax.servlet.ServletRequest#startAsync()
+	 */
+	@Override
+	public AsyncContext startAsync() throws IllegalStateException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see javax.servlet.ServletRequest#startAsync(javax.servlet.ServletRequest, javax.servlet.ServletResponse)
+	 */
+	@Override
+	public AsyncContext startAsync(ServletRequest arg0, ServletResponse arg1)
+			throws IllegalStateException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see javax.servlet.http.HttpServletRequest#authenticate(javax.servlet.http.HttpServletResponse)
+	 */
+	@Override
+	public boolean authenticate(HttpServletResponse arg0) throws IOException,
+			ServletException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	/* (non-Javadoc)
+	 * @see javax.servlet.http.HttpServletRequest#getPart(java.lang.String)
+	 */
+	@Override
+	public Part getPart(String arg0) throws IOException, ServletException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see javax.servlet.http.HttpServletRequest#getParts()
+	 */
+	@Override
+	public Collection<Part> getParts() throws IOException, ServletException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see javax.servlet.http.HttpServletRequest#login(java.lang.String, java.lang.String)
+	 */
+	@Override
+	public void login(String arg0, String arg1) throws ServletException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	/* (non-Javadoc)
+	 * @see javax.servlet.http.HttpServletRequest#logout()
+	 */
+	@Override
+	public void logout() throws ServletException {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
