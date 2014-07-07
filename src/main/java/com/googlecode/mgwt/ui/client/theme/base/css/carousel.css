@@ -17,6 +17,8 @@
 	.mgwt-Carousel {
 		display: \-moz-box;
 		\-moz-box-flex: 1;
+		 display: flex !important;
+	    flex: 1 !important;
 	}
 }
 
@@ -51,6 +53,9 @@
 	.mgwt-Carousel-Container {
 		display: \-moz-box;
 		\-moz-box-flex: 1;
+		 display: flex !important;
+	    flex: 1 !important;
+		
 	}
 }
 
@@ -72,6 +77,8 @@
 	.mgwt-Carousel-Indicator-Container {
 		display: \-moz-box;
 		\-moz-box-pack: center;
+		justify-content: center !important;
+		display: flex !important;
 	}
 }
 
