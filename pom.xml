@@ -16,7 +16,7 @@
 	<name>mgwt</name>
 
 	<properties>
-		<gwtversion>2.6.1</gwtversion>
+		<gwt.version>2.6.1</gwt.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
@@ -83,6 +83,69 @@
 						</goals>
 					</execution>
 				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>gwt-maven-plugin</artifactId>
+				<version>${gwt.version}</version>
+				<executions>
+					<execution>
+					   <id>resources</id>
+						<configuration>
+							<extraJvmArgs>-Xmx1024M -Xss1024k</extraJvmArgs>
+						</configuration>
+						<goals>
+							<goal>resources</goal>
+						</goals>
+					</execution>
+                    <execution>
+                        <id>compile</id>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                        <configuration>
+                            <extraJvmArgs>-Xmx1024M -Xss1024k</extraJvmArgs>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>gwt-code-server</id>
+                        <configuration>
+                          <!-- This doesn't work the gwt plugin doesn't get it -->
+                            <codeServerWorkDir>${project.build.directory}/m2e-wtp/web-resources</codeServerWorkDir>
+                            <webappDirectory>${project.build.directory}/m2e-wtp/web-resources</webappDirectory>
+                        </configuration>
+                        <goals>
+                            <goal>run-codeserver</goal>
+                        </goals>
+                        
+                    </execution>
+                    <execution>
+                        <id>test</id>
+                        <configuration>
+                            <extraJvmArgs>-Xmx1024M -Xss1024k</extraJvmArgs>
+                        </configuration>
+                        <goals>
+                            <goal>test</goal>
+                        </goals>
+                    </execution>
+				</executions>
+				<dependencies>
+					<dependency>
+						<groupId>com.google.gwt</groupId>
+						<artifactId>gwt-user</artifactId>
+						<version>${gwt.version}</version>
+					</dependency>
+					<dependency>
+						<groupId>com.google.gwt</groupId>
+						<artifactId>gwt-dev</artifactId>
+						<version>${gwt.version}</version>
+					</dependency>
+					<dependency>
+						<groupId>com.google.gwt</groupId>
+						<artifactId>gwt-codeserver</artifactId>
+						<version>${gwt.version}</version>
+					</dependency>
+				</dependencies>
 			</plugin>
 
 			<plugin>
@@ -169,13 +232,13 @@
 		<dependency>
 			<groupId>com.google.gwt</groupId>
 			<artifactId>gwt-user</artifactId>
-			<version>${gwtversion}</version>
+			<version>${gwt.version}</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.google.gwt</groupId>
 			<artifactId>gwt-dev</artifactId>
-			<version>${gwtversion}</version>
+			<version>${gwt.version}</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>

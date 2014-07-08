@@ -28,6 +28,7 @@ import com.googlecode.mgwt.ui.client.util.impl.CssUtilImpl;
  * @version $Id: $
  */
 public class CssUtil {
+	
 
 	private static final CssUtilImpl cssUtilImpl = GWT.create(CssUtilImpl.class);
 

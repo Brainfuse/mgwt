@@ -1,6 +1,8 @@
 package com.googlecode.mgwt.ui.client.util.impl;
 
+import com.google.gwt.core.client.JsArrayInteger;
 import com.google.gwt.user.client.Element;
+import com.googlecode.mgwt.ui.client.MGWT;
 
 public class CssUtilIE9Impl implements CssUtilImpl {
 
@@ -12,26 +14,27 @@ public class CssUtilIE9Impl implements CssUtilImpl {
 		// translate(1px,2px) -> working
 		// translate(1px,2px ) -> NOT working
 		// please ms stop making browsers
-		el.getStyle().setProperty("msTransform", "translate(" + x + "px," + y + "px)");
+		el.getStyle().setProperty("msTransform",
+				"translate(" + x + "px," + y + "px)");
 
 	}
 
 	@Override
 	public native void setDelay(Element el, int milliseconds) /*-{
 		el.style.msTransitionDelay = milliseconds + "ms";
-  }-*/;
+	}-*/;
 
 	@Override
 	public native void setOpacity(Element el, double opacity) /*-{
 		el.style.opacity = opacity;
 
-  }-*/;
+	}-*/;
 
 	@Override
 	public native void setDuration(Element el, int time) /*-{
 		el.style.msTransitionDuration = time + "ms";
 
-  }-*/;
+	}-*/;
 
 	@Override
 	public void rotate(Element el, int degree) {
@@ -42,8 +45,8 @@ public class CssUtilIE9Impl implements CssUtilImpl {
 
 	@Override
 	public boolean hasTransform() {
-		// TODO this is okay for IE9 review this for IE10
-		return false;
+
+		return true;
 	}
 
 	@Override
@@ -59,26 +62,36 @@ public class CssUtilIE9Impl implements CssUtilImpl {
 
 	@Override
 	public String getTransformProperty() {
-		// TODO Auto-generated method stub
-		return null;
+		return "msTransform";
 	}
 
 	@Override
 	public int[] getPositionFromTransForm(Element element) {
-		throw new RuntimeException("no ie support!");
+		JsArrayInteger array = getPositionFromTransform(element);
+		return new int[] { array.get(0), array.get(1) };
 	}
+
+	private native JsArrayInteger getPositionFromTransform(Element el)/*-{
+		var matrix = getComputedStyle(el, null)['msTransform'].replace(
+				/[^0-9-.,]/g, '').split(',');
+		if (matrix.length < 6)
+			return [ 0, 0 ];
+		var x = matrix[4] * 1;
+		var y = matrix[5] * 1;
+		return [ x, y ];
+	}-*/;
 
 	@Override
 	public native int getTopPositionFromCssPosition(Element element) /*-{
 		return getComputedStyle(that.scroller, null).top
 				.replace(/[^0-9-]/g, '') * 1;
-  }-*/;
+	}-*/;
 
 	@Override
 	public native int getLeftPositionFromCssPosition(Element element)/*-{
 		return getComputedStyle(that.scroller, null).left.replace(/[^0-9-]/g,
 				'') * 1;
-  }-*/;
+	}-*/;
 
 	@Override
 	public void resetTransform(Element element) {
@@ -87,32 +100,40 @@ public class CssUtilIE9Impl implements CssUtilImpl {
 	}
 
 	@Override
-	public void setTransistionProperty(Element element, String string) {
-		// TODO Auto-generated method stub
+	public native void setTransistionProperty(Element element, String string) /*-{
+		element.msTransitionProperty = string;
+	}-*/;
+
+	@Override
+	public native void setTransFormOrigin(Element el, int x, int y) /*-{
+		el.msTransformOrigin = x + " " + y;
+	}-*/;
+
+	@Override
+	public native void setTransistionTimingFunction(Element element,
+			String string) /*-{
+		el.msTransitionTimingFunction = string;
+	}-*/;
+
+	@Override
+	public void setTranslateAndZoom(Element el, int x, int y, double scale) {
+		String cssText = null;
+		if (MGWT.getOsDetection().isAndroid()
+				|| MGWT.getOsDetection().isDesktop()) {
+			cssText = "translate(" + x + "px, " + y + "px) scale(" + scale
+					+ ")";
+		} else {
+			cssText = "translate3d(" + x + "px, " + y + "px, 0px) scale("
+					+ scale + ")";
+		}
+		el.getStyle().setProperty(getTransformProperty(), cssText);
 
 	}
 
 	@Override
-	public void setTransFormOrigin(Element element, int x, int y) {
-		// TODO Auto-generated method stub
-
+	public void translatePercent(Element el, double x, double y) {
+		el.getStyle().setProperty("msTransform",
+				"translate(" + x + "%," + y + "%)");
 	}
-
-	@Override
-	public void setTransistionTimingFunction(Element element, String string) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void setTranslateAndZoom(Element element, int x, int y, double scale) {
-		// TODO Auto-generated method stub
-
-	}
-
-  @Override
-  public void translatePercent(Element el, double x, double y) {
-    el.getStyle().setProperty("msTransform", "translate(" + x + "%," + y + "%)");
-  }
 
 }
