@@ -971,8 +971,8 @@ public class ScrollPanelTouchImpl extends ScrollPanelImpl {
       return;
     }
 
-    int deltaX = this.x + wheelDeltaX;
-    int deltaY = this.y + wheelDeltaY;
+    int deltaX = this.x - wheelDeltaX;
+    int deltaY = this.y - wheelDeltaY;
 
     if (deltaX > 0)
       deltaX = 0;
