@@ -157,4 +157,9 @@ public class WebkitCssUtilImpl implements CssUtilImpl {
 
   }
 
+	@Override
+	public boolean hasAnimationEnd() {
+		return true;
+	}
+
 }

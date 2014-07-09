@@ -127,4 +127,9 @@ public class OperaCssUtilImpl implements CssUtilImpl {
     // TODO Auto-generated method stub
 
   }
+
+	@Override
+	public boolean hasAnimationEnd() {
+		return true;
+	}
 }

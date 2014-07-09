@@ -109,4 +109,9 @@ public class CssUtil {
 		cssUtilImpl.setTranslateAndZoom(element, x, y, scale);
 
 	}
+
+	public static boolean hasAnimationEnd() {
+		return cssUtilImpl.hasAnimationEnd();
+		
+	}
 }

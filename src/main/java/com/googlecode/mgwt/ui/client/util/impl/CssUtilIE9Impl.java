@@ -136,4 +136,9 @@ public class CssUtilIE9Impl implements CssUtilImpl {
 				"translate(" + x + "%," + y + "%)");
 	}
 
+	@Override
+	public boolean hasAnimationEnd() {
+		return false;
+	}
+
 }

@@ -155,4 +155,9 @@ public class HTML5CssUtilImpl implements CssUtilImpl {
 
   }
 
+	@Override
+	public boolean hasAnimationEnd() {
+		return true;
+	}
+
 }

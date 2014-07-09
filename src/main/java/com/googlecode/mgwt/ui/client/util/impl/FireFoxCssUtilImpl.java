@@ -121,4 +121,9 @@ public class FireFoxCssUtilImpl implements CssUtilImpl {
 
   }
 
+@Override
+public boolean hasAnimationEnd() {
+	return true;
+}
+
 }

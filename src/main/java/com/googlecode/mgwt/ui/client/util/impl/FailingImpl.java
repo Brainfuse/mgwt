@@ -112,4 +112,9 @@ public class FailingImpl implements CssUtilImpl {
 
   }
 
+@Override
+public boolean hasAnimationEnd() {
+	return false;
+}
+
 }
