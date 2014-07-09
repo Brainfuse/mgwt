@@ -80,7 +80,6 @@ under * the License.
 		 <all> 
    			<when-property-is name="user.agent" value="safari" />
   		</all>
-		
 	</replace-with>
 	
 	<replace-with class="com.googlecode.mgwt.ui.client.util.impl.HTML5CssUtilImpl">
@@ -209,6 +208,15 @@ under * the License.
                 <when-property-is name="mgwt.os" value="ipad_retina"/>
             </any>
     </replace-with> 
+    <replace-with class="com.googlecode.mgwt.ui.client.widget.impl.LayoutPanelDefaultImpl">
+		<when-type-is class="com.googlecode.mgwt.ui.client.widget.impl.LayoutPanelBaseImpl" />
+	</replace-with>
+    <replace-with class="com.googlecode.mgwt.ui.client.widget.impl.LayoutPanelIE9Impl">
+		<when-type-is class="com.googlecode.mgwt.ui.client.widget.impl.LayoutPanelBaseImpl" />
+		 <all> 
+   			<when-property-is name="user.agent" value="ie9" />
+  		</all>
+	</replace-with>
 
 	<source path="client" />
 </module>

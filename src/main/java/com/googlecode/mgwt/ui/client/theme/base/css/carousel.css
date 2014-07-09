@@ -17,7 +17,7 @@
 	.mgwt-Carousel {
 		display: \-moz-box;
 		\-moz-box-flex: 1;
-		 display: flex !important;
+		display: flex !important;
 	    flex: 1 !important;
 	}
 }

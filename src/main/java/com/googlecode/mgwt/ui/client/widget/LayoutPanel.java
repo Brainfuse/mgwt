@@ -17,13 +17,13 @@ package com.googlecode.mgwt.ui.client.widget;
 
 import java.util.Iterator;
 
+import com.google.gwt.core.shared.GWT;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.InsertPanel;
 import com.google.gwt.user.client.ui.Widget;
-import com.googlecode.mgwt.ui.client.MGWTStyle;
 import com.googlecode.mgwt.ui.client.theme.base.LayoutCss;
+import com.googlecode.mgwt.ui.client.widget.impl.LayoutPanelBaseImpl;
 
 /**
  * A layout panel can resize children to take up remaining space on the screen
@@ -37,140 +37,137 @@ import com.googlecode.mgwt.ui.client.theme.base.LayoutCss;
  * @version $Id: $
  */
 public class LayoutPanel extends Composite implements HasWidgets, InsertPanel {
-	private FlowPanel main;
-	private final LayoutCss css;
-
-	/**
-	 * Construct a layout panel with a given css
-	 * 
-	 * @param css the css to use
-	 */
-	public LayoutPanel(LayoutCss css) {
-		this.css = css;
-		css.ensureInjected();
-		main = new FlowPanel();
-		initWidget(main);
-
-		main.addStyleName(css.fillPanel());
-	}
+	protected final LayoutPanelBaseImpl impl = GWT
+			.create(LayoutPanelBaseImpl.class);
 
 	/**
 	 * Construct a layout panel
 	 */
 	public LayoutPanel() {
-		this(MGWTStyle.getTheme().getMGWTClientBundle().getLayoutCss());
+		initWidget(impl);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see com.google.gwt.user.client.ui.HasWidgets#add(com.google.gwt.user.client.ui.Widget)
-	 */
-	/** {@inheritDoc} */
-	@Override
 	public void add(Widget w) {
-
-		//TODO markup interface?
-		if (w instanceof ScrollPanel || w instanceof HeaderList) {
-			w.addStyleName(css.fillPanelExpandChild());
-		}
-
-		main.add(w);
+		impl.add(w);
 	}
 
-	/**
-	 * Layout children horizontally
-	 * 
-	 * default: false
-	 * 
-	 * @param horiontal true to layout children horizontally
-	 */
 	public void setHorizontal(boolean horiontal) {
-		if (horiontal) {
-			addStyleName(css.fillPanelHorizontal());
-		} else {
-			removeStyleName(css.fillPanelHorizontal());
-		}
+		impl.setHorizontal(horiontal);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see com.google.gwt.user.client.ui.HasWidgets#clear()
-	 */
-	/** {@inheritDoc} */
-	@Override
 	public void clear() {
-		main.clear();
-
+		impl.clear();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see com.google.gwt.user.client.ui.HasWidgets#iterator()
-	 */
-	/** {@inheritDoc} */
-	@Override
 	public Iterator<Widget> iterator() {
-		return main.iterator();
+		return impl.iterator();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see com.google.gwt.user.client.ui.HasWidgets#remove(com.google.gwt.user.client.ui.Widget)
-	 */
-	/** {@inheritDoc} */
-	@Override
 	public boolean remove(Widget w) {
-		return main.remove(w);
+		return impl.remove(w);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see com.google.gwt.user.client.ui.IndexedPanel#getWidget(int)
-	 */
-	/** {@inheritDoc} */
-	@Override
 	public Widget getWidget(int index) {
-		return main.getWidget(index);
+		return impl.getWidget(index);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see com.google.gwt.user.client.ui.IndexedPanel#getWidgetCount()
-	 */
-	/** {@inheritDoc} */
+	public boolean remove(int index) {
+		return impl.remove(index);
+	}
+
+	public void addStyleDependentName(String styleSuffix) {
+		impl.addStyleDependentName(styleSuffix);
+	}
+
+	public void addStyleName(String style) {
+		impl.addStyleName(style);
+	}
+
+	public int getAbsoluteLeft() {
+		return impl.getAbsoluteLeft();
+	}
+
+	public int getAbsoluteTop() {
+		return impl.getAbsoluteTop();
+	}
+
+	public int getOffsetHeight() {
+		return impl.getOffsetHeight();
+	}
+
+	public int getOffsetWidth() {
+		return impl.getOffsetWidth();
+	}
+
+	public String getStyleName() {
+		return impl.getStyleName();
+	}
+
+	public String getStylePrimaryName() {
+		return impl.getStylePrimaryName();
+	}
+
+	public String getTitle() {
+		return impl.getTitle();
+	}
+
+	public boolean isVisible() {
+		return impl.isVisible();
+	}
+
+	public void removeStyleDependentName(String styleSuffix) {
+		impl.removeStyleDependentName(styleSuffix);
+	}
+
+	public void removeStyleName(String style) {
+		impl.removeStyleName(style);
+	}
+
+	public void setHeight(String height) {
+		impl.setHeight(height);
+	}
+
+	public void setPixelSize(int width, int height) {
+		impl.setPixelSize(width, height);
+	}
+
+	public void setSize(String width, String height) {
+		impl.setSize(width, height);
+	}
+
+	public void setStyleDependentName(String styleSuffix, boolean add) {
+		impl.setStyleDependentName(styleSuffix, add);
+	}
+
+	public void setStyleName(String style, boolean add) {
+		impl.setStyleName(style, add);
+	}
+
+	public void setStyleName(String style) {
+		impl.setStyleName(style);
+	}
+
+	public void setStylePrimaryName(String style) {
+		impl.setStylePrimaryName(style);
+	}
+
+	public String toString() {
+		return impl.toString();
+	}
+
 	@Override
 	public int getWidgetCount() {
-		return main.getWidgetCount();
+		return impl.getWidgetCount();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see com.google.gwt.user.client.ui.IndexedPanel#getWidgetIndex(com.google.gwt.user.client.ui.Widget)
-	 */
-	/** {@inheritDoc} */
 	@Override
 	public int getWidgetIndex(Widget child) {
-		return main.getWidgetIndex(child);
+		return impl.getWidgetIndex(child);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see com.google.gwt.user.client.ui.IndexedPanel#remove(int)
-	 */
-	/** {@inheritDoc} */
-	@Override
-	public boolean remove(int index) {
-		return main.remove(index);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see com.google.gwt.user.client.ui.InsertPanel#insert(com.google.gwt.user.client.ui.Widget, int)
-	 */
-	/** {@inheritDoc} */
 	@Override
 	public void insert(Widget w, int beforeIndex) {
-		main.insert(w, beforeIndex);
-
+		impl.insert(w, beforeIndex);
 	}
+
 }
