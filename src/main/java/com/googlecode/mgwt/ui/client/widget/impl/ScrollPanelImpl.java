@@ -39,158 +39,177 @@ import com.googlecode.mgwt.ui.client.widget.event.scroll.ScrollTouchEndEvent;
  */
 public abstract class ScrollPanelImpl extends Composite implements HasWidgets {
 
-  /**
-   * instruct the panel to use position absolute instead of translate3d
-   * 
-   * on android devices input fields behave strange when used with translate3d
-   * 
-   * take a look into the mgwt docs
-   * 
-   * @param pos true to use absolute position default: translate3d
-   */
-  public abstract void setUsePos(boolean pos);
+	/**
+	 * instruct the panel to use position absolute instead of translate3d
+	 * 
+	 * on android devices input fields behave strange when used with translate3d
+	 * 
+	 * take a look into the mgwt docs
+	 * 
+	 * @param pos
+	 *            true to use absolute position default: translate3d
+	 */
+	public abstract void setUsePos(boolean pos);
 
-  /**
-   * Scroll to a given position in the specified time
-   * 
-   * @param destX the new position x
-   * @param destY the new position y
-   * @param newDuration the duration
-   */
-  public abstract void scrollTo(int destX, int destY, int newDuration);
+	/**
+	 * Scroll to a given position in the specified time
+	 * 
+	 * @param destX
+	 *            the new position x
+	 * @param destY
+	 *            the new position y
+	 * @param newDuration
+	 *            the duration
+	 */
+	public abstract void scrollTo(int destX, int destY, int newDuration);
 
-  /**
-   * Is scrolling enabled in x-axis
-   * 
-   * @return true if scrolling is enabled
-   */
-  public abstract boolean isScrollingEnabledX();
+	/**
+	 * Is scrolling enabled in x-axis
+	 * 
+	 * @return true if scrolling is enabled
+	 */
+	public abstract boolean isScrollingEnabledX();
 
-  /**
-   * enable scrolling in x-axis
-   * 
-   * @param scrollingEnabledX true to enable scrolling
-   */
-  public abstract void setScrollingEnabledX(boolean scrollingEnabledX);
+	/**
+	 * enable scrolling in x-axis
+	 * 
+	 * @param scrollingEnabledX
+	 *            true to enable scrolling
+	 */
+	public abstract void setScrollingEnabledX(boolean scrollingEnabledX);
 
-  /**
-   * Is scrolling enabled in y-axis
-   * 
-   * @return true if scrolling is enabled
-   */
-  public abstract boolean isScrollingEnabledY();
+	/**
+	 * Is scrolling enabled in y-axis
+	 * 
+	 * @return true if scrolling is enabled
+	 */
+	public abstract boolean isScrollingEnabledY();
 
-  /**
-   * enable scrolling in y-axis
-   * 
-   * @param scrollingEnabledY a boolean.
-   */
-  public abstract void setScrollingEnabledY(boolean scrollingEnabledY);
+	/**
+	 * enable scrolling in y-axis
+	 * 
+	 * @param scrollingEnabledY
+	 *            a boolean.
+	 */
+	public abstract void setScrollingEnabledY(boolean scrollingEnabledY);
 
-  /**
-   * set the content of the scrollable area
-   * 
-   * @param child the content of the scrollable area
-   */
-  public abstract void setWidget(IsWidget child);
+	/**
+	 * set the content of the scrollable area
+	 * 
+	 * @param child
+	 *            the content of the scrollable area
+	 */
+	public abstract void setWidget(IsWidget child);
 
-  /**
-   * Recalculate dimensions for scrolling
-   * 
-   * (needs to be called when the content of the childarea changes without setting a new child)
-   */
-  public abstract void refresh();
+	/**
+	 * Recalculate dimensions for scrolling
+	 * 
+	 * (needs to be called when the content of the childarea changes without
+	 * setting a new child)
+	 */
+	public abstract void refresh();
 
-  public abstract void setOffSetY(int y);
+	public abstract void setOffSetY(int y);
 
-  public abstract void setMaxScrollY(int y);
+	public abstract void setMaxScrollY(int y);
 
-  public abstract int getMaxScrollY();
+	public abstract int getMaxScrollY();
 
-  public abstract void setMinScrollY(int y);
+	public abstract void setMinScrollY(int y);
 
-  public abstract int getMinScrollY();
+	public abstract int getMinScrollY();
 
-  public abstract void scrollTo(int x, int y, int time, boolean relative);
+	public abstract void scrollTo(int x, int y, int time, boolean relative);
 
-  public abstract void scrollToPage(int pageX, int pageY, int time);
+	public abstract void scrollToPage(int pageX, int pageY, int time);
 
-  public abstract void setBounce(boolean bounce);
+	public abstract void setBounce(boolean bounce);
 
-  public abstract void setMomentum(boolean momentum);
+	public abstract void setMomentum(boolean momentum);
 
-  public abstract void setSnap(boolean snap);
+	public abstract void setSnap(boolean snap);
 
-  public abstract void setSnapThreshold(int threshold);
+	public abstract void setSnapThreshold(int threshold);
 
-  public HandlerRegistration addBeforeScrollStartHandler(BeforeScrollStartEvent.Handler handler) {
-    return addHandler(handler, BeforeScrollStartEvent.getTYPE());
-  }
+	public HandlerRegistration addBeforeScrollStartHandler(
+			BeforeScrollStartEvent.Handler handler) {
+		return addHandler(handler, BeforeScrollStartEvent.getTYPE());
+	}
 
-  public HandlerRegistration addBeforeScrollMoveHandler(BeforeScrollMoveEvent.Handler handler) {
-    return addHandler(handler, BeforeScrollMoveEvent.getTYPE());
-  }
+	public HandlerRegistration addBeforeScrollMoveHandler(
+			BeforeScrollMoveEvent.Handler handler) {
+		return addHandler(handler, BeforeScrollMoveEvent.getTYPE());
+	}
 
-  public HandlerRegistration addBeforeScrollEndHandler(BeforeScrollEndEvent.Handler handler) {
-    return addHandler(handler, BeforeScrollEndEvent.getTYPE());
-  }
+	public HandlerRegistration addBeforeScrollEndHandler(
+			BeforeScrollEndEvent.Handler handler) {
+		return addHandler(handler, BeforeScrollEndEvent.getTYPE());
+	}
 
-  public HandlerRegistration addScrollEndHandler(ScrollEndEvent.Handler handler) {
-    return addHandler(handler, ScrollEndEvent.getTYPE());
-  }
+	public HandlerRegistration addScrollEndHandler(
+			ScrollEndEvent.Handler handler) {
+		return addHandler(handler, ScrollEndEvent.getTYPE());
+	}
 
-  public HandlerRegistration addScrollStartHandler(ScrollStartEvent.Handler handler) {
-    return addHandler(handler, ScrollStartEvent.getTYPE());
-  }
+	public HandlerRegistration addScrollStartHandler(
+			ScrollStartEvent.Handler handler) {
+		return addHandler(handler, ScrollStartEvent.getTYPE());
+	}
 
-  public HandlerRegistration addScrollMoveHandler(ScrollMoveEvent.Handler handler) {
-    return addHandler(handler, ScrollMoveEvent.getTYPE());
-  }
+	public HandlerRegistration addScrollMoveHandler(
+			ScrollMoveEvent.Handler handler) {
+		return addHandler(handler, ScrollMoveEvent.getTYPE());
+	}
 
-  public HandlerRegistration addScrollRefreshHandler(ScrollRefreshEvent.Handler handler) {
-    return addHandler(handler, ScrollRefreshEvent.getTYPE());
-  }
+	public HandlerRegistration addScrollRefreshHandler(
+			ScrollRefreshEvent.Handler handler) {
+		return addHandler(handler, ScrollRefreshEvent.getTYPE());
+	}
 
-  public HandlerRegistration addScrollTouchEndHandler(ScrollTouchEndEvent.Handler handler) {
-    return addHandler(handler, ScrollTouchEndEvent.getTYPE());
-  }
+	public HandlerRegistration addScrollTouchEndHandler(
+			ScrollTouchEndEvent.Handler handler) {
+		return addHandler(handler, ScrollTouchEndEvent.getTYPE());
+	}
 
-  public HandlerRegistration addScrollAnimationStartHandler(Handler handler) {
-    return addHandler(handler, ScrollAnimationStartEvent.getTYPE());
-  }
+	public HandlerRegistration addScrollAnimationStartHandler(Handler handler) {
+		return addHandler(handler, ScrollAnimationStartEvent.getTYPE());
+	}
 
-  public HandlerRegistration addScrollAnimationMoveHandler(ScrollAnimationMoveEvent.Handler handler) {
-    return addHandler(handler, ScrollAnimationMoveEvent.getTYPE());
-  }
+	public HandlerRegistration addScrollAnimationMoveHandler(
+			ScrollAnimationMoveEvent.Handler handler) {
+		return addHandler(handler, ScrollAnimationMoveEvent.getTYPE());
+	}
 
-  public HandlerRegistration addScrollAnimationEndHandler(ScrollAnimationEndEvent.Handler handler) {
-    return addHandler(handler, ScrollAnimationEndEvent.getTYPE());
-  }
+	public HandlerRegistration addScrollAnimationEndHandler(
+			ScrollAnimationEndEvent.Handler handler) {
+		return addHandler(handler, ScrollAnimationEndEvent.getTYPE());
+	}
 
-  public abstract int getY();
+	public abstract int getY();
 
-  public abstract int getX();
+	public abstract int getX();
 
-  public abstract void setBounceFactor(double factor);
+	public abstract void setBounceFactor(double factor);
 
-  public abstract void setShowScrollBarX(boolean b);
+	public abstract void setShowScrollBarX(boolean b);
 
-  public abstract void setShowScrollBarY(boolean b);
+	public abstract void setShowScrollBarY(boolean b);
 
-  public abstract int getCurrentPageX();
+	public abstract int getCurrentPageX();
 
-  public abstract int getCurrentPageY();
+	public abstract int getCurrentPageY();
 
-  public abstract void setAutoHandleResize(boolean handle);
+	public abstract void setAutoHandleResize(boolean handle);
 
-  public abstract void setOffSetMaxY(int height);
+	public abstract void setOffSetMaxY(int height);
 
-  public abstract void setSnapSelector(String selector);
+	public abstract void setSnapSelector(String selector);
 
-  public abstract LightArrayInt getPagesY();
+	public abstract LightArrayInt getPagesY();
 
-  public abstract LightArrayInt getPagesX();
+	public abstract LightArrayInt getPagesX();
 
-  public abstract void setHideScrollBar(boolean hideScrollBar);
+	public abstract void setHideScrollBar(boolean hideScrollBar);
+
 
 }

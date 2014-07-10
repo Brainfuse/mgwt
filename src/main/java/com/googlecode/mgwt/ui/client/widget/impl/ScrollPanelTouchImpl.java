@@ -10,14 +10,12 @@ import com.google.gwt.core.client.JsArray;
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.dom.client.EventTarget;
-import com.google.gwt.dom.client.NativeEvent;
 import com.google.gwt.dom.client.Node;
 import com.google.gwt.dom.client.Style.Position;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.MouseOutEvent;
 import com.google.gwt.event.dom.client.MouseOutHandler;
 import com.google.gwt.event.dom.client.MouseWheelEvent;
-import com.google.gwt.event.dom.client.MouseWheelHandler;
 import com.google.gwt.event.logical.shared.ResizeEvent;
 import com.google.gwt.event.logical.shared.ResizeHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
@@ -58,7 +56,7 @@ import com.googlecode.mgwt.ui.client.widget.event.scroll.ScrollRefreshEvent;
 import com.googlecode.mgwt.ui.client.widget.event.scroll.ScrollStartEvent;
 import com.googlecode.mgwt.ui.client.widget.touch.TouchDelegate;
 
-public class ScrollPanelTouchImpl extends ScrollPanelImpl {
+public class ScrollPanelTouchImpl extends ScrollPanelImpl implements ScrollPanelWithMouseWheelHandler{
 
   private static Logger logger = Logger.getLogger(ScrollPanelTouchImpl.class.getName());
 
@@ -938,7 +936,7 @@ public class ScrollPanelTouchImpl extends ScrollPanelImpl {
 
   }
 
-  private void wheel(int wheelDeltaX, int wheelDeltaY, int pageX, int pageY) {
+  public void wheel(int wheelDeltaX, int wheelDeltaY, int pageX, int pageY) {
 
     if (wheelActionZoom) {
       double deltaScale = this.scale * Math.pow(2, 1.0 / 3 * (wheelDeltaY != 0 ? wheelDeltaY / Math.abs(wheelDeltaY) : 0));
@@ -1660,36 +1658,9 @@ public class ScrollPanelTouchImpl extends ScrollPanelImpl {
   }
 
   private void bindMouseWheelEvent() {
-    mouseWheelRegistration = scroller.addDomHandler(new MouseWheelHandler() {
-
-      @Override
-      public void onMouseWheel(MouseWheelEvent event) {
-        int wheelDeltaX = 0;
-        int wheelDeltaY = 0;
-
-        if (isScrollingEnabledX()) {
-          wheelDeltaX = getMouseWheelVelocityX(event.getNativeEvent()) / 10;
-        }
-
-        if (isScrollingEnabledY()) {
-          wheelDeltaY = getMouseWheelVelocityY(event.getNativeEvent()) / 10;
-        }
-        wheel(wheelDeltaX, wheelDeltaY, event.getClientX(), event.getClientY());
-
-      }
-    }, MouseWheelEvent.getType());
+    mouseWheelRegistration = scroller.addDomHandler(new ScrollPanelMouseWheelHandler(this), MouseWheelEvent.getType());
 
   }
-
-  private native int getMouseWheelVelocityX(NativeEvent evt)/*-{
-		return Math.round(-evt.wheelDeltaX) || 0;
-  }-*/;
-
-  private native int getMouseWheelVelocityY(NativeEvent evt)/*-{
-
-		var val = (evt.detail * 40) || -evt.wheelDeltaY || 0;
-		return Math.round(val);
-  }-*/;
 
   private void unbindMouseWheelEvent() {
     if (mouseWheelRegistration != null) {
