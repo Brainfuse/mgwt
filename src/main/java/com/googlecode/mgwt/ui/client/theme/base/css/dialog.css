@@ -3,6 +3,54 @@
 	@external mgwt-DialogPanel, mgwt-Dialog, container, title, content, footer, okbutton, cancelbutton, active, mgwt-BottomPanel, shadow, z_index;
 }
 
+@if user.agent ie9 {
+
+/* 	.mgwt-DialogPanel{
+		width:300px;
+		margin:0 auto;
+		margin-top:25%;
+		border-radius: 10px;
+		background-color:rgba(0, 15, 70, 0.5);
+	
+	} */
+	
+	.mgwt-DialogPanel{
+		border:none !important;
+	}
+	.container{
+		padding: 5px;
+		border-radius: 10px;
+		text-align:center;	
+		width:300px;
+		margin:0 auto;
+		margin-top:25%;
+		border-radius: 10px;
+		background-color:rgba(0, 15, 70, 0.5);
+	}
+	
+	.footer{
+		height:40px;
+	}
+
+	.okbutton, .cancelbutton {
+		width:135px;
+		float:left;
+		background-color:#828BA3;
+		border-radius:8px;
+	}
+	
+	.okbutton:active, .cancelbutton:active{
+		background-color:#4E5362;
+	}
+}
+
+.okbutton, .cancelbutton {
+	cursor:pointer;
+}
+
+
+
+
 .z_index {
 	z-index: 100;
 }
@@ -39,6 +87,15 @@
 		height: 100%;
 	}
 }
+
+/* @if user.agent ie9 {
+	.mgwt-DialogAnimationContainer {
+		top:50%;
+		position:absolute;
+		width:100%;
+	}
+} */
+
 
 .mgwt-BottomPanel {
 	position: absolute;
