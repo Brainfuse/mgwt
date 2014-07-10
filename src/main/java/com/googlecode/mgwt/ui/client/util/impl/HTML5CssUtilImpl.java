@@ -3,8 +3,9 @@ package com.googlecode.mgwt.ui.client.util.impl;
 import com.google.gwt.core.client.JsArrayInteger;
 import com.google.gwt.user.client.Element;
 import com.googlecode.mgwt.ui.client.MGWT;
+import com.googlecode.mgwt.ui.client.util.CssUtil.TransformType;
 
-public class HTML5CssUtilImpl implements CssUtilImpl {
+public class HTML5CssUtilImpl extends CssUtilImplBase implements CssUtilImpl {
 
   private boolean has3d;
 
@@ -117,17 +118,17 @@ public class HTML5CssUtilImpl implements CssUtilImpl {
 
   @Override
   public native void setTransistionProperty(Element element, String string) /*-{
-		element.transitionProperty = string;
+		element.style.transitionProperty = string;
   }-*/;
 
   @Override
   public native void setTransFormOrigin(Element el, int x, int y) /*-{
-		el.transformOrigin = x + " " + y;
+		el.style.transformOrigin = x + " " + y;
   }-*/;
 
   @Override
   public native void setTransistionTimingFunction(Element element, String string) /*-{
-		el.transitionTimingFunction = string;
+		el.style.transitionTimingFunction = string;
   }-*/;
 
   @Override
@@ -159,5 +160,6 @@ public class HTML5CssUtilImpl implements CssUtilImpl {
 	public boolean hasAnimationEnd() {
 		return true;
 	}
+	
 
 }

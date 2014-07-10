@@ -1,6 +1,7 @@
 package com.googlecode.mgwt.ui.client.util.impl;
 
 import com.google.gwt.user.client.Element;
+import com.googlecode.mgwt.ui.client.util.CssUtil.TransformType;
 
 public class FailingImpl implements CssUtilImpl {
 
@@ -115,6 +116,13 @@ public class FailingImpl implements CssUtilImpl {
 @Override
 public boolean hasAnimationEnd() {
 	return false;
+}
+
+@Override
+public void setTransformProperty(Element element, TransformType type, double x,
+		double y) {
+	// TODO Auto-generated method stub
+	
 }
 
 }

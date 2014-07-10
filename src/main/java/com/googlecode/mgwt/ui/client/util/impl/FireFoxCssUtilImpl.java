@@ -2,8 +2,11 @@ package com.googlecode.mgwt.ui.client.util.impl;
 
 import com.google.gwt.core.client.JsArrayInteger;
 import com.google.gwt.user.client.Element;
-
-public class FireFoxCssUtilImpl implements CssUtilImpl {
+import com.googlecode.mgwt.ui.client.util.CssUtil.TransformType;
+/*
+ * Currently this is not being used since I switched to the HTML5 for Geicko
+ */
+public class FireFoxCssUtilImpl extends CssUtilImplBase implements CssUtilImpl {
 
 	public FireFoxCssUtilImpl() {
 
@@ -125,5 +128,6 @@ public class FireFoxCssUtilImpl implements CssUtilImpl {
 public boolean hasAnimationEnd() {
 	return true;
 }
+
 
 }

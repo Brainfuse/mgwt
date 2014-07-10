@@ -1,6 +1,7 @@
 package com.googlecode.mgwt.ui.client.util.impl;
 
 import com.google.gwt.user.client.Element;
+import com.googlecode.mgwt.ui.client.util.CssUtil.TransformType;
 
 public interface CssUtilImpl {
 
@@ -40,5 +41,8 @@ public interface CssUtilImpl {
 
   public void translatePercent(Element el, double x, double y);
   public boolean hasAnimationEnd();
+
+  public void setTransformProperty(Element element, TransformType type, double x,
+		double y);
 
 }

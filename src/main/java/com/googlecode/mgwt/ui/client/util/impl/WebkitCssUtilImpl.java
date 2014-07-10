@@ -2,10 +2,10 @@ package com.googlecode.mgwt.ui.client.util.impl;
 
 import com.google.gwt.core.client.JsArrayInteger;
 import com.google.gwt.user.client.Element;
-
 import com.googlecode.mgwt.ui.client.MGWT;
+import com.googlecode.mgwt.ui.client.util.CssUtil.TransformType;
 
-public class WebkitCssUtilImpl implements CssUtilImpl {
+public class WebkitCssUtilImpl extends CssUtilImplBase implements CssUtilImpl {
 
   private boolean has3d;
 
@@ -161,5 +161,8 @@ public class WebkitCssUtilImpl implements CssUtilImpl {
 	public boolean hasAnimationEnd() {
 		return true;
 	}
+
+
+
 
 }

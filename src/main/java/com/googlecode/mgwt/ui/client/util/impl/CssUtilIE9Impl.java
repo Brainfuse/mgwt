@@ -3,8 +3,9 @@ package com.googlecode.mgwt.ui.client.util.impl;
 import com.google.gwt.core.client.JsArrayInteger;
 import com.google.gwt.user.client.Element;
 import com.googlecode.mgwt.ui.client.MGWT;
+import com.googlecode.mgwt.ui.client.util.CssUtil.TransformType;
 
-public class CssUtilIE9Impl implements CssUtilImpl {
+public class CssUtilIE9Impl extends CssUtilImplBase implements CssUtilImpl {
 
 	@Override
 	public void translate(Element el, int x, int y) {
@@ -101,18 +102,18 @@ public class CssUtilIE9Impl implements CssUtilImpl {
 
 	@Override
 	public native void setTransistionProperty(Element element, String string) /*-{
-		element.msTransitionProperty = string;
+		element.style.msTransitionProperty = string;
 	}-*/;
 
 	@Override
 	public native void setTransFormOrigin(Element el, int x, int y) /*-{
-		el.msTransformOrigin = x + " " + y;
+		el.style.msTransformOrigin = x + "px " + y + "px";
 	}-*/;
 
 	@Override
 	public native void setTransistionTimingFunction(Element element,
 			String string) /*-{
-		el.msTransitionTimingFunction = string;
+		el.style.msTransitionTimingFunction = string;
 	}-*/;
 
 	@Override
@@ -140,5 +141,8 @@ public class CssUtilIE9Impl implements CssUtilImpl {
 	public boolean hasAnimationEnd() {
 		return false;
 	}
+	
+
+
 
 }

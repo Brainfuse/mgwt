@@ -17,7 +17,6 @@ package com.googlecode.mgwt.ui.client.util;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Element;
-
 import com.googlecode.mgwt.ui.client.util.impl.CssUtilImpl;
 
 /**
@@ -32,6 +31,23 @@ public class CssUtil {
 
 	private static final CssUtilImpl cssUtilImpl = GWT.create(CssUtilImpl.class);
 
+	public static enum TransformType{
+		SCALE("scale")
+		;
+		private final String name;
+
+		private TransformType(String name) {
+			this.name = name;
+		}
+
+		public String getName() {
+			return name;
+		}
+		
+		
+		
+		
+	}
 	public static void translate(Element el, int x, int y) {
 		cssUtilImpl.translate(el, x, y);
 	}
@@ -81,6 +97,10 @@ public class CssUtil {
 	public static void setTransFormOrigin(Element element, int x, int y) {
 		cssUtilImpl.setTransFormOrigin(element, x, y);
 
+	}
+	
+	public static void setTransformProperty(Element element, TransformType type, double x, double y){
+		cssUtilImpl.setTransformProperty(element, type, x, y);
 	}
 
 	public static void setTransistionTimingFunction(Element element, String string) {

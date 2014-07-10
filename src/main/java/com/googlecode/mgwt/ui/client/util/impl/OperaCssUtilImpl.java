@@ -15,8 +15,9 @@ package com.googlecode.mgwt.ui.client.util.impl;
 
 import com.google.gwt.core.client.JsArrayInteger;
 import com.google.gwt.user.client.Element;
+import com.googlecode.mgwt.ui.client.util.CssUtil.TransformType;
 
-public class OperaCssUtilImpl implements CssUtilImpl {
+public class OperaCssUtilImpl extends CssUtilImplBase implements CssUtilImpl {
 
   @Override
   public void translate(Element el, int x, int y) {
@@ -99,17 +100,17 @@ public class OperaCssUtilImpl implements CssUtilImpl {
 
   @Override
   public native void setTransistionProperty(Element element, String string) /*-{
-		element.oTransitionProperty = string;
+		element.style.oTransitionProperty = string;
   }-*/;
 
   @Override
   public native void setTransFormOrigin(Element el, int x, int y) /*-{
-		el.oTransformOrigin = x + " " + y;
+		el.style.oTransformOrigin = x + " " + y;
   }-*/;
 
   @Override
   public native void setTransistionTimingFunction(Element element, String string) /*-{
-		el.oTransitionTimingFunction = string;
+		el.style.oTransitionTimingFunction = string;
   }-*/;
 
   @Override
@@ -132,4 +133,6 @@ public class OperaCssUtilImpl implements CssUtilImpl {
 	public boolean hasAnimationEnd() {
 		return true;
 	}
+
+
 }
