@@ -95,8 +95,8 @@ public class AnimatableDisplayIphoneImpl extends AnimatableDisplayBaseImpl {
 			animationEnd.removeHandler();
 			animationEnd = null;
 		}
-
-		animationEnd = main.addDomHandler(listener, AnimationEndEvent.getType());
+		
+		animationEnd = main.addBitlessDomHandler(listener, AnimationEndEvent.getType());
 
 		first.addStyleName(type);
 		second.addStyleName(type);

@@ -124,6 +124,7 @@ public class AnimatableDisplayIpadImpl extends AnimatableDisplayBaseImpl {
 		if (currentIsFirst) {
 			first.addStyleName(this.css.in());
 			second.addStyleName(this.css.out());
+			
 
 			if (!lastDir) {
 				second.getElement().getStyle().setZIndex(-1);
