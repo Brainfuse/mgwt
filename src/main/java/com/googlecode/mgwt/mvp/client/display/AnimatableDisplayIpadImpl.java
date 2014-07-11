@@ -109,7 +109,7 @@ public class AnimatableDisplayIpadImpl extends AnimatableDisplayBaseImpl {
 			animationEnd = null;
 		}
 
-		animationEnd = main.addDomHandler(listener, AnimationEndEvent.getType());
+		animationEnd = main.addBitlessDomHandler(listener, AnimationEndEvent.getType());
 
 		first.addStyleName(type);
 		second.addStyleName(type);
