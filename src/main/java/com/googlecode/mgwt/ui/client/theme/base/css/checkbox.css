@@ -24,17 +24,24 @@
 	}
 }
 
-@if user.agent gecko1_8 {
+@if user.agent gecko1_8 ie10 {
 	.mgwt-CheckBox {
 		width: 88px;
 		line-height: 27px;
 		display: \-moz-box;
+		display: flex;
+		
+		
+		
 		\-moz-box-orient: horizontal;
+		flex-direction: row;
 		\-moz-box-pack: justify;
+		justify-content: center;
 		\-moz-tap-highlight-color: transparent;
 		\-moz-border-radius: 6px;
 		border-radius: 6px;
 		\-moz-box-sizing: border-box;
+		box-sizing: border-box;
 	}
 }
 
@@ -53,10 +60,11 @@
 	}
 }
 
-@if user.agent gecko1_8 {
+@if user.agent gecko1_8 ie10 {
 	.mgwt-CheckBox-middle {
 		\-moz-transition: all 0.1s ease-in-out;
 		\-moz-border-radius: 6px;
+		transition: all 0.1s ease-in-out;
 		border-radius: 6px;
 	}
 }
@@ -80,10 +88,12 @@
 	}
 }
 
-@if user.agent gecko1_8 {
+@if user.agent gecko1_8 ie10 {
 	.mgwt-CheckBox-middle-content {
 		\-moz-box-sizing: border-box;
+		box-sizing: border-box;
 		background-image: literal('-moz-linear-gradient(top, #cecece, #fcfcfc )');
+		background-image: linear-gradient(top, #cecece, #fcfcfc );
 		\-moz-border-radius: 5px;
 		border-radius: 5px;
 	}
@@ -121,14 +131,16 @@
 	}
 }
 
-@if user.agent gecko1_8 {
+@if user.agent gecko1_8 ie10 {
 	.mgwt-CheckBox-on {
 		background-image: literal('-moz-linear-gradient(top, #295ab3, #76adfb )');
+		background-image:linear-gradient(top, #295ab3, #76adfb );
 		\-moz-border-radius-bottomleft: 6px;
 		\-moz-border-radius-topleft: 6px;
 		border-radius-bottomleft: 6px;
 		border-radius-topleft: 6px;
 		\-moz-transition: all 0.1s ease-in-out;
+		transition: all 0.1s ease-in-out;
 	
 	}
 	
@@ -172,9 +184,10 @@
 	}
 }
 
-@if user.agent gecko1_8 {
+@if user.agent gecko1_8 ie10 {
 	.mgwt-CheckBox-off {
 		background-image: literal('-moz-linear-gradient(top, #b6b6b6, #fff 50% )');
+		background-image: linear-gradient(top, #b6b6b6, #fff 50% );
 		\-moz-border-radius-topright: 6px;
 		\-moz-border-radius-bottomright: 6px;
 		border-radius-topright: 6px;
@@ -229,43 +242,50 @@
 
 
 
-@if user.agent gecko1_8 {
+@if user.agent gecko1_8 ie10 {
 
 	.mgwt-CheckBox-important .mgwt-CheckBox-on {
 		background-image: literal('-moz-linear-gradient(top, #e75f00, #fe9c12 50% )');
+		background-image: linear-gradient(top, #e75f00, #fe9c12 50% );
 		border: solid 1px #d87101;
 	}
 	
 	
 	.mgwt-CheckBox-notchecked .mgwt-CheckBox-middle {
 	    \-moz-transform: translate(-54px,0);
+	    transform: translate(-54px,0);
 	}
 	
 	.mgwt-CheckBox-checked .mgwt-CheckBox-middle {
 	    \-moz-transform: translate(0px,0);
+	    transform: translate(0px,0);
 	}
 	
 	.mgwt-CheckBox-notchecked .mgwt-CheckBox-off {
 	    \-moz-transform: translate(-54px,0);
+	    transform: translate(-54px,0);
 	}
 	
 	.mgwt-CheckBox-checked .mgwt-CheckBox-off {
 	    \-moz-transform: translate(0px,0);
+	    transform: translate(0px,0);
 	}
 	
 	.mgwt-CheckBox-notchecked .mgwt-CheckBox-on {
 	    \-moz-transform: translate(-62px,0);
+	    transform: translate(-62px,0);
 	}
 	
 	.mgwt-CheckBox-checked .mgwt-CheckBox-on {
 	    \-moz-transform: translate(0px,0);
+	    transform: translate(0px,0);
 	}
 	
 }
 
 
 /*TODO add browser....*/
-@if user.agent ie6 ie8 ie9 gecko opera {
+@if user.agent ie6 ie8 ie9 ie10 gecko opera {
 
 	.mgwt-CheckBox-important .mgwt-CheckBox-on {
 		

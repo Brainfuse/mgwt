@@ -1,5 +1,5 @@
 
-@if user.agent gecko1_8 {
+@if user.agent gecko1_8 ie10 {
 
 	
 .displayContainer {
