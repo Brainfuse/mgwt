@@ -123,7 +123,7 @@ public class HTML5CssUtilImpl extends CssUtilImplBase implements CssUtilImpl {
 
   @Override
   public native void setTransFormOrigin(Element el, int x, int y) /*-{
-		el.style.transformOrigin = x + " " + y;
+		el.style.transformOrigin = x + "px " + y + "px";
   }-*/;
 
   @Override

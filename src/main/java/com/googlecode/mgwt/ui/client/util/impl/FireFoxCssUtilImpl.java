@@ -94,17 +94,17 @@ public class FireFoxCssUtilImpl extends CssUtilImplBase implements CssUtilImpl {
 
 	@Override
 	public native void setTransistionProperty(Element element, String string) /*-{
-		element.mozTransitionProperty = string;
+		element.style.mozTransitionProperty = string;
   }-*/;
 
 	@Override
 	public native void setTransFormOrigin(Element el, int x, int y) /*-{
-		el.mozTransformOrigin = x + " " + y;
+		el.style.mozTransformOrigin = x + "px " + y + "px";
   }-*/;
 
 	@Override
 	public native void setTransistionTimingFunction(Element element, String string) /*-{
-		el.mozTransitionTimingFunction = string;
+		el.style.mozTransitionTimingFunction = string;
   }-*/;
 
 	@Override

@@ -23,10 +23,21 @@
 	.mgwt-Button {
 		\-moz-border-radius: 6px;
 		border-radius: 6px;
-		background-image: literal('-moz-linear-gradient(bottom,#A8ACB9 , #eee)');
+		background-image: linear-gradient(to bottom,#A8ACB9 , #eee);
 	}
 	.mgwt-Button-active {
-		background-image: literal('-moz-linear-gradient(top, rgb(5, 140, 245),  rgb(1, 95, 230))');
+		background-image: linear-gradient(to top, rgb(5, 140, 245),  rgb(1, 95, 230));
+	}
+}
+
+@if user.agent ie10 {
+	.mgwt-Button {
+		border-radius: 6px;
+		background-image: literal('-ms-linear-gradient(bottom,#A8ACB9 , #eee)');
+	}
+	
+	.mgwt-Button-active {
+		background-image: literal('-ms-linear-gradient(top, rgb(5, 140, 245),  rgb(1, 95, 230))');
 	}
 }
 
@@ -55,10 +66,20 @@
 
 @if user.agent gecko1_8 {
 	.mgwt-Button-important {
-		background-image: literal('-moz-linear-gradient(top, rgba(255,59,59,0.70), rgba(233,72,72,0.80) 50%, rgba(184,0,0,0.70) 51%, rgba(255,0,0,0.80))');
+		background-image: linear-gradient(to top, rgba(255,59,59,0.70), rgba(233,72,72,0.80) 50%, rgba(184,0,0,0.70) 51%, rgba(255,0,0,0.80));
 	}
 	.mgwt-Button-important.mgwt-Button-active {
-		background-image: literal('-moz-linear-gradient(top, rgba(255,30,30,1), rgba(233,40,40,1) 50%, rgba(184,0,0,1) 51%, rgba(255,0,0,1))');
+		background-image: linear-gradient(to top, rgba(255,30,30,1), rgba(233,40,40,1) 50%, rgba(184,0,0,1) 51%, rgba(255,0,0,1));
+	}
+}
+
+@if user.agent ie10 {
+
+	.mgwt-Button-important {
+		background-image: literal('-ms-linear-gradient(top, rgba(255,59,59,0.70), rgba(233,72,72,0.80) 50%, rgba(184,0,0,0.70) 51%, rgba(255,0,0,0.80))');
+	}
+	.mgwt-Button-important.mgwt-Button-active {
+		background-image: literal('-ms-linear-gradient(top, rgba(255,30,30,1), rgba(233,40,40,1) 50%, rgba(184,0,0,1) 51%, rgba(255,0,0,1))');
 	}
 }
 
@@ -86,13 +107,21 @@
 
 @if user.agent gecko1_8 {
 	.mgwt-Button-confirm {
-		background-image: literal('-moz-linear-gradient(top, rgba(115,239,115,0.70),rgba(73,171,14,0.60) 50%, rgba(0,113,0,0.70) 51%, rgba(0,150,0,0.80))');
+		background-image: linear-gradient(to top, rgba(115,239,115,0.70),rgba(73,171,14,0.60) 50%, rgba(0,113,0,0.70) 51%, rgba(0,150,0,0.80));
 	}
 	.mgwt-Button-confirm.mgwt-Button-active {
-		background-image: literal('-moz-linear-gradient(top, rgba(80,200,80,1), rgba(50,150,0,1) 50%, rgba(0,100,0,1) 51%, rgba(0,80,0,1))');
+		background-image: linear-gradient(to top, rgba(80,200,80,1), rgba(50,150,0,1) 50%, rgba(0,100,0,1) 51%, rgba(0,80,0,1));
 	}
 }
 
+@if user.agent ie10 {
+	.mgwt-Button-confirm {
+		background-image: literal('-ms-linear-gradient(top, rgba(115,239,115,0.70),rgba(73,171,14,0.60) 50%, rgba(0,113,0,0.70) 51%, rgba(0,150,0,0.80))');
+	}
+	.mgwt-Button-confirm.mgwt-Button-active {
+		background-image: literal('-ms-linear-gradient(top, rgba(80,200,80,1), rgba(50,150,0,1) 50%, rgba(0,100,0,1) 51%, rgba(0,80,0,1))');
+	}
+}
 
 @if user.agent ie9 {
 	.mgwt-Button-confirm {
