@@ -165,7 +165,7 @@ public class TestPermutationMapLinker {
 
 	}
 
-	private static class MockConfigurationProperty implements ConfigurationProperty {
+	private static class MockConfigurationProperty implements ConfigurationProperty, Comparable<MockConfigurationProperty> {
 
 		private final String name;
 		private final List<String> list;
@@ -194,6 +194,11 @@ public class TestPermutationMapLinker {
 		@Override
 		public boolean hasMultipleValues() {
 			return list.size() > 1;
+		}
+
+		@Override
+		public int compareTo(MockConfigurationProperty arg0) {
+			return name.compareTo(arg0.name);
 		}
 
 	}
