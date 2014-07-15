@@ -119,17 +119,17 @@ public class WebkitCssUtilImpl extends CssUtilImplBase implements CssUtilImpl {
 
   @Override
   public native void setTransistionProperty(Element element, String string) /*-{
-		element.webkitTransitionProperty = string;
+		element.style.webkitTransitionProperty = string;
   }-*/;
 
   @Override
   public native void setTransFormOrigin(Element el, int x, int y) /*-{
-		el.webkitTransformOrigin = x + " " + y;
+		el.style.webkitTransformOrigin = x + "px " + y + "px";
   }-*/;
 
   @Override
   public native void setTransistionTimingFunction(Element element, String string) /*-{
-		el.webkitTransitionTimingFunction = string;
+		el.style.webkitTransitionTimingFunction = string;
   }-*/;
 
   @Override

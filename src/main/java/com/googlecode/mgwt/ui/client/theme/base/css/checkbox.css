@@ -93,7 +93,7 @@
 		\-moz-box-sizing: border-box;
 		box-sizing: border-box;
 		background-image: literal('-moz-linear-gradient(top, #cecece, #fcfcfc )');
-		background-image: linear-gradient(top, #cecece, #fcfcfc );
+		background-image: linear-gradient(to top, #cecece, #fcfcfc );
 		\-moz-border-radius: 5px;
 		border-radius: 5px;
 	}
@@ -134,7 +134,7 @@
 @if user.agent gecko1_8 ie10 {
 	.mgwt-CheckBox-on {
 		background-image: literal('-moz-linear-gradient(top, #295ab3, #76adfb )');
-		background-image:linear-gradient(top, #295ab3, #76adfb );
+		background-image:linear-gradient(to top, #295ab3, #76adfb );
 		\-moz-border-radius-bottomleft: 6px;
 		\-moz-border-radius-topleft: 6px;
 		border-radius-bottomleft: 6px;
@@ -187,7 +187,7 @@
 @if user.agent gecko1_8 ie10 {
 	.mgwt-CheckBox-off {
 		background-image: literal('-moz-linear-gradient(top, #b6b6b6, #fff 50% )');
-		background-image: linear-gradient(top, #b6b6b6, #fff 50% );
+		background-image: linear-gradient(to top, #b6b6b6, #fff 50% );
 		\-moz-border-radius-topright: 6px;
 		\-moz-border-radius-bottomright: 6px;
 		border-radius-topright: 6px;
@@ -246,7 +246,7 @@
 
 	.mgwt-CheckBox-important .mgwt-CheckBox-on {
 		background-image: literal('-moz-linear-gradient(top, #e75f00, #fe9c12 50% )');
-		background-image: linear-gradient(top, #e75f00, #fe9c12 50% );
+		background-image: linear-gradient(to top, #e75f00, #fe9c12 50% );
 		border: solid 1px #d87101;
 	}
 	

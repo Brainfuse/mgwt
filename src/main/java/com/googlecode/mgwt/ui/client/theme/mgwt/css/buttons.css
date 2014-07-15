@@ -16,13 +16,16 @@
 	}
 }
 
-@if user.agent gecko1_8 {
+@if user.agent gecko1_8 ie10 {
 	.mgwt-Button {
 		background-image: literal('-moz-linear-gradient(top, rgba(255,255, 255, 0.35), rgba(255,255, 255, 0.15) 50%,  rgba(255,255, 255, 0.35))'); 
+		background-image: linear-gradient(to top, rgba(255,255, 255, 0.35), rgba(255,255, 255, 0.15) 50%,  rgba(255,255, 255, 0.35)); 
+		
 	}
 	
 	.mgwt-Button.active {
 		background-image: literal('-moz-linear-gradient(top, rgba(255,255, 255, 0.20), rgba(0,0,0,0.10) 50%,  rgba(255,255, 255, 0.20))'); 
+		background-image: linear-gradient(to top, rgba(255,255, 255, 0.20), rgba(0,0,0,0.10) 50%,  rgba(255,255, 255, 0.20)); 
 	}
 }
 

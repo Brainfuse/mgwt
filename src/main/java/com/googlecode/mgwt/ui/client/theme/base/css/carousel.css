@@ -13,7 +13,7 @@
 	}
 }
 
-@if user.agent gecko1_8 {
+@if user.agent gecko1_8 ie10 {
 	.mgwt-Carousel {
 		display: \-moz-box;
 		\-moz-box-flex: 1;
@@ -56,7 +56,7 @@
 	}
 }
 
-@if user.agent gecko1_8 {
+@if user.agent gecko1_8 ie10 {
 	.mgwt-Carousel-Container {
 		display: \-moz-box;
 		\-moz-box-flex: 1;
@@ -80,7 +80,7 @@
 	}
 }
 
-@if user.agent gecko1_8 {
+@if user.agent gecko1_8 ie10 {
 	.mgwt-Carousel-Indicator-Container {
 		display: \-moz-box;
 		\-moz-box-pack: center;
