@@ -39,7 +39,7 @@ public abstract class AnimatableDisplayBaseImpl implements AnimatableDisplay {
 
   protected SimplePanel second;
 
-  protected boolean lastDir;
+  protected boolean isReverse;
 
   protected final AnimationCss css;
 

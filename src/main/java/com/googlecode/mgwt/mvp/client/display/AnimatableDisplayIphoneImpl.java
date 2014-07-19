@@ -56,6 +56,9 @@ public class AnimatableDisplayIphoneImpl extends AnimatableDisplayBaseImpl {
 			first.clear();
 
 		}
+		setZIndex(1);
+		
+
 		removeAllStyles();
 
 		if (animationEnd != null) {
@@ -101,7 +104,7 @@ public class AnimatableDisplayIphoneImpl extends AnimatableDisplayBaseImpl {
 		first.addStyleName(type);
 		second.addStyleName(type);
 
-		lastDir = animation.isInverse();
+		isReverse = animation.isInverse();
 		// backwards
 		if (animation.isInverse()) {
 			first.addStyleName(this.css.reverse());
@@ -115,12 +118,20 @@ public class AnimatableDisplayIphoneImpl extends AnimatableDisplayBaseImpl {
 		} else {
 			first.addStyleName(this.css.out());
 			second.addStyleName(this.css.in());
-
 		}
+		setZIndex( -1);
 
 		first.getElement().getStyle().setDisplay(Display.BLOCK);
 		second.getElement().getStyle().setDisplay(Display.BLOCK);
 
+	}
+	/**
+	 * This is a donothing implementation to be overriden in the iPad version;
+	 * @param currentIsFirst
+	 * @param i
+	 */
+	protected void setZIndex(int i) {
+		
 	}
 
 	@Override
