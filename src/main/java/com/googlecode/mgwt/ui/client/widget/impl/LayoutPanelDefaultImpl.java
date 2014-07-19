@@ -24,6 +24,7 @@ import com.google.gwt.user.client.ui.InsertPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.googlecode.mgwt.ui.client.MGWTStyle;
 import com.googlecode.mgwt.ui.client.theme.base.LayoutCss;
+import com.googlecode.mgwt.ui.client.widget.ExpandChildWidget;
 import com.googlecode.mgwt.ui.client.widget.HeaderList;
 import com.googlecode.mgwt.ui.client.widget.ScrollPanel;
 
@@ -75,7 +76,7 @@ public class LayoutPanelDefaultImpl extends LayoutPanelBaseImpl implements HasWi
 	public void add(Widget w) {
 
 		//TODO markup interface?
-		if (w instanceof ScrollPanel || w instanceof HeaderList) {
+		if (w instanceof ScrollPanel || w instanceof HeaderList || w instanceof ExpandChildWidget) {
 			w.addStyleName(css.fillPanelExpandChild());
 		}
 

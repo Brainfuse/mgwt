@@ -46,12 +46,18 @@
 		transition-property: transform;
 		transition-timing-function: cubic-bezier(0, 0, 0.25, 1);
 		vertical-align: top;
+	/* 	height:100%; */
+		/* flex:1; */
 	}
 }
 
+/* @if user.agent ie9 ie10 {
+	.mgwt-ScrollPanel-container {
+		height:100%;
+	}
+}
 
-
-
+ */
 			
 
 			

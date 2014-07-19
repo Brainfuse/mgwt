@@ -91,7 +91,7 @@
 
 @if user.agent gecko1_8 ie10  {
 	.mgwt-HeaderButton-back .mgwt-HeaderButton-border-content {
-		
+		display: none !important;
 		background-image: literal('-moz-linear-gradient(top, #9fb3cc,#6b8bb2 50%, #597eaa 51%, #5b80ab)');
 		background-image: literal('-ms-linear-gradient(top, #9fb3cc,#6b8bb2 50%, #597eaa 51%, #5b80ab)');
 		background-image: linear-gradient(top, #9fb3cc,#6b8bb2 50%, #597eaa 51%, #5b80ab);

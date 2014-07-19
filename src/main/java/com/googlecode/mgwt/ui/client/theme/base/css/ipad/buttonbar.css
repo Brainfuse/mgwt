@@ -13,6 +13,13 @@
 @if user.agent gecko1_8 {
 	.mgwt-ButtonBar {
 		background: literal('-moz-linear-gradient(bottom,#A8ACB9,#eee)');
+		background: linear-gradient(to top,#A8ACB9,#eee);
+	}
+}
+
+@if user.agent ie10 {
+	.mgwt-ButtonBar {
+		background: literal('-ms-linear-gradient(bottom,#A8ACB9,#eee)');
 	}
 }
 

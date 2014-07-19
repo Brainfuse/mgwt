@@ -71,6 +71,8 @@
 @if user.agent gecko1_8 ie10 {
 	.mgwt-List-group.mgwt-List-selected {
 		background-image: literal('-moz-linear-gradient(top, rgb(5, 140, 245), rgb(1, 95, 230))');
+		background-image: literal('-ms-linear-gradient(top, rgb(5, 140, 245), rgb(1, 95, 230))');
+		background-image: linear-gradient(to bottom, rgb(5, 140, 245), rgb(1, 95, 230));
 	}
 }
 
@@ -109,6 +111,9 @@
 @if user.agent gecko1_8 ie10 {
 	.mgwt-List-Head-Element, .mgwt-List > .mgwt-List-Head-Element {
 		background: literal('-moz-linear-gradient(bottom,#A8ACB9,#eee)');
+		background: literal('-ms-linear-gradient(bottom,#A8ACB9,#eee)');
+		background: linear-gradient(to bottom,#A8ACB9,#eee);
+		
 	}
 }
 

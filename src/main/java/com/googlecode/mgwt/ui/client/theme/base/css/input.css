@@ -22,8 +22,6 @@
 }
 
 
-
-
 @if user.agent safari {
 	.mgwt-TextBox .mgwt-InputBox-box,.mgwt-PasswordTextBox .mgwt-InputBox-box,.mgwt-TextArea .mgwt-InputBox-box {
 		display: -webkit-box;
@@ -35,6 +33,7 @@
 	.mgwt-TextBox .mgwt-InputBox-box,.mgwt-PasswordTextBox .mgwt-InputBox-box,.mgwt-TextArea .mgwt-InputBox-box {
 		display: -moz-box;
 		\-moz-box-flex: 1;
+		background-color: #FFF;
 	}
 }
 
