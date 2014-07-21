@@ -23,40 +23,51 @@
     
     <replace-with class="com.googlecode.mgwt.mvp.client.display.AnimatableDisplayIphoneImpl">
         <when-type-is class="com.googlecode.mgwt.mvp.client.AnimatableDisplay"/>
-        <any>
+        <all>
         	
             <when-property-is name="mgwt.os" value="iphone"/>
-    		<when-property-is name="mgwt.os" value="retina"/>
+        </all>
+    </replace-with>
     
-        </any>
+    <replace-with class="com.googlecode.mgwt.mvp.client.display.AnimatableDisplayIphoneImpl">
+        <when-type-is class="com.googlecode.mgwt.mvp.client.AnimatableDisplay"/>
+        <all>
+            <when-property-is name="mgwt.os" value="retina"/>
+        </all>
     </replace-with>
     
     <replace-with class="com.googlecode.mgwt.mvp.client.display.AnimatableDisplayIpadImpl">
         <when-type-is class="com.googlecode.mgwt.mvp.client.AnimatableDisplay"/>
-        <any>
+        <all>
             <when-property-is name="mgwt.os" value="ipad"/>
-            <when-property-is name="mgwt.os" value="ipad_retina"/>
-        </any>
+        </all>
     </replace-with>
     
-   
+    <replace-with class="com.googlecode.mgwt.mvp.client.display.AnimatableDisplayIpadImpl">
+        <when-type-is class="com.googlecode.mgwt.mvp.client.AnimatableDisplay"/>
+        <all>
+            <when-property-is name="mgwt.os" value="ipad_retina"/>
+        </all>
+    </replace-with>
+    
     <replace-with class="com.googlecode.mgwt.mvp.client.display.AnimatableDisplayTransistionImpl">
         <when-type-is class="com.googlecode.mgwt.mvp.client.AnimatableDisplay"/>
-        <any>
-            <when-property-is name="mgwt.os" value="android_tablet"/>
+        <all>
             <when-property-is name="mgwt.os" value="android"/>
-        </any>
+        </all>
+    </replace-with>
+    
+    <replace-with class="com.googlecode.mgwt.mvp.client.display.AnimatableDisplayTransistionImpl">
+        <when-type-is class="com.googlecode.mgwt.mvp.client.AnimatableDisplay"/>
+        <all>
+            <when-property-is name="mgwt.os" value="android_tablet"/>
+        </all>
     </replace-with>
     
     <replace-with class="com.googlecode.mgwt.mvp.client.display.AnimatableDisplayIphoneImpl">
         <when-type-is class="com.googlecode.mgwt.mvp.client.AnimatableDisplay"/>
         <all>
             <when-property-is name="mgwt.os" value="desktop"/>
-            <any>
-            	<when-property-is name="user.agent" value="ie10"/>
-            	<when-property-is name="user.agent" value="gecko1_8"/>
-            	
-            </any>
         </all>
     </replace-with>
     
