@@ -1,11 +1,11 @@
-.headerPanel{
+.headerPanel {
 	position:absolute;
 	top:0px;
 	left: 0px;
 	right: 0px;
 }
 
-.fillPanel .content{
+.fillPanel .content {
 	position:absolute;
 	overflow:hidden;
 	display:block;
@@ -15,37 +15,21 @@
 	right:0px;
 }
 
-.fillPanel .buttonBar{
+.fillPanel .buttonBar {
 	position:absolute;
 	display:block;
 	bottom:0px;
 	left:0px;
 	right:0px;
-	height:auto;	
+	height:40px;	
 }
 
-.buttonBar div{
+.buttonBar div {
 	display:block;
 	float:left;
 }
 
-.fillPanel{
+.fillPanel {
 	position: relative;
 	width: 100%; height:100%;	
 }
-
-
-/* .attachment{
-	display:block;
-	float:left;
-}
-
-.textArea{
-	display:block;
-	float:left;
-}
-
-.sendButton{
-	display:block;
-	float:left;
-} */

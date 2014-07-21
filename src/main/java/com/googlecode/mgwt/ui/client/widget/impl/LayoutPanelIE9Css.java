@@ -15,13 +15,4 @@ public interface LayoutPanelIE9Css extends CssResource{
 	
 	public String fillPanel();
 	
-/*	@ClassName("attachment")
-	public String attachment();
-	
-	@ClassName("textArea")
-	public String textArea();
-	
-	@ClassName("sendButton")
-	public String sendButton();*/
-	
 }

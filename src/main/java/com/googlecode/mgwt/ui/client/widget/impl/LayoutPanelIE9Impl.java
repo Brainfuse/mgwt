@@ -32,6 +32,7 @@ import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.InsertPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.googlecode.mgwt.ui.client.theme.base.LayoutCss;
+import com.googlecode.mgwt.ui.client.widget.ExpandChildWidget;
 import com.googlecode.mgwt.ui.client.widget.HeaderList;
 import com.googlecode.mgwt.ui.client.widget.HeaderPanel;
 import com.googlecode.mgwt.ui.client.widget.ScrollPanel;
@@ -107,9 +108,12 @@ public class LayoutPanelIE9Impl extends LayoutPanelBaseImpl implements
 					updateTopAndBottom();
 				}
 			});
-		} else if (w instanceof ScrollPanel || w instanceof HeaderList) {
+		} else if (w instanceof ScrollPanel
+				|| w instanceof HeaderList 
+				|| w instanceof ExpandChildWidget) {
 			this.widgetToExpand = w;
 			w.addStyleName(css.content());
+			updateTopAndBottom();
 		} else if (w instanceof ButtonBar) {
 			w.addStyleName(css.buttonBar());
 			

@@ -212,9 +212,7 @@ public class SwipeRecognizer implements TouchHandler {
 
   }
 
-  public native void log(String l)/*-{
-		$wnd.console.log(l);
-  }-*/;
+  
 
   /*
    * (non-Javadoc)
