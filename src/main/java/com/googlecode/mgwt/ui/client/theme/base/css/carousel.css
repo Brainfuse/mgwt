@@ -92,7 +92,6 @@
 @if user.agent ie9	{
 	.mgwt-Carousel-Indicator-Container {
 		left:50% !important;
-		right:50% !important;
 	}
 }
 
@@ -102,6 +101,12 @@
 	background-color: #d3d3d3;
 	border-radius: 4px;
 	margin: 4px;
+}
+
+@if user.agent ie9 {
+	.mgwt-Carousel-Indicator {
+		float: left;
+	}
 }
 
 .mgwt-Carousel-Indicator-active {
@@ -123,3 +128,10 @@
 		display: \-moz-box;
 	}
 }
+
+@if user.agent ie9 {
+	.mgwt-Carousel-Holder {
+		float:left;
+	}
+}
+
