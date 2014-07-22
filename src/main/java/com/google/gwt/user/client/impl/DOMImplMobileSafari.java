@@ -52,11 +52,12 @@ public class DOMImplMobileSafari extends DOMImplWebkit {
 	}
 
 	/** {@inheritDoc} */
-	protected void sinkEventsImpl(Element elem, int bits) {
+	@Override
+	protected void sinkEventsImpl(com.google.gwt.dom.client.Element elem, int bits) {
 		sinkEventsImpl0(elem, bits);
 	}
 
-	protected  native void sinkEventsImpl0(Element elem, int bits) /*-{
+	protected  native void sinkEventsImpl0(com.google.gwt.dom.client.Element elem, int bits) /*-{
 		var chMask = (elem.__eventBits || 0) ^ bits;
 	    elem.__eventBits = bits;
 	    if (!chMask) return;
