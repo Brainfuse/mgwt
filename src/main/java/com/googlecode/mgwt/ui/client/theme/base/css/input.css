@@ -37,7 +37,11 @@
 	}
 }
 
-
+@if user.agent ie9 ie10 {
+	.mgwt-TextBox .mgwt-InputBox-box,.mgwt-PasswordTextBox .mgwt-InputBox-box,.mgwt-TextArea .mgwt-InputBox-box {
+		background-color: #FFF;
+	}
+}
 
 .mgwt-TextBox,.mgwt-PasswordTextBox,.mgwt-TextArea {
 	position: relative;
