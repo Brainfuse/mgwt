@@ -111,12 +111,24 @@ public class DOMImplSafariWithTransistion extends DOMImplWebkit {
         @com.google.gwt.user.client.impl.DOMImplStandard::dispatchEvent : null;
     if (chMask & 0x80000) elem.onpaste       = (bits & 0x80000) ? 
         @com.google.gwt.user.client.impl.DOMImplStandard::dispatchEvent : null;
-    if (chMask & 0x100000) elem.ontouchstart = (bits & 0x100000) ? 
-        @com.google.gwt.user.client.impl.DOMImplStandard::dispatchEvent : null;
-    if (chMask & 0x200000) elem.ontouchmove  = (bits & 0x200000) ? 
-        @com.google.gwt.user.client.impl.DOMImplStandard::dispatchEvent : null;
-    if (chMask & 0x400000) elem.ontouchend   = (bits & 0x400000) ? 
-        @com.google.gwt.user.client.impl.DOMImplStandard::dispatchEvent : null;
+    if (chMask & 0x100000) {
+//	    	if (bits & 0x100000)
+//	    		elem.addEventListener('touchstart', @com.google.gwt.user.client.impl.DOMImplStandard::dispatchEvent, false);
+	    	elem.ontouchstart = (bits & 0x100000) ? 
+	        @com.google.gwt.user.client.impl.DOMImplStandard::dispatchEvent : null;
+	    }
+	    if (chMask & 0x200000) {
+//	    	if (bits & 0x200000)
+//	    		elem.addEventListener('touchmove', @com.google.gwt.user.client.impl.DOMImplStandard::dispatchEvent, false);
+	    	elem.ontouchmove  = (bits & 0x200000) ? 
+	        @com.google.gwt.user.client.impl.DOMImplStandard::dispatchEvent : null;
+	    }
+	    if (chMask & 0x400000) {
+//	    	if (bits & 0x400000)
+//	    		elem.addEventListener('touchend', @com.google.gwt.user.client.impl.DOMImplStandard::dispatchEvent, false);
+	    	elem.ontouchend   = (bits & 0x400000) ? 
+	        @com.google.gwt.user.client.impl.DOMImplStandard::dispatchEvent : null;
+	    }
     if (chMask & 0x800000) elem.ontouchcancel= (bits & 0x800000) ? 
         @com.google.gwt.user.client.impl.DOMImplStandard::dispatchEvent : null;
     if (chMask & 0x1000000) elem.ongesturestart  =(bits & 0x1000000) ? 
@@ -130,15 +142,19 @@ public class DOMImplSafariWithTransistion extends DOMImplWebkit {
 	if (chMask & 0x8000000) {
 	if(bits & 0x8000000){
 	elem.addEventListener('webkitTransitionEnd', @com.google.gwt.user.client.impl.DOMImplStandard::dispatchEvent, false);
+	}else{
+		elem.removeEventListener("webkitTransitionEnd", @com.google.gwt.user.client.impl.DOMImplStandard::dispatchEvent, false);
 	}
 	}
 
 
 	//animation end
 	if (chMask & 0x10000000) {
-	if(bits & 0x10000000){
-	elem.addEventListener('webkitAnimationEnd', @com.google.gwt.user.client.impl.DOMImplStandard::dispatchEvent, false);
-	}
+		if(bits & 0x10000000){
+		elem.addEventListener('webkitAnimationEnd', @com.google.gwt.user.client.impl.DOMImplStandard::dispatchEvent, false);
+		}else{
+		elem.removeEventListener("webkitAnimationEnd", @com.google.gwt.user.client.impl.DOMImplStandard::dispatchEvent, false);
+		}
 	}
 }-*/;
 
