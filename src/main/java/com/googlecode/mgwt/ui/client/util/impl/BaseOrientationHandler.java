@@ -90,30 +90,34 @@ public abstract class BaseOrientationHandler implements OrientationHandler {
 		var func = $entry(function() {
 			handler.@com.googlecode.mgwt.ui.client.util.impl.BaseOrientationHandler::onorientationChange(I)($wnd.orientation);
 		});
-		$doc.body.onorientationchange = func;
-		$doc.addEventListener("orientationChanged", func);
+		var w = $wnd.top || $wnd;
+		w.onorientationchange = func;
+		w.addEventListener("orientationChanged", func);
 		return func;
 	}-*/;
 
 	private static native void destroyOrientation(JavaScriptObject o)/*-{
-		$doc.body.onorientationchange = null;
-		$doc.removeEventListener("orientationChanged", o);
+		var w = $wnd.top || $wnd;
+		w.onorientationchange = null;
+		w.removeEventListener("orientationChanged", o);
 	}-*/;
 
 
 	protected static native int getOrientation0()/*-{
-		if (typeof ($wnd.orientation) == 'undefined') {
+		var w = $wnd.top || $wnd;
+		if (typeof (w.orientation) == 'undefined') {
 			return 0;
 		}
 
-		return $wnd.orientation;
+		return w.orientation;
 	}-*/;
+	
 	
 
 	protected static ORIENTATION getBrowserOrientation() {
 		int orientation = getOrientation0();
 	
-	      return getBrowserOrientationByAngle(orientation);
+	    return getBrowserOrientationByAngle(orientation);
 	}
 
 	protected static ORIENTATION getBrowserOrientationByAngle(int orientation) {
