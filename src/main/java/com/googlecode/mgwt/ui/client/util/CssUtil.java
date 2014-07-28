@@ -16,7 +16,9 @@
 package com.googlecode.mgwt.ui.client.util;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.dom.client.LIElement;
 import com.google.gwt.user.client.Element;
+import com.googlecode.mgwt.ui.client.util.CssUtil.TransformType;
 import com.googlecode.mgwt.ui.client.util.impl.CssUtilImpl;
 
 /**
@@ -132,6 +134,12 @@ public class CssUtil {
 
 	public static boolean hasAnimationEnd() {
 		return cssUtilImpl.hasAnimationEnd();
+		
+	}
+
+	public static void setTransformProperty(com.google.gwt.dom.client.Element element, TransformType type,
+			double x, double y) {
+		cssUtilImpl.setTransformProperty(element, type, x, y);
 		
 	}
 }

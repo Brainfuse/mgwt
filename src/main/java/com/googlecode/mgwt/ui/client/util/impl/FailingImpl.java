@@ -107,22 +107,29 @@ public class FailingImpl implements CssUtilImpl {
 
 	}
 
-  @Override
-  public void translatePercent(Element el, double x, double y) {
-    // TODO Auto-generated method stub
+	@Override
+	public void translatePercent(Element el, double x, double y) {
+		// TODO Auto-generated method stub
 
-  }
+	}
 
-@Override
-public boolean hasAnimationEnd() {
-	return false;
-}
+	@Override
+	public boolean hasAnimationEnd() {
+		return false;
+	}
 
-@Override
-public void setTransformProperty(Element element, TransformType type, double x,
-		double y) {
-	// TODO Auto-generated method stub
-	
-}
+	@Override
+	public void setTransformProperty(Element element, TransformType type,
+			double x, double y) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void setTransformProperty(com.google.gwt.dom.client.Element element,
+			TransformType type, double x, double y) {
+		// TODO Auto-generated method stub
+
+	}
 
 }
