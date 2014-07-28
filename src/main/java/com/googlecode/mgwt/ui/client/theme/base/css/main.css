@@ -36,13 +36,13 @@ body {
 	Fix ios 7 bug with the body on an ipad in landscape mode being 20px 692px instead of 672px 
 	when running in Safari.
 */
-@if mgwt.os ipad ipad_retina{
+@if mgwt.os ipad ipad_retina {
 	body{
 		position: fixed;
 	}
 
 
-}@else{
+}@else {
 	body{
 		position: absolute;
 	}
