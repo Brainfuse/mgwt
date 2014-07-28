@@ -31,9 +31,22 @@
 body {
 	width: 100%;
 	height: 100%;
-	position: absolute;
 }
+/**
+	Fix ios 7 bug with the body on an ipad in landscape mode being 20px 692px instead of 672px 
+	when running in Safari.
+*/
+@if mgwt.os ipad ipad_retina {
+	body{
+		position: fixed;
+	}
 
+
+}@else {
+	body{
+		position: absolute;
+	}
+}
 @if mgwt.os desktop {
 	body {
 		background-color: #E0E1E5;

@@ -39,10 +39,14 @@ public interface CssUtilImpl {
 
 	public void setTranslateAndZoom(Element element, int x, int y, double scale);
 
-  public void translatePercent(Element el, double x, double y);
-  public boolean hasAnimationEnd();
+	public void translatePercent(Element el, double x, double y);
 
-  public void setTransformProperty(Element element, TransformType type, double x,
-		double y);
+	public boolean hasAnimationEnd();
+
+	public void setTransformProperty(Element element, TransformType type,
+			double x, double y);
+
+	void setTransformProperty(com.google.gwt.dom.client.Element element,
+			TransformType type, double x, double y);
 
 }
