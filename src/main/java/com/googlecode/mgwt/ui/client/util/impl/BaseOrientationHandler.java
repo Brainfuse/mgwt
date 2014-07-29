@@ -45,7 +45,7 @@ public abstract class BaseOrientationHandler implements OrientationHandler {
 		fireOrientationChangedEvent(o);
 
 	}
-	
+
 	void fireOrientationChangedEvent(ORIENTATION orientation) {
 		setClasses(orientation);
 		currentOrientation = orientation;
@@ -112,12 +112,11 @@ public abstract class BaseOrientationHandler implements OrientationHandler {
 		return w.orientation;
 	}-*/;
 	
-	
 
 	protected static ORIENTATION getBrowserOrientation() {
 		int orientation = getOrientation0();
 	
-	    return getBrowserOrientationByAngle(orientation);
+	      return getBrowserOrientationByAngle(orientation);
 	}
 
 	protected static ORIENTATION getBrowserOrientationByAngle(int orientation) {
@@ -130,7 +129,8 @@ public abstract class BaseOrientationHandler implements OrientationHandler {
 	
 	        case 90:
 	        case -90:
-	          o = ORIENTATION.LANDSCAPE;
+	        case 270: //added.  if delta is 90, and orientation is 180.
+	          o = ORIENTATION.LANDSCAPE; 
 	          break;
 	
 	        default:

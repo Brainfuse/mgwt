@@ -10,14 +10,13 @@ import com.googlecode.mgwt.ui.client.util.OrientationHandler;
 
 public class ResizeOrientationHandler extends BaseOrientationHandler implements
 		OrientationHandler {
-	private int initialAngel;
+	private int initialAngle;
 	private int delta;
 	@Override
 	public void doSetupOrientation() {
 
 		if (!orientationEventSupported()) {
 			Window.addResizeHandler(new ResizeHandler() {
-
 				@Override
 				public void onResize(ResizeEvent event) {
 					ORIENTATION orientation = getOrientation();
@@ -30,9 +29,9 @@ public class ResizeOrientationHandler extends BaseOrientationHandler implements
 			setupNativeBrowerOrientationHandler();
 		}
 		ORIENTATION currentOrientationByScreenSize = getOrientationByScreenSize();
-		initialAngel = abs(getOrientation0());
+		initialAngle = abs(getOrientation0());
 		int[] standardAngel = getStandardAngleByOrientation(currentOrientationByScreenSize);
-		if ( (inArr(initialAngel , standardAngel) ) ){
+		if ( (inArr(initialAngle , standardAngel) ) ){
 			//Good implementation
 			delta = 0;
 			
@@ -42,6 +41,7 @@ public class ResizeOrientationHandler extends BaseOrientationHandler implements
 		
 
 	}
+	
 	private boolean inArr(int val, int[] arr){
 		for (int i=0;i<arr.length;i++){
 			if ( arr[i]== val)
@@ -62,9 +62,8 @@ public class ResizeOrientationHandler extends BaseOrientationHandler implements
 		 * degrees on various devices. This is why I changed to use the
 		 * screen.height instead of the value of window.orientation.
 		 */
-		int height = getScreenHeight();
-
-		int width = getScreenWidth();
+		int height =Window.getClientHeight();
+		int width = Window.getClientWidth();
 
 		if (width > height) {
 			return ORIENTATION.LANDSCAPE;
@@ -77,17 +76,6 @@ public class ResizeOrientationHandler extends BaseOrientationHandler implements
 	private native static boolean orientationEventSupported()/*-{
 		return "onorientationchange" in $wnd;
 	}-*/;
-	
-	private native static int getScreenWidth()/*-{
-		return screen.width;
-	}-*/;
-	
-	private native static int getScreenHeight()/*-{
-		return screen.height;
-	}-*/;
-	
-	
-
 	/**
 	 * Get the current orientation of the device
 	 * 
@@ -113,10 +101,9 @@ public class ResizeOrientationHandler extends BaseOrientationHandler implements
 		case PORTRAIT:
 			return new int[]{180, 0};
 		case LANDSCAPE:
-			return new int[]{90};
+			return new int[]{90}; 
 		 default:
 	          throw new IllegalStateException("this should not happen!?");
 		}
 	}
-
 }
