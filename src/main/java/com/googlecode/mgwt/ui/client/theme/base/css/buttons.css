@@ -12,6 +12,7 @@
 	text-overflow: ellipsis;
 	font-size: 19px;
 	text-align: center;
+	cursor:pointer;
 }
 
 @if user.agent safari {
