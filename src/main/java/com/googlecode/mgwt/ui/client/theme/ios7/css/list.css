@@ -1,0 +1,12 @@
+.mgwt-List-group{}
+.mgwt-List-Head-Element{}
+.mgwt-List-canbeSelected{}
+.mgwt-List-selected{}
+.mgwt-List-Header{}
+.mgwt-List>li {
+	border: none !important;
+}
+
+.mgwt-List-round {
+	padding:0px;
+}

@@ -268,11 +268,11 @@ public class MCheckBox extends TouchWidget implements HasValue<Boolean>, IsEdito
 
 		clearStyles();
 		if (value) {
-			addStyleName(css.checked());
+			addStyleName(css.checked());//add style to checkedOn div
 			removeStyleName(css.notChecked());
 
 		} else {
-			addStyleName(css.notChecked());
+			addStyleName(css.notChecked());//add style to check off div...
 			removeStyleName(css.checked());
 
 		}

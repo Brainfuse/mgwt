@@ -1,0 +1,54 @@
+
+
+
+.mgwt-Button-active{}
+.mgwt-Button-important{}
+.mgwt-Button-disabled{}
+.mgwt-Button-confirm{}
+
+.mgwt-Button{
+	background-color: #f5f5f5;
+	margin:0px;
+}
+
+
+/* @if mgwt.css pretty {
+	@external mgwt-Button, mgwt-Button-active, mgwt-Button-small, mgwt-Button-round, mgwt-Button-important, mgwt-Button-confirm, mgwt-Button-disabled;
+}
+
+.mgwt-Button {
+	display: block;
+	position: relative;
+	padding: 9px 13px;
+	margin: 5px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	font-size: 19px;
+	text-align: center;
+	cursor:pointer;
+}
+
+@if user.agent safari {
+	.mgwt-Button {
+		\-webkit-appearance: none;
+	}
+}
+
+@if user.agent gecko1_8 {
+	.mgwt-Button {
+		\-moz-appearance: none;
+	}
+}
+
+.mgwt-Button-small {
+	padding: 5px 7px;
+	margin: 2px;
+	margin-left: 5px;
+	margin-right: 5px;
+	font-size: 12px;
+}
+*/
+.mgwt-Button-round {
+	border-radius: 5px;
+} 
