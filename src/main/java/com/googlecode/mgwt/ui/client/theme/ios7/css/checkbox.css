@@ -1,7 +1,6 @@
 
 .mgwt-CheckBox {
     user-select:none;
-
 }
 
 .mgwt-CheckBox-middle {
@@ -10,11 +9,9 @@
     height: 25px;
 	border-radius: 999px;
 	background-color: #ccc;
-	-webkit-transition-duration: .4s;
-	-webkit-transition-property: background-color, box-shadow;
-	box-shadow: inset 0 0 0 0px rgba(0,0,0,0.4);
 	margin: 15px 1.2em 15px 2.5em;
     cursor:pointer;
+
 }
 
 .mgwt-CheckBox-middle-content {
@@ -24,12 +21,6 @@
     height: 23px;
 	margin-top: 1px;
 	background: #fff;
-	-webkit-transition-timing-function: cubic-bezier(.54,1.85,.5,1);
-	-webkit-transition-duration: 0.4s;
-	-webkit-transition-property: transform, background-color, box-shadow;
-	-moz-transition-timing-function: cubic-bezier(.54,1.85,.5,1);
-	-moz-transition-duration: 0.4s;
-	-moz-transition-property: transform, background-color;
 	pointer-events: none;
 	margin-top: 1px;
 	margin-left: 1px;
@@ -47,78 +38,127 @@
 
 .mgwt-CheckBox-checked .mgwt-CheckBox-middle {
 	background-color: #59da75;
-	box-shadow: inset 0 0 0 10px rgba(89,218,117,1);
 }
 
 .mgwt-CheckBox-checked .mgwt-CheckBox-middle-content {
-	-webkit-transform: translate3d(25px, 0, 0);
-	-moz-transform: translate3d(16px, 0, 0);
+
 }
 
 .mgwt-CheckBox-important{
 
 }
 
-@if user.agent safari{
+@if user.agent safari {
 	.mgwt-CheckBox {
 	    \-webkit-user-select: none;
 	}
 	
 	.mgwt-CheckBox-middle {
-	
+		\-webkit-transition-duration: .4s;
+		\-webkit-transition-property: background-color, box-shadow;
+		\-webkit-transform: none !important;
+		\-webkit-box-shadow: inset 0 0 0 0px rgba(0,0,0,0.4);
 	}
 	
 	.mgwt-CheckBox-middle-content {
-	
+		\-webkit-transition-timing-function: cubic-bezier(.54,1.85,.5,1);
+		\-webkit-transition-duration: 0.4s;
+		\-webkit-transition-property: transform, background-color, box-shadow;
 	}
 	
 	.mgwt-CheckBox-checked .mgwt-CheckBox-middle {
-	
+		\-webkit-box-shadow: inset 0 0 0 10px rgba(89,218,117,1);
 	}
 	
 	.mgwt-CheckBox-checked .mgwt-CheckBox-middle-content {
-	
+		\-webkit-transform: translate3d(25px, 0, 0);
 	}
 }
 
 
-@if user.agent gecko {
+@if user.agent gecko ie10 {
 	.mgwt-CheckBox {
 	    \-moz-user-select: none;
+	    user-select:none;
 	}
 	
 	.mgwt-CheckBox-middle {
-	
+		\-moz-transition-duration: .4s;
+		\-moz-transition-property: background-color, box-shadow;
+		\-moz-transform: none !important;
+		\-moz-box-shadow: inset 0 0 0 0px rgba(0,0,0,0.4);
+		
+		
+		transition-duration: .4s;
+		transition-property: background-color, box-shadow;
+		transform: none !important;
+		box-shadow: inset 0 0 0 0px rgba(0,0,0,0.4);
+		
 	}
 	
 	.mgwt-CheckBox-middle-content {
-	
+		\-moz-transition-timing-function: cubic-bezier(.54,1.85,.5,1);
+		\-moz-transition-duration: 0.4s;
+		\-moz-transition-property: transform, background-color, box-shadow;
+		
+		transition-timing-function: cubic-bezier(.54,1.85,.5,1);
+		transition-duration: 0.4s;
+		transition-property: transform, background-color, box-shadow;
 	}
 	
 	.mgwt-CheckBox-checked .mgwt-CheckBox-middle {
-	
+		\-moz-box-shadow: inset 0 0 0 10px rgba(89,218,117,1);
+		box-shadow: inset 0 0 0 10px rgba(89,218,117,1);
 	}
 	
 	.mgwt-CheckBox-checked .mgwt-CheckBox-middle-content {
-	
+		\-moz-transform: translate3d(25px, 0, 0);
+		transform: translate3d(25px, 0, 0);
 	}
-
 } 
+
+@if user.agent ie9 {
+	
+	.mgwt-CheckBox-middle {	
+		\-ms-transform: none !important;
+		box-shadow: inset 0 0 0 0px rgba(0,0,0,0.4);
+	}
+	
+	.mgwt-CheckBox-middle-content {		
+
+	}
+	
+	.mgwt-CheckBox-checked .mgwt-CheckBox-middle {
+		box-shadow: inset 0 0 0 10px rgba(89,218,117,1);
+	}
+	
+	.mgwt-CheckBox-checked .mgwt-CheckBox-middle-content {
+		\-ms-transform: translate(25px, 0);
+	}
+}
 
 @if user.agent opera {
 	
-} 
+	.mgwt-CheckBox-middle {
+		\-o-transition-duration: .4s;
+		\-o-transition-property: background-color, box-shadow;
+		\-o-transform: none !important;
+		\-o-box-shadow: inset 0 0 0 0px rgba(0,0,0,0.4);
+	}
+	
+	.mgwt-CheckBox-middle-content {
+		\-o-transition-timing-function: cubic-bezier(.54,1.85,.5,1);
+		\-o-transition-duration: 0.4s;
+		\-o-transition-property: transform, background-color, box-shadow;
 
-
-
-
-
-
-
-
-
-
-
-
-
+	}
+	
+	.mgwt-CheckBox-checked .mgwt-CheckBox-middle {
+		\-o-box-shadow: inset 0 0 0 10px rgba(89,218,117,1);
+	}
+	
+	.mgwt-CheckBox-checked .mgwt-CheckBox-middle-content {
+		\-o-transform: translate3d(25px, 0, 0);
+	}
+}
 

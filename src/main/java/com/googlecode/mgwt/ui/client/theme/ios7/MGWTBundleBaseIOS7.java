@@ -1,5 +1,6 @@
 package com.googlecode.mgwt.ui.client.theme.ios7;
 
+import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.resources.client.ClientBundle.Source;
 import com.googlecode.mgwt.ui.client.theme.MGWTClientBundle;
 import com.googlecode.mgwt.ui.client.theme.base.ButtonBarButtonCss;
@@ -24,7 +25,7 @@ public interface MGWTBundleBaseIOS7 extends MGWTClientBundle{
 	
 	@Source({"com/googlecode/mgwt/ui/client/theme/base/css/buttons.css","css/buttons.css"})
 	ButtonCss getButtonCss();
-	/* "com/googlecode/mgwt/ui/client/theme/base/css/dialog.css",*/
+
 	@Source({"css/dialog.css" })
     DialogCss getDialogCss();
 	
@@ -41,10 +42,28 @@ public interface MGWTBundleBaseIOS7 extends MGWTClientBundle{
 	@Source({"css/checkbox.css"})
 	CheckBoxCss getCheckBoxCss();
 	
-	@Source({"com/googlecode/mgwt/ui/client/theme/base/css/slider.css","css/slider.css"})
+	@Source({"css/slider.css"})
 	SliderCss getSliderCss();
 	
 	@Source({"com/googlecode/mgwt/ui/client/theme/base/css/carousel.css","css/carousel.css"})
 	CarouselCss getCarouselCss();
+	
+	@Source("css/resources/deleteIcon2.png")
+	ImageResource getButtonBarTrashImage();
+	
+	@Source("css/resources/addFolderIcon.png")
+	ImageResource getButtonBarPlusImage();
+	
+	@Source("css/resources/editIcon2.png")
+	ImageResource getButtonBarOrganizeImage();
+	
+	@Source("css/resources/cameraIcon.png")
+	ImageResource getButtonBarCameraImage();
+	
+	@Source("css/resources/actionIcon.png")
+	ImageResource getButtonBarActionImage();
+	
+	@Source("css/resources/addNewIcon.png")
+	public ImageResource getButtonBarNewImage();
 
 }

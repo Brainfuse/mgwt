@@ -5,28 +5,15 @@
 	background-color: #f5f5f5;
 }
 
-/*  adds a bottom border here 
-.mgwt-HeaderPanel:after {
-	content: "";
-	background: #dcdcdc;
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	height: 1px;
-	width: 85%;
-	margin: 0 auto;
-	right: 0;
-} */
-
 .mgwt-HeaderPanel-left {
 	position: absolute;
-	bottom: 10px;
+	bottom: 5px;
 	left: 10px;
 }
 
 .mgwt-HeaderPanel-right {
 	position: absolute;
-	bottom: 10px;
+	bottom: 5px;
 	right: 10px;
 }
 
@@ -51,12 +38,10 @@
 .mgwt-HeaderButton {
 
 }
-/* 
+
 .mgwt-HeaderButton:active {
-  	color:#bcd9ff;
-    background:transparent;
-    font-size:18px;
-} */
+  	opacity: 0.5;
+}
 
 .mgwt-HeaderButton-text {
 	position: relative;
@@ -70,21 +55,68 @@
 	white-space: nowrap;
 	color: #0046b9;
 	font-weight: bold;
+	padding: 3px 0px 3px 20px;
+	line-height: 18px;
 }
 
-@url arrow backArrow;
-@url arrowBlank backArrowBlank;
+
+@if user.agent safari {
+	.mgwt-HeaderPanel-left {
+		\-webkit-animation: text_fade 2s;
+	}
+	
+	.mgwt-HeaderPanel-right {
+		\-webkit-animation: text_fade 2s;
+	}
+	
+	@-webkit-keyframes text_fade {
+		from {opacity: 0;}
+		to {opacity: 1;}
+	}
+}
+
+@if user.agent gecko1_8 ie10 {
+	
+	.mgwt-HeaderPanel-left {
+		animation: text_fade 2s;
+		\-moz-animation: text_fade 2s;
+	}
+	
+	.mgwt-HeaderPanel-right {
+		animation: text_fade 2s;
+		\-moz-animation: text_fade 2s;
+	}
+	
+	@-moz-keyframes text_fade{
+		from {opacity: 0;}
+		to {opacity: 1;}
+	}
+	
+	@keyframes text_fade {
+		from {opacity: 0;}
+		to {opacity: 1;}
+	}
+}
 
 .mgwt-HeaderButton-back {
 
 }
 
-/* use background here in order to properly align with text */
-.mgwt-HeaderButton-back p:before{
-	background: arrow center center no-repeat;
-	content: arrowBlank;
-	margin-right: 5px;
+.mgwt-HeaderButton-back p:before {
+	content: "";
+	position: absolute;
+	top: 4px;
+	left: 5px;
+	width: 12px;
+	height: 12px;
+	font-size: 1px;
+	-webkit-transform: rotate(45deg);
+	border-width: 0 0 3px 3px;
+	border-style: solid;
+	border-color: #0046b9;
 }
+
+
 
 .mgwt-HeaderButton-back .mgwt-HeaderButton-border-container {
 
@@ -106,12 +138,7 @@
 	DROP DOWN MENU
 	only IOS right now
 */
-@sprite .mgwt-DropDownMenu {
-	gwt-image: "bkLinenTexture";
-	width: 320px;
-	background-repeat: repeat;
-	height: auto;
-}
+.mgwt-DropDownMenu {}
 
 .mgwt-DropDownMenu-content {
 }
