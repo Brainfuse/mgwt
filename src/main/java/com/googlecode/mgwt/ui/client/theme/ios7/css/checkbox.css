@@ -5,8 +5,8 @@
 
 .mgwt-CheckBox-middle {
 	vertical-align: middle;
-	width: 50px;	
-    height: 25px;
+	width: 52px;	
+    height: 27px;
 	border-radius: 999px;
 	background-color: #ccc;
 	margin: 15px 1.2em 15px 2.5em;
@@ -17,8 +17,8 @@
 .mgwt-CheckBox-middle-content {
 	border-radius: inherit;
 	float: left;
-	width: 23px; 
-    height: 23px;
+	width: 25px; 
+    height: 25px;
 	margin-top: 1px;
 	background: #fff;
 	pointer-events: none;
@@ -64,6 +64,7 @@
 		\-webkit-transition-timing-function: cubic-bezier(.54,1.85,.5,1);
 		\-webkit-transition-duration: 0.4s;
 		\-webkit-transition-property: transform, background-color, box-shadow;
+		\-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
 	}
 	
 	.mgwt-CheckBox-checked .mgwt-CheckBox-middle {
@@ -100,10 +101,12 @@
 		\-moz-transition-timing-function: cubic-bezier(.54,1.85,.5,1);
 		\-moz-transition-duration: 0.4s;
 		\-moz-transition-property: transform, background-color, box-shadow;
+		\-moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
 		
 		transition-timing-function: cubic-bezier(.54,1.85,.5,1);
 		transition-duration: 0.4s;
 		transition-property: transform, background-color, box-shadow;
+		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
 	}
 	
 	.mgwt-CheckBox-checked .mgwt-CheckBox-middle {
@@ -125,7 +128,7 @@
 	}
 	
 	.mgwt-CheckBox-middle-content {		
-
+		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
 	}
 	
 	.mgwt-CheckBox-checked .mgwt-CheckBox-middle {
@@ -134,6 +137,7 @@
 	
 	.mgwt-CheckBox-checked .mgwt-CheckBox-middle-content {
 		\-ms-transform: translate(25px, 0);
+		
 	}
 }
 
@@ -150,6 +154,7 @@
 		\-o-transition-timing-function: cubic-bezier(.54,1.85,.5,1);
 		\-o-transition-duration: 0.4s;
 		\-o-transition-property: transform, background-color, box-shadow;
+		\-o-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
 
 	}
 	
