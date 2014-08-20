@@ -36,12 +36,14 @@ public class DOMImplMozillaWithTransistions extends DOMImplMozilla{
 
 	}
 
-	/** {@inheritDoc} */
-	protected void sinkEventsImpl(Element elem, int bits) {
+
+	@Override
+	protected   void sinkEventsImpl(com.google.gwt.dom.client.Element elem, int bits){
 		sinkEventsImpl0(elem, bits);
 	}
 
-	protected  native void sinkEventsImpl0(Element elem, int bits) /*-{
+
+	protected  native void sinkEventsImpl0(com.google.gwt.dom.client.Element elem, int bits) /*-{
 		var chMask = (elem.__eventBits || 0) ^ bits;
 	    elem.__eventBits = bits;
 	    if (!chMask) return;
@@ -86,12 +88,24 @@ public class DOMImplMozillaWithTransistions extends DOMImplMozilla{
 	        @com.google.gwt.user.client.impl.DOMImplStandard::dispatchEvent : null;
 	    if (chMask & 0x80000) elem.onpaste       = (bits & 0x80000) ? 
 	        @com.google.gwt.user.client.impl.DOMImplStandard::dispatchEvent : null;
-	    if (chMask & 0x100000) elem.ontouchstart = (bits & 0x100000) ? 
+	    if (chMask & 0x100000) {
+//	    	if (bits & 0x100000)
+//	    		elem.addEventListener('touchstart', @com.google.gwt.user.client.impl.DOMImplStandard::dispatchEvent, false);
+	    	elem.ontouchstart = (bits & 0x100000) ? 
 	        @com.google.gwt.user.client.impl.DOMImplStandard::dispatchEvent : null;
-	    if (chMask & 0x200000) elem.ontouchmove  = (bits & 0x200000) ? 
+	    }
+	    if (chMask & 0x200000) {
+//	    	if (bits & 0x200000)
+//	    		elem.addEventListener('touchmove', @com.google.gwt.user.client.impl.DOMImplStandard::dispatchEvent, false);
+	    	elem.ontouchmove  = (bits & 0x200000) ? 
 	        @com.google.gwt.user.client.impl.DOMImplStandard::dispatchEvent : null;
-	    if (chMask & 0x400000) elem.ontouchend   = (bits & 0x400000) ? 
+	    }
+	    if (chMask & 0x400000) {
+//	    	if (bits & 0x400000)
+//	    		elem.addEventListener('touchend', @com.google.gwt.user.client.impl.DOMImplStandard::dispatchEvent, false);
+	    	elem.ontouchend   = (bits & 0x400000) ? 
 	        @com.google.gwt.user.client.impl.DOMImplStandard::dispatchEvent : null;
+	    }
 	    if (chMask & 0x800000) elem.ontouchcancel= (bits & 0x800000) ? 
 	        @com.google.gwt.user.client.impl.DOMImplStandard::dispatchEvent : null;
 	    if (chMask & 0x1000000) elem.ongesturestart  =(bits & 0x1000000) ? 
