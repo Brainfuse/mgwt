@@ -59,7 +59,6 @@
 	line-height: 18px;
 }
 
-
 @if user.agent safari {
 	.mgwt-HeaderPanel-left {
 		\-webkit-animation: text_fade 2s;
@@ -72,6 +71,10 @@
 	@-webkit-keyframes text_fade {
 		from {opacity: 0;}
 		to {opacity: 1;}
+	}
+	
+	.mgwt-HeaderButton-back p:before {
+		\-webkit-transform: rotate(45deg);
 	}
 }
 
@@ -96,6 +99,11 @@
 		from {opacity: 0;}
 		to {opacity: 1;}
 	}
+	
+	.mgwt-HeaderButton-back p:before {
+		\-moz-transform: rotate(45deg);
+		transform: rotate(45deg);
+	}
 }
 
 .mgwt-HeaderButton-back {
@@ -110,7 +118,6 @@
 	width: 12px;
 	height: 12px;
 	font-size: 1px;
-	-webkit-transform: rotate(45deg);
 	border-width: 0 0 3px 3px;
 	border-style: solid;
 	border-color: #0046b9;
