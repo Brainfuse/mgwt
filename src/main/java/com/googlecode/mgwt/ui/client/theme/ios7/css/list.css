@@ -4,7 +4,11 @@
 .mgwt-List-selected{}
 .mgwt-List-Header{}
 .mgwt-List>li {
-	border: none !important;
+	/* border: none !important; */
+}
+
+.mgwt-List>li:active {
+	opacity: 0.75;
 }
 
 .mgwt-List-round {

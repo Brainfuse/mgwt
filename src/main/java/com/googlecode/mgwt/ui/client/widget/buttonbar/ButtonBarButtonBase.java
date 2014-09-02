@@ -59,6 +59,7 @@ public class ButtonBarButtonBase extends ButtonBase {
 
 	public interface IconHandler {
 		public void setIcons(Element element, ImageResource icon, ImageResource highlight, boolean active);
+		public void setIcons(com.google.gwt.dom.client.Element element, ImageResource icon, ImageResource highlight, boolean active);
 	}
 
 	public static class DefaultIconHandler implements IconHandler {
@@ -87,6 +88,10 @@ public class ButtonBarButtonBase extends ButtonBase {
 				}
 			}
 
+		}
+		
+		public void setIcons(com.google.gwt.dom.client.Element element, ImageResource icon, ImageResource highlight, boolean active){
+			setIcons((Element) element, icon, highlight, active);
 		}
 	}
 

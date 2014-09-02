@@ -54,7 +54,7 @@
 	border-right: none;
 	border-top: none;
 }
-
+.mgwt-HeaderButton-Icon {}
 @if user.agent safari {
 	.mgwt-HeaderButton-back .mgwt-HeaderButton-border-content {
 		\-webkit-box-shadow: none;

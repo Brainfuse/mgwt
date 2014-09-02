@@ -59,6 +59,31 @@
 	line-height: 18px;
 }
 
+.mgwt-HeaderButton-Icon{
+	position: relative;
+	z-index: 2;
+	font-size: 15px;
+	text-align: center;
+	min-width: 20px;
+	max-width: 20px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	color: #0046b9;
+	font-weight: bold;
+	line-height: 18px;
+	background-size: 20px 20px;
+	width: 20px;
+	height: 20px;
+}
+.mgwt-HeaderButton-Icon i{
+	display:block;
+	width: 20px;
+	height: 20px;
+	background-size: 20px 20px;
+	
+}
+
 @if user.agent safari {
 	.mgwt-HeaderPanel-left {
 		\-webkit-animation: text_fade 2s;

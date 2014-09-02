@@ -47,7 +47,7 @@
 }
 
 .mgwt-BottomPanel div{
-	color: #505050 !important;
+	color: #026fff !important;
 	font-size: 18px !important;
 	font-family: HelveticaNeue, "Helvetica Neue", Helvetica, Arial, "BBAlpha Sans";
 	border-bottom: 1px solid #dcdcdc;
@@ -61,7 +61,6 @@
 
 .mgwt-BottomPanel div:last-child{
 	border-radius: 5px;
-	color: #026fff !important;
 	font-weight: bold;
 	margin-top: 20px !important;
 	border-bottom:none;

@@ -74,4 +74,7 @@ public interface HeaderCss extends ButtonBaseCss {
 
 	@ClassName("mgwt-DropDownMenu-arrow")
 	public String arrow();
+	
+	@ClassName("mgwt-HeaderButton-Icon")
+	public String icon();
 }

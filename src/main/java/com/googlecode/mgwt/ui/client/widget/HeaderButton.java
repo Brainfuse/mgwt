@@ -15,13 +15,16 @@
  */
 package com.googlecode.mgwt.ui.client.widget;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.ParagraphElement;
+import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Element;
 import com.googlecode.mgwt.ui.client.MGWTStyle;
 import com.googlecode.mgwt.ui.client.theme.base.HeaderCss;
 import com.googlecode.mgwt.ui.client.widget.base.ButtonBase;
+import com.googlecode.mgwt.ui.client.widget.buttonbar.ButtonBarButtonBase.IconHandler;
 
 /**
  * A Button that can be used inside a {@link HeaderPanel}
@@ -50,6 +53,8 @@ import com.googlecode.mgwt.ui.client.widget.base.ButtonBase;
  */
 
 public class HeaderButton extends ButtonBase {
+
+	protected final static IconHandler ICON_HANDLER = GWT.create(IconHandler.class);
 
 	private ParagraphElement pElement;
 	protected final HeaderCss headerCss;
@@ -80,9 +85,39 @@ public class HeaderButton extends ButtonBase {
 
 		pElement = Document.get().createPElement();
 		pElement.addClassName(css.headerButtonText());
+		
 		getElement().appendChild(pElement);
 
 	}
+	/**
+	 * Construct a HeaderButton with a given css
+	 * 
+	 * @param css the css to use
+	 */
+	public HeaderButton(HeaderCss css,ImageResource img) {
+		super(css);
+		this.headerCss = css;
+		addStyleName(css.headerButton());
+
+		Element pointDiv = DOM.createDiv();
+		pointDiv.addClassName(css.headerButtonBorderContainer());
+		Element pointSpan = DOM.createSpan();
+		pointSpan.addClassName(css.headerButtonBorderContent());
+		pointDiv.appendChild(pointSpan);
+		getElement().appendChild(pointDiv);
+		
+		pElement = Document.get().createPElement();
+		com.google.gwt.dom.client.Element iElement = Document.get().createElement("i");
+		ICON_HANDLER.setIcons(iElement, img, img, false);
+		
+		pElement.addClassName(css.headerButtonText());
+		pElement.addClassName(css.icon());
+		pElement.appendChild(iElement);
+//		iElement.addClassName(css.icon());
+		getElement().appendChild(pElement);
+
+	}
+	
 
 	/*
 	 * (non-Javadoc)
