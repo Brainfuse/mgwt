@@ -1,6 +1,6 @@
 
 .mgwt-BarButton {
-	background-size: 25px 25px;
+	background-size: 25px 25px !important;
 	margin:0px 10px;
 }
 
