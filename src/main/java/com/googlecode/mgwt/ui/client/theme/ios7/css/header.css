@@ -8,7 +8,7 @@
 .mgwt-HeaderPanel-left {
 	position: absolute;
 	bottom: 8px;
-	left: 10px;
+	left: 5px;
 }
 
 .mgwt-HeaderPanel-right {
@@ -39,8 +39,8 @@
 
 }
 
-.mgwt-HeaderButton:active {
-  	opacity: 0.5;
+.mgwt-HeaderButton:active, .mgwt-HeaderButton:hover  {
+  	opacity: 0.75;
 }
 
 .mgwt-HeaderButton-text {
