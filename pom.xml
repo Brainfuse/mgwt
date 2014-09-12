@@ -11,7 +11,7 @@
 
 	<groupId>com.brainfuse.mgwt</groupId>
 	<artifactId>mgwt</artifactId>
-	<version>1.2.10-SNAPSHOT</version>
+	<version>1.3.0</version>
 	<packaging>jar</packaging>
 	<name>mgwt</name>
 
@@ -245,7 +245,7 @@
 										</goals>
 									</pluginExecutionFilter>
 									<action>
-										<ignore></ignore>
+										<ignore />
 									</action>
 								</pluginExecution>
 							</pluginExecutions>
