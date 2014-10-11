@@ -15,10 +15,7 @@
  */
 package com.googlecode.mgwt.ui.client.widget.buttonbar;
 
-import com.google.gwt.resources.client.ImageResource;
-import com.google.gwt.uibinder.client.UiConstructor;
 import com.googlecode.mgwt.ui.client.MGWTStyle;
-import com.googlecode.mgwt.ui.client.theme.base.ButtonBarButtonCss;
 import com.googlecode.mgwt.ui.client.widget.HeaderButton;
 
 public class NewIconButton extends HeaderButton {

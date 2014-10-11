@@ -10,7 +10,7 @@
 	overflow:hidden;
 	display:block;
 	top:40px;
-	bottom:40px;
+	bottom:44px !important;
 	left:0px;
 	right:0px;
 }

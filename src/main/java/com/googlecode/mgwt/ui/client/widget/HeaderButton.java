@@ -98,24 +98,15 @@ public class HeaderButton extends ButtonBase {
 		super(css);
 		this.headerCss = css;
 		addStyleName(css.headerButton());
-
+		
 		Element pointDiv = DOM.createDiv();
-		pointDiv.addClassName(css.headerButtonBorderContainer());
-		Element pointSpan = DOM.createSpan();
-		pointSpan.addClassName(css.headerButtonBorderContent());
-		pointDiv.appendChild(pointSpan);
-		getElement().appendChild(pointDiv);
+		pointDiv.addClassName(css.icon());
 		
-		pElement = Document.get().createPElement();
-		com.google.gwt.dom.client.Element iElement = Document.get().createElement("i");
-		ICON_HANDLER.setIcons(iElement, img, img, false);
-		
-		pElement.addClassName(css.headerButtonText());
-		pElement.addClassName(css.icon());
-		pElement.appendChild(iElement);
-//		iElement.addClassName(css.icon());
-		getElement().appendChild(pElement);
+		Element iconContainer = DOM.createDiv();
+		ICON_HANDLER.setIcons(iconContainer, img, img, false);
 
+		pointDiv.appendChild(iconContainer);
+		getElement().appendChild(pointDiv);
 	}
 	
 

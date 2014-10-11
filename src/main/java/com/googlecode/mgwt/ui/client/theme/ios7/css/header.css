@@ -59,30 +59,19 @@
 	line-height: 18px;
 }
 
-.mgwt-HeaderButton-Icon{
+.mgwt-HeaderButton-Icon {
+	padding: 5px;
 	position: relative;
-	z-index: 2;
-	font-size: 15px;
-	text-align: center;
-	min-width: 20px;
-	max-width: 20px;
-	text-overflow: ellipsis;
-	overflow: hidden;
-	white-space: nowrap;
-	color: #0046b9;
-	font-weight: bold;
-	line-height: 18px;
-	background-size: 20px 20px;
-	width: 20px;
-	height: 20px;
+	left: 5px;
+	top: 3px;
 }
-.mgwt-HeaderButton-Icon i{
-	display:block;
-	width: 20px;
-	height: 20px;
+
+.mgwt-HeaderButton-Icon div {
 	background-size: 20px 20px !important;
-	
+	width: 20px;
+	height: 20px;
 }
+
 
 @if user.agent safari {
 	.mgwt-HeaderPanel-left {
@@ -98,7 +87,7 @@
 		to {opacity: 1;}
 	}
 	
-	.mgwt-HeaderButton-back p:before {
+	.mgwt-HeaderButton-back p:after {
 		\-webkit-transform: rotate(45deg);
 	}
 }
@@ -125,7 +114,7 @@
 		to {opacity: 1;}
 	}
 	
-	.mgwt-HeaderButton-back p:before {
+	.mgwt-HeaderButton-back p:after {
 		\-moz-transform: rotate(45deg);
 		transform: rotate(45deg);
 	}
@@ -135,7 +124,7 @@
 
 }
 
-.mgwt-HeaderButton-back p:before {
+.mgwt-HeaderButton-back p:after {
 	content: "";
 	position: absolute;
 	top: 4px;
@@ -170,16 +159,51 @@
 	DROP DOWN MENU
 	only IOS right now
 */
-.mgwt-DropDownMenu {}
+.mgwt-DropDownMenu {
+	width: 320px;
+	\-webkit-padding-start: 0px;
+	\-webkit-border-radius: 10px;
+	\-webkit-box-shadow: 1px 1px 10px #555;
+	border: solid 2px #cecece;
+	background-color: #fff;
+	margin: 0px;
+	top: 49px;
+	left: 10px;
+	bottom: 20px;
+	position: absolute;
+}
 
 .mgwt-DropDownMenu-content {
+	display: -webkit-box;
+	\-webkit-box-orient: vertical;
+	width: 100%;
+	height: 100%;
 }
 
 .mgwt-DropDownMenu-arrow {
-
+	margin: 0px 5px 5px 5px !important;
+	\-webkit-border-radius: 4px;
+	position: absolute;
+	top: -16px;
+	left: 3px;
+	height: 30px !important;
+	width: 30px;
+	border: solid 3px #cecece;
+	border-bottom: none;
+	border-right: none;
+	background-color: #fff;
+	\-webkit-transform: rotate(45deg);
+	\-webkit-mask-image: literal('-webkit-gradient(linear, left top, right bottom, from(#000000), color-stop(0.5, #000000), color-stop(0.5, transparent), to(transparent) )');
 }
 
 .mgwt-DropDownMenu .mgwt-HeaderPanel {
+	padding: 0px 10px;
+	height: 40px;
+	background-color: #fff;
+	\-webkit-border-top-left-radius: 8px;
+	\-webkit-border-top-right-radius: 8px;
+	position: relative;
+	border-bottom: 1px solid #cecece;
  }
 
 .mgwt-DropDownMenu .mgwt-HeaderPanel .mgwt-HeaderPanel-center {
@@ -201,6 +225,8 @@
 .mgwt-DropDownMenu .mgwt-HeaderButton-active .mgwt-HeaderButton-border-content {
 	
 }
+
+
 
 /* other browsers */
 @if user.agent ie6 ie8 ie9 gecko opera {
