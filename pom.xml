@@ -11,7 +11,7 @@
 
 	<groupId>com.brainfuse.mgwt</groupId>
 	<artifactId>mgwt</artifactId>
-	<version>1.4.7</version>
+	<version>1.4.8-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<name>mgwt</name>
 
