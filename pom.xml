@@ -46,7 +46,22 @@
 		<developerConnection>scm:git:git@github.com:Brainfuse/mgwt.git</developerConnection>
 
 	</scm>
-
+	<distributionManagement>
+				<repository>
+					<uniqueVersion>false</uniqueVersion>
+					<id>dev-maven</id>
+					<name>Dev Machine Repository</name>
+					<url>ftp://dev3.trustforte.com/maven</url>
+					<layout>default</layout>
+				</repository>
+				<snapshotRepository>
+					<uniqueVersion>false</uniqueVersion>
+					<id>dev-maven</id>
+					<name>Dev Machine Repository</name>
+					<url>ftp://dev3.trustforte.com/maven</url>
+					<layout>default</layout>
+				</snapshotRepository>
+			</distributionManagement>
 
 
 	<build>
