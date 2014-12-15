@@ -58,13 +58,40 @@
       return mgwt_os;
     }
     ]]></property-provider>
-
+    
+    
+    <define-property name="android.defaultBrowser" values="chrome,other" />
+	<property-provider name="android.defaultBrowser"><![CDATA[
+	{
+	    var android_defaultBrowser = (function(){
+		    var ua = window.navigator.userAgent.toLowerCase();
+		    if(ua.indexOf('android') != -1) {
+		    	var androidVersion = parseFloat(ua.match(/android\s+([\d\.]+)/)[1]);
+		  		if(androidVersion >= 4.4) {
+		  			return 'chrome';
+		  		}
+		  	}
+		  	return 'other';
+	  	})();
+	  	
+	  	return android_defaultBrowser;
+  	}]]></property-provider>
+    
+	<set-property name="android.defaultBrowser" value="other">
+    	<none>
+			<when-property-is name="mgwt.os" value="android" />
+			<when-property-is name="mgwt.os" value="android_tablet" />
+    	</none>
+    </set-property>
+    
     <!-- non-safari browsers are always desktop -->
     <set-property name="mgwt.os" value="desktop" >
       <none>
         <when-property-is name="user.agent" value="safari" />
       </none>
     </set-property>
+    
+    
     
     <!--  derived property, so as we do not add permutations unless we define 
           a property-provider for it -->
@@ -86,6 +113,8 @@
 			<when-property-is name="mgwt.os" value="retina" />
 		</any>
 	</set-property>
+	
+
 
     <replace-with class="com.google.gwt.user.client.impl.DOMImplMobileSafari">
         <when-type-is class="com.google.gwt.user.client.impl.DOMImpl"/>
