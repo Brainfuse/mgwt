@@ -1,0 +1,58 @@
+.mgwt-ProgressIndicator {
+	  background-color:#3498db;
+	  position:absolute;
+	  top:0;
+	  left:0;
+	  width:10px;
+	  height:10px;
+	  -webkit-border-radius:10px;
+	  -webkit-animation-name:bounce_followingBallsG;
+	  -webkit-animation-duration:1.5s;
+	  -webkit-animation-iteration-count:infinite;
+	  -webkit-animation-direction:linear;
+	  margin: 10px;
+}
+
+.mgwt-ProgressIndicator:before {
+	  content:"";
+	  width:10px;
+	  height:10px;
+	  position:absolute;
+	  background-color:#e74c3c;
+	  -webkit-border-radius:10px;
+	  -webkit-animation-name:bounce_followingBallsG;
+	  -webkit-animation-duration:1.5s;
+	  -webkit-animation-iteration-count:infinite;
+	  -webkit-animation-direction:linear;
+	  -webkit-animation-delay:0.2s;
+}
+
+.mgwt-ProgressIndicator:after {
+	  content:"";
+	  width:10px;
+	  height:10px;
+	  position:absolute;
+	  background-color:#f9c922;
+	  -webkit-border-radius:10px;
+	  -webkit-animation-name:bounce_followingBallsG;
+	  -webkit-animation-duration:1.5s;
+	  -webkit-animation-iteration-count:infinite;
+	  -webkit-animation-direction:linear;
+	  -webkit-animation-delay:0.4s;
+}
+
+@-webkit-keyframes bounce_followingBallsG{
+	  0%{
+	    left:0px;
+	    opacity: 1;
+	  }
+	
+	  50%{
+	    left:60px;
+	  }
+	
+	  100%{
+	    left:0px;
+	    opacity: 1;
+	  }
+}

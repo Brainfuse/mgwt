@@ -66,7 +66,10 @@ public abstract class PullArrowBase extends Composite implements PullArrowWidget
 		indicator = new ProgressIndicator();
 		indicator.addStyleName(css.spinner());
 		indicator.getElement().getStyle().setDisplay(Display.NONE);
-		main.add(indicator);
+		FlowPanel indicatorContainer = new FlowPanel();
+		indicatorContainer.add(indicator);
+		indicatorContainer.addStyleName(css.indicatorContainer());
+		main.add(indicatorContainer);
 
 		textContainer = new HTML();
 		textContainer.addStyleName(css.text());
@@ -121,7 +124,7 @@ public abstract class PullArrowBase extends Composite implements PullArrowWidget
 	@Override
 	public int getHeight() {
 		// TODO
-		return 70;
+		return 30;//70;
 	}
 
 	/*

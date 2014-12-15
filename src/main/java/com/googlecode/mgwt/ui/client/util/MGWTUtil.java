@@ -24,4 +24,8 @@ public class MGWTUtil {
 			
 		}
 	}
+	
+	public static native void log(String s)/*-{
+		$wnd.console.log("MGWT Log: "+s);
+	}-*/;
 }
