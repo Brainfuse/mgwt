@@ -8,7 +8,7 @@
 .mgwt-Slider-bar {
 	position: relative;
 	height: 4px;
-	background-color: #017afd;
+	background-color: rgb(204, 204, 204);
 }
 
 @if user.agent safari {
@@ -44,4 +44,12 @@
 		\-moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
 		\-moz-border-radius: 100%;
 	}
+}
+
+
+.mgwt-Slider-Progress {
+	background-color: #017afd;
+	border-radius: 15px;
+	position: absolute;
+	height: 100%;
 }

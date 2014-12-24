@@ -15,6 +15,7 @@ package com.googlecode.mgwt.ui.client.widget;
 
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
+import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.editor.client.LeafValueEditor;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
@@ -61,23 +62,27 @@ public class MSlider extends Composite implements HasValue<Integer>, LeafValueEd
   private static class SliderWidget extends TouchWidget {
 
     private Element slider;
+    private Element progress;
     private Element bar;
 
     public SliderWidget(SliderCss css) {
       setElement(DOM.createDiv());
+      progress = DOM.createSpan();
       bar = DOM.createDiv();
       bar.setClassName(css.bar());
-
+      progress.addClassName(css.progress());
       slider = DOM.createDiv();
       slider.setClassName(css.pointer());
+      bar.appendChild(progress);
       bar.appendChild(slider);
 
       getElement().appendChild(bar);
-
+  
     }
 
     public void setPos(int x) {
       CssUtil.translate(slider, x, 0);
+      progress.getStyle().setWidth(x, Unit.PX);
     }
   }
 
