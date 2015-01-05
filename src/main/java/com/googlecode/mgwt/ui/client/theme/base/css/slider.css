@@ -1,5 +1,5 @@
 @if mgwt.css pretty {
-	@external mgwt-Slider, mgwt-Slider-bar, mgwt-Slider-pointer;
+	@external mgwt-Slider, mgwt-Slider-bar, mgwt-Slider-pointer, mgwt-Silder-Progress;
 }
 
 .mgwt-Slider {
@@ -7,4 +7,9 @@
 	width: 277px;
 	padding-top: 10px;
 	padding-bottom: 10px;
+}
+
+.mgwt-Slider-Progress {
+	position: absolute;
+	height: 100%;
 }

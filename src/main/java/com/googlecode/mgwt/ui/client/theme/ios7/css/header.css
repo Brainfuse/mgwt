@@ -2,7 +2,7 @@
 	position:relative;
 	height: 40px;
 	border-bottom: 1px solid #cecece;
-	background-color: #f5f5f5;
+	background-color: #f8f8f8;
 }
 
 @if ios.version ios7_higher {

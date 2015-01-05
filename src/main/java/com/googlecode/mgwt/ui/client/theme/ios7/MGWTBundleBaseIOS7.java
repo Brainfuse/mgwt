@@ -1,7 +1,7 @@
 package com.googlecode.mgwt.ui.client.theme.ios7;
 
-import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.resources.client.ClientBundle.Source;
+import com.google.gwt.resources.client.ImageResource;
 import com.googlecode.mgwt.ui.client.theme.MGWTClientBundle;
 import com.googlecode.mgwt.ui.client.theme.base.ButtonBarButtonCss;
 import com.googlecode.mgwt.ui.client.theme.base.ButtonBarCss;
@@ -12,6 +12,8 @@ import com.googlecode.mgwt.ui.client.theme.base.DialogCss;
 import com.googlecode.mgwt.ui.client.theme.base.HeaderCss;
 import com.googlecode.mgwt.ui.client.theme.base.ListCss;
 import com.googlecode.mgwt.ui.client.theme.base.MainCss;
+import com.googlecode.mgwt.ui.client.theme.base.ProgressIndicatorCss;
+import com.googlecode.mgwt.ui.client.theme.base.PullToRefreshCss;
 import com.googlecode.mgwt.ui.client.theme.base.SliderCss;
 
 public interface MGWTBundleBaseIOS7 extends MGWTClientBundle{
@@ -32,8 +34,7 @@ public interface MGWTBundleBaseIOS7 extends MGWTClientBundle{
 	@Source({"css/header.css" })
     HeaderCss getHeaderCss();
 
-	@Source({ "com/googlecode/mgwt/ui/client/theme/base/css/list.css"
-		,"css/list.css"})
+	@Source({ "com/googlecode/mgwt/ui/client/theme/base/css/list.css","css/list.css"})
 	ListCss getListCss();
 	
 	@Source({ "com/googlecode/mgwt/ui/client/theme/base/css/main.css","css/main.css" })
@@ -47,6 +48,12 @@ public interface MGWTBundleBaseIOS7 extends MGWTClientBundle{
 	
 	@Source({"com/googlecode/mgwt/ui/client/theme/base/css/carousel.css","css/carousel.css"})
 	CarouselCss getCarouselCss();
+	
+	@Source({"css/pulltorefresh.css"})
+	PullToRefreshCss getPullToRefreshCss();
+	
+	@Source({"css/progressindicator.css"})
+	ProgressIndicatorCss getProgressIndicatorCss();
 	
 	@Source("css/resources/deleteIcon2.png")
 	ImageResource getButtonBarTrashImage();
@@ -64,6 +71,9 @@ public interface MGWTBundleBaseIOS7 extends MGWTClientBundle{
 	ImageResource getButtonBarActionImage();
 	
 	@Source("css/resources/addNewIcon.png")
-	public ImageResource getButtonBarNewImage();
+	ImageResource getButtonBarNewImage();
+	
+	@Source("css/resources/pullToRefreshArrow.png")
+	ImageResource pullToRefreshArrow();
 
 }

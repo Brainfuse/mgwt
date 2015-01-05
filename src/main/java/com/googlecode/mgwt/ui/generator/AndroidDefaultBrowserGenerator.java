@@ -1,0 +1,89 @@
+package com.googlecode.mgwt.ui.generator;
+
+import java.io.PrintWriter;
+
+import com.google.gwt.core.ext.BadPropertyValueException;
+import com.google.gwt.core.ext.Generator;
+import com.google.gwt.core.ext.GeneratorContext;
+import com.google.gwt.core.ext.PropertyOracle;
+import com.google.gwt.core.ext.SelectionProperty;
+import com.google.gwt.core.ext.TreeLogger;
+import com.google.gwt.core.ext.UnableToCompleteException;
+import com.google.gwt.core.ext.typeinfo.JClassType;
+import com.google.gwt.core.ext.typeinfo.NotFoundException;
+import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
+import com.google.gwt.user.rebind.SourceWriter;
+import com.googlecode.mgwt.ui.client.AndroidDefaultBrowserDetection;
+
+/**
+ * Considered internal
+ * 
+ * {@link AndroidDefaultBrowserGenerator} creates the implementation for
+ * {@link AndroidDefaultBrowserDetection} for each platform
+ * 
+ */
+
+public class AndroidDefaultBrowserGenerator extends Generator {
+
+	@Override
+	public String generate(TreeLogger logger, GeneratorContext context,
+			String typeName) throws UnableToCompleteException {
+		
+		
+		
+		
+		// get the property oracle
+		PropertyOracle propertyOracle = context.getPropertyOracle();
+		SelectionProperty property = null;
+		try {
+			// get android.defaultBrowser variable
+			property = propertyOracle.getSelectionProperty(logger, "android.defaultBrowser");
+		} catch (BadPropertyValueException e) {
+			// if we can`t find it die
+			logger.log(TreeLogger.ERROR, "can not resolve android.defaultBrowser variable", e);
+			throw new UnableToCompleteException();
+		}
+
+		JClassType classType = null;
+
+		try {
+			// get the type we are looking for
+			classType = context.getTypeOracle().getType(typeName);
+		} catch (NotFoundException e) {
+			// if we can`t get it die
+			logger.log(TreeLogger.ERROR, "can not find type: '" + typeName + "'", e);
+			throw new UnableToCompleteException();
+		}
+
+		// get value of android.defaultBrowser
+		String androidBrowserProperty = property.getCurrentValue();
+		// get the package name
+		String packageName = classType.getPackage().getName();
+		// build name for implementation class
+		String simpleName = classType.getSimpleSourceName() + "_" + property.getCurrentValue();
+		// combine package name and simple name to full qualified
+		String fullName = packageName + "." + simpleName;
+
+		ClassSourceFileComposerFactory composer = new ClassSourceFileComposerFactory(packageName, simpleName);
+		composer.addImplementedInterface(typeName);
+		composer.addImport(typeName);
+
+		PrintWriter printWriter = context.tryCreate(logger, packageName, simpleName);
+
+		if (printWriter == null) {
+			return fullName;
+		}
+
+		// start writing the implementation
+		SourceWriter writer = composer.createSourceWriter(context, printWriter);
+		
+		writer.println("public boolean isAndroidChromeDefaultBrowser() {");
+		writer.println("return " + androidBrowserProperty.equals("chrome") + ";");
+		writer.println("}");
+
+		writer.commit(logger);
+
+		return fullName;
+	}
+
+}

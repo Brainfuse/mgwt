@@ -35,4 +35,7 @@ public interface SliderCss extends CssResource {
 
 	@ClassName("mgwt-Slider-bar")
 	public String bar();
+	
+	@ClassName("mgwt-Slider-Progress")
+	public String progress();
 }
