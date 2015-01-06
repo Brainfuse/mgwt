@@ -17,18 +17,14 @@ under * the License.
 	
 	<!-- need to remove ie6 (causing bugs with clientbundle inlining images) -->
 	<set-property name="user.agent" value="safari,gecko1_8,ie9,ie8,ie10" />
-	
+
 	<define-configuration-property name="mgwt.css" is-multi-valued="false" />
 	<set-configuration-property name="mgwt.css" value="obf" />
+
 
 	<generate-with
 		class="com.googlecode.mgwt.ui.generator.OsDetectionGenerator">
 		<when-type-assignable class="com.googlecode.mgwt.ui.client.OsDetection" />
-	</generate-with>
-	
-	<generate-with
-		class="com.googlecode.mgwt.ui.generator.AndroidDefaultBrowserGenerator">
-		<when-type-assignable class="com.googlecode.mgwt.ui.client.AndroidDefaultBrowserDetection" />
 	</generate-with>
 
 	<replace-with class="com.googlecode.mgwt.ui.client.widget.touch.TouchWidgetDesktopImpl">
