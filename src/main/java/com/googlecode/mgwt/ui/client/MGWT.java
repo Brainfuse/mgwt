@@ -45,15 +45,13 @@ import com.googlecode.mgwt.ui.client.util.OrientationHandler;
  * The MGWT Object is used to apply settings for an MGWT App. It also provides an instance of
  * {@link OsDetection}, as well a way to determine the device orientation
  * 
- * {@link AndroidDefaultBrowserDetection}
+ * 
  * 
  * @author Daniel Kurka
  */
 public class MGWT {
 
   private static OsDetection OS_DETECTION;
-  
-  private static AndroidDefaultBrowserDetection ANDROID_DEFAULT_BROWSER_DETECTION;
 
   private static EventBus manager;
 
@@ -201,7 +199,6 @@ public class MGWT {
 		return false;
   }-*/;
 
-
   /**
    * 
    * Considered internal don`t call!
@@ -259,19 +256,9 @@ public class MGWT {
     }
     return OS_DETECTION;
   }
+
   
-  
-  /**
-   * Get the os detection interface
-   * 
-   * @return a {@link com.googlecode.mgwt.ui.client.AndroidDefaultBrowserDetection} object.
-   */
-  public static AndroidDefaultBrowserDetection getAndroidDefaultBrowserDetection(){
-	  if(ANDROID_DEFAULT_BROWSER_DETECTION == null) {
-		  ANDROID_DEFAULT_BROWSER_DETECTION = GWT.create(AndroidDefaultBrowserDetection.class);
-	  }
-	  return ANDROID_DEFAULT_BROWSER_DETECTION;
-  }
+
 
   private static Element getHead() {
     NodeList<Element> elementsByTagName = Document.get().getElementsByTagName("head");
