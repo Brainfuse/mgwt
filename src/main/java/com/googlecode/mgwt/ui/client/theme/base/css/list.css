@@ -68,6 +68,12 @@
 	}
 }
 
+@if user.agent ie10 {
+	.mgwt-FormList-Element-label{
+		width: 30%;
+		display: \-ms-flexbox;
+	}
+}
 
 .mgwt-FormList-Element-container{
 	padding: 10px;
@@ -89,6 +95,14 @@
 	}
 }
 
+@if user.agent gecko1_8 {
+	.mgwt-FormList-Element-container{
+		\-ms-flex: 1;
+		flex: 1;
+		\-ms-box-pack: end;
+		display: \-ms-flexbox;
+	}
+}
  
 
 

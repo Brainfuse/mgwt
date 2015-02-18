@@ -33,9 +33,8 @@
 }
 }
 
-@if user.agent ie10 gecko1_8 {
+@if user.agent gecko1_8 {
 	.fillPanel {
-		
 		display: -moz-box;
 		display: flex;
 		flex-direction: column;
@@ -44,9 +43,6 @@
 		height: 100%;
 		overflow: hidden;
 		vertical-align: top;
-		
-		
-		
 	}
 	
 	.horizontal {
@@ -63,16 +59,34 @@
 		\-moz-box-flex: 1;
 		flex: 1;
 	} 
-	
-	
 }
 
-
+@if user.agent ie10 {
+	.fillPanel {
+		display: -ms-flexbox;
+		\-ms-flex-direction: column;
+		width: 100%;
+		height: 100%;
+		background-image: literal('-ms-radial-gradient(center, ellipse cover, #4C4C4C 0%,#595959 0%,#2C2C2C 78%,#2B2B2B 81%,#2B2B2B 100%,#1C1C1C 98%,#666 100%,#111 100%,#131313 100%)'
+			);
+	}
+	.horizontal {
+		\-ms-flex-direction: row;
+	}
+	.fillPanel>.fillPanelExpandChild {
+		\-ms-flex: 1;
+		flex: 1;
+	}
+	.fillPanelExpandChild {
+		\-ms-flex: 1;
+		flex: 1;
+	}
+}
 
 /* other browsers */
 
 @if user.agent ie6 ie8 ie9 gecko opera {
 	.fillPanel{}
-                        .fillPanelExpandChild{}
-                        .horizontal{}
+    .fillPanelExpandChild{}
+    .horizontal{}
 }

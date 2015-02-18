@@ -68,9 +68,16 @@
 .mgwt-ButtonBar-spacer{
 }
 
-@if user.agent ie10 gecko1_8  {
+@if user.agent gecko1_8 {
 	.mgwt-ButtonBar-spacer{
 		\-moz-box-flex: 1;
+		flex: 1;
+	}
+}
+
+@if user.agent ie10 {
+	.mgwt-ButtonBar-spacer{
+		\-ms-flex: 1;
 		flex: 1;
 	}
 }

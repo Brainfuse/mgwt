@@ -67,6 +67,15 @@
 	}
 }
 
+@if user.agent ie10 {
+	.mgwt-DialogPanel .footer {
+		\-ms-flex-pack: justify;
+		display: -ms-flexbox;
+		\-ms-box-orient: horizontal;
+		box-sizing: border-box;
+	}
+}
+
 .mgwt-DialogPanel .okbutton,.mgwt-DialogPanel .cancelbutton {
 	display: block;
 	font-size: 17px;
@@ -85,9 +94,15 @@
 	}
 }
 
-@if user.agent safari {
+@if user.agent gecko1_8 {
 	.mgwt-DialogPanel .okbutton,.mgwt-DialogPanel .cancelbutton {
 		\-moz-box-flex: 2;
+	}
+}
+
+@if user.agent ie10 {
+	.mgwt-DialogPanel .okbutton,.mgwt-DialogPanel .cancelbutton {
+		\-ms-flex: 2;
 	}
 }
 

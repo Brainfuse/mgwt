@@ -100,6 +100,18 @@
 	}
 }
 
+@if user.agent ie10 {
+	.mgwt-DialogPanel .footer {
+		display: -ms-flexbox;
+		\-ms-flex-pack: center;
+		display: flex;
+		\-ms-box-orient: horizontal;
+		box-sizing: border-box;
+		width: 100%;
+	}
+}
+
+
 .mgwt-DialogPanel .okbutton,.mgwt-DialogPanel .cancelbutton {
 	display: block;
 	font-size: 17px;
@@ -136,6 +148,7 @@
 		\-moz-box-flex: 2;
 		\-moz-border-radius: 8px;
 		border-radius: 8px;
+		flex: 2;
 	}
 	.mgwt-DialogPanel .okbutton {
 		background-image: literal('-moz-linear-gradient(top, #b0b5c5,#7a839b 50%, #515d7c 51%, #636e8a)');
@@ -147,3 +160,11 @@
 		background-image: literal('-moz-linear-gradient(top, #70747f, #424857 50%, #171e30 51%, #222839)');
 	}
 }
+
+@if user.agent ie10 {
+	.mgwt-DialogPanel .okbutton,.mgwt-DialogPanel .cancelbutton {
+		\-ms-box-flex: 2;
+		flex: 2;
+	}
+}
+

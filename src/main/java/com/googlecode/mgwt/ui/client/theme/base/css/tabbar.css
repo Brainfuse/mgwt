@@ -38,6 +38,12 @@
 	}
 }
 
+@if user.agent ie10 {
+	.mgwt-TabBar {
+		display: \-ms-flexbox;
+		\-ms-box-orient: horizontal;
+	}
+}
 
 .mgwt-TabBar-Button-active {
 	
@@ -64,5 +70,12 @@
 	.mgwt-TabBar-Button {
 		\-moz-appearance: none;
 		\-moz-box-flex: 1;
+	}
+}
+
+@if user.agent ie10 {
+	.mgwt-TabBar-Button {
+		\-ms-flex: 1;
+		flex: 1;
 	}
 }

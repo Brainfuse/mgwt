@@ -39,6 +39,10 @@
 
 @if user.agent ie9 ie10 {
 	.mgwt-TextBox .mgwt-InputBox-box,.mgwt-PasswordTextBox .mgwt-InputBox-box,.mgwt-TextArea .mgwt-InputBox-box {
+		display: -ms-flexbox;
+		\-ms-flex: 1;
+		display: flex;
+		flex: 1;
 		background-color: #FFF;
 	}
 }
@@ -62,6 +66,14 @@
 	}
 }
 
+@if user.agent gecko1_8 {
+	.mgwt-TextBox,.mgwt-PasswordTextBox,.mgwt-TextArea {
+		display: flex;
+		flex: 1;
+		display: -ms-flexbox;
+	    \-ms-flex: 1;
+	}
+}
 
 
 .mgwt-RadioButton {
@@ -91,6 +103,24 @@
 		display: -moz-box;
 		position: relative;
 		\-moz-box-flex: 1;
+	}
+}
+
+@if user.agent ie10 {
+	.mgwt-RadioButton {
+		display: \-ms-flexbox;
+		\-ms-box-orient: horizontal;
+		width: 100%;
+		\-ms-flex: 1;
+		display: flex;
+		flex: 1;
+	}
+	.mgwt-RadioButton>label {
+		position: relative;		
+		display: flex;
+		flex: 1;
+		display: -ms-flexbox;
+	    \-ms-flex: 1;
 	}
 }
 
@@ -125,5 +155,12 @@
 		display: -moz-box;
 		\-moz-appearance: none;
 		\-moz-user-select: text;
+	}
+}
+
+@if user.agent ie10 {
+	.mgwt-ListBox {
+		display: -ms-flexbox;
+		user-select: text;
 	}
 }

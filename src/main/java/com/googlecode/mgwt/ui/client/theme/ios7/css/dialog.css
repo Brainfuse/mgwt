@@ -203,6 +203,16 @@
 	}
 }
 
+@if user.agent ie10 {
+	.mgwt-DialogPanel .footer {
+		\-ms-box-pack: justify;
+		display:  \-ms-flexbox;
+		\-ms-box-orient: horizontal;
+		box-sizing: border-box;
+		width: 100%;
+	}
+}
+
 .mgwt-DialogPanel .footer div{
 	border-right: 1px solid #dcdcdc;
 }
@@ -249,6 +259,13 @@
 	.mgwt-DialogPanel .cancelbutton {
 	}
 	.mgwt-DialogPanel .cancelbutton.active,.mgwt-DialogPanel .okbutton.active {
+	}
+}
+
+@if user.agent ie10 {
+	.mgwt-DialogPanel .okbutton,.mgwt-DialogPanel .cancelbutton {
+		\-ms-flex: 2;
+		flex: 2;
 	}
 }
 
