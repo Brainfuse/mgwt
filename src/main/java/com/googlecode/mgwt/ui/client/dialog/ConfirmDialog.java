@@ -184,5 +184,9 @@ public class ConfirmDialog implements HasText, HasTitleText, Dialog {
     popinDialog.hide();
 
   }
+  
+  public DialogPanel getDialogPanel(){
+	  return this.dialogPanel1;
+  }
 
 }

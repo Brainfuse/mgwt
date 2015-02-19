@@ -1,0 +1,282 @@
+/* 
+
+	THIS CSS IS USED ONLY IN BfConfirmDialog
+
+ */
+.mgwt-DialogPanel {
+		border: none;
+		box-shadow: none;
+		background-image: none;
+	}
+	
+	.mgwt-DialogPanel input[type] {
+		/* color: #fff; */
+		background-color: transparent;
+	}
+	.mgwt-DialogPanel ::-webkit-input-placeholder {
+		/* color: #E1E1E1; */
+		
+	}
+	.mgwt-DialogPanel textarea {
+		background-color: transparent;
+	}
+	.mgwt-DialogPanel label {
+		/* color: #FFF; */
+		margin-right: 10px;
+	}
+	.mgwt-DialogPanel .container {
+		background-image: none;
+		text-shadow: none;
+	}
+	.mgwt-BottomPanel {
+		position: absolute;
+		bottom: 0px;
+		left: 0px;
+		right: 0px;
+		padding: 20px 10px 20px 10px;
+		background-color: transparent;
+	}
+	.mgwt-BottomPanel div {
+		color: #026fff !important;
+		font-size: 18px !important;
+		font-family: HelveticaNeue, "Helvetica Neue", Helvetica, Arial,
+			"BBAlpha Sans";
+		border-bottom: 1px solid #dcdcdc;
+	}
+	.mgwt-BottomPanel div:nth-last-child\(2\) {
+		border-bottom-right-radius: 5px;
+		border-bottom-left-radius: 5px;
+		border-bottom: none;
+	}
+	.mgwt-BottomPanel div:last-child {
+		border-radius: 5px;
+		font-weight: bold;
+		margin-top: 20px !important;
+		border-bottom: none;
+	}
+	.mgwt-BottomPanel div:first-child {
+		border-top-right-radius: 5px;
+		border-top-left-radius: 5px;
+	}
+	.okbutton, .cancelbutton {
+		cursor: pointer;
+	}
+	.z_index {
+		z-index: 100;
+	}
+	.mgwt-DialogAnimationContainer-Shadow {
+		z-index: 100;
+		background-color: rgba(0, 0, 0, 0.4);
+	}
+	@if user.agent safari {
+		.mgwt-DialogAnimationContainer {
+			display: -webkit-box;
+			width: 100%;
+			height: 100%;
+			overflow: hidden;
+		}
+		.mgwt-DialogAnimationContainer-center {
+			\-webkit-box-orient: horizontal;
+			\-webkit-box-pack: center;
+			\-webkit-box-align: center;
+		}
+		.mgwt-BottomPanel {
+			
+		}
+	}
+	@if user.agent gecko1_8 {
+		.mgwt-DialogAnimationContainer {
+			
+		}
+		.mgwt-DialogAnimationContainer-center {
+			/* ie11 */
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			\-moz-box-orient: horizontal;
+			\-moz-box-pack: center;
+			\-moz-box-align: center;
+			display: -moz-box;
+			width: 100%;
+			height: 100%;
+		}
+		.mgwt-BottomPanel {
+			
+		}
+	}
+	@if user.agent ie10 {
+		.mgwt-DialogAnimationContainer {
+			
+		}
+		.mgwt-DialogAnimationContainer-center {
+			display: \-ms-flexbox;
+			-ms-flex-pack: center;
+			-ms-flex-align: center;
+			width: 100%;
+			height: 100%;
+		}
+	}
+
+	/* ok  */
+	.mgwt-DialogPanel .container {
+		padding: 5px;
+		border-radius: 5px;
+		background-color: #f8f8f8;
+	}
+	@if user.agent safari {
+		.mgwt-DialogPanel .container {
+			\-webkit-border-radius: 5px;
+		}
+	}
+	@if user.agent gecko1_8 {
+		.mgwt-DialogPanel .container {
+			\-moz-border-radius: 5px;
+			border-radius: 5px;
+		}
+	}
+	.mgwt-DialogPanel .title {
+		width: 100%;
+		text-align: center;
+		padding-top: 10px;
+		padding-bottom: 5px;
+		color: #000;
+		font-size: 18px;
+		font-family: HelveticaNeue, "Helvetica Neue", Helvetica, Arial,
+			"BBAlpha Sans";
+		font-weight: bold;
+		text-shadow: none;
+	}
+	.mgwt-DialogPanel .content {
+		margin: 25px;
+		margin-top: 5px;
+		color: #505050;
+		max-width: 280px;
+	}
+	.mgwt-DialogPanel .footer {
+		border-top: 1px solid #dcdcdc;
+		margin-top: 10px;
+		color: #026fff;
+	}
+	@if user.agent safari {
+		.mgwt-DialogPanel .footer {
+			\-webkit-box-pack: justify;
+			display: -webkit-box;
+			\-webkit-box-orient: horizontal;
+			\-webkit-box-sizing: border-box;
+		}
+		
+		.mgwt-DialogPanel .okbutton,.mgwt-DialogPanel .cancelbutton {
+			\-webkit-box-flex: 2;
+		}
+	}
+	@if user.agent gecko1_8 {
+		.mgwt-DialogPanel .footer {
+			\-moz-box-pack: justify;
+			display: -moz-box;
+			\-moz-box-orient: horizontal;
+			\-moz-box-sizing: border-box;
+			width: 100%;
+		}
+	}
+	
+	@if user.agent ie10 {
+		.mgwt-DialogPanel .footer {
+			\-ms-box-pack: justify;
+			display: \-ms-flexbox;
+			\-ms-box-orient: horizontal;
+			box-sizing: border-box;
+			width: 100%;
+		}
+	}
+	
+	.mgwt-DialogPanel .footer div {
+		border-right: 1px solid #dcdcdc;
+	}
+	.mgwt-DialogPanel .footer div:last-child {
+		border-right: none;
+	}
+	.mgwt-DialogPanel .okbutton, .mgwt-DialogPanel .cancelbutton {
+		display: block;
+		font-size: 17px;
+		font-weight: bold;
+		text-align: center;
+		padding-top: 10px;
+		margin-right: 5px;
+		padding-right: 5px;
+		padding-left: 5px;
+		min-width: 40px;
+		height: 32px;
+		line-height: 32px;
+		background-image: none;
+		border-radius: 0px;
+		text-shadow: none;
+		border: none;
+/* 		\-webkit-box-flex: 2;
+ */	}
+	
+	.active{
+		background-image: none !important;
+		opacity: .75;
+	}
+	
+@if user.agent ie9 {
+
+	.mgwt-DialogPanel{
+		border:none !important;
+	}
+	.container{
+		padding: 5px;
+		border-radius: 10px;
+		text-align:center;	
+		width:300px;
+		margin:0 auto;
+		position:absolute;
+		top:50%;
+		left:0px;
+		right:0px;
+	}
+	
+	.footer{
+		height:40px;
+	}
+
+	.okbutton, .cancelbutton {
+		width:135px;
+		float:left;
+	}
+	
+	.okbutton:active, .cancelbutton:active{
+	}
+}
+
+@if user.agent gecko1_8 {
+	.mgwt-DialogPanel .okbutton,.mgwt-DialogPanel .cancelbutton {
+		flex: 2;
+		\-moz-box-flex: 2;
+		\-moz-border-radius: 8px;
+	}
+}
+
+@if user.agent ie10 {
+	.mgwt-DialogPanel .okbutton,.mgwt-DialogPanel .cancelbutton {
+		flex: 2;
+		\-ms-flex: 2;
+	}
+}
+
+/* other browsers */
+@if user.agent ie6 ie8 ie9 ie10 gecko opera {
+	.mgwt-DialogAnimationContainer {
+		
+	}
+	.mgwt-DialogAnimationContainer-center {
+		
+	}
+	.active {
+		
+	}
+}
+
+
+	
+	
