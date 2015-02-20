@@ -28,4 +28,33 @@ public class MGWTUtil {
 	public static native void log(String s)/*-{
 		$wnd.console.log("MGWT Log: "+s);
 	}-*/;
+	
+	/**
+	 * This function is to test if the cssFeature is supported in the current browser
+	 * return true if supported.
+	 * can be used for old browser like ie9 where many css3 features are not supported
+	 * @param css featurename ex. isCSSFeatureSupported("trainsition");
+	 * 
+	 */
+	public static native boolean isCSSFeatureSupported(String featurename)/*-{
+		var feature = false,
+	    domPrefixes = 'Webkit Moz ms O'.split(' '),
+	    elm = document.createElement('div'),
+	    featurenameCapital = null;
+	
+	    featurename = featurename.toLowerCase();
+	
+	    if( elm.style[featurename] !== undefined ) { feature = true; } 
+	
+	    if( feature === false ) {
+	        featurenameCapital = featurename.charAt(0).toUpperCase() + featurename.substr(1);
+	        for( var i = 0; i < domPrefixes.length; i++ ) {
+	            if( elm.style[domPrefixes[i] + featurenameCapital ] !== undefined ) {
+	              feature = true;
+	              break;
+	            }
+	        }
+	    }
+	    return feature; 
+	}-*/;
 }
