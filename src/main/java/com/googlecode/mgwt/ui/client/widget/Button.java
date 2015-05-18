@@ -207,6 +207,10 @@ public class Button extends ButtonBase {
 	   this.disabled = disabled;
 	}
 	
+	public boolean isDisabled(){
+		return this.disabled;
+	}
+	
 	/**
 	 * @see com.google.gwt.user.client.ui.Widget#fireEvent(com.google.gwt.event.shared.GwtEvent)
 	 */
