@@ -78,10 +78,6 @@ public abstract class ButtonBase extends TouchWidget implements HasText {
           if (MGWT.getOsDetection().isDesktop()) {
             DOM.releaseCapture(getElement());
           }
-          
-          //workaround for android keyboard pop up issue
-//          ButtonBase.this.getElement().setAttribute("tabindex", "-1");
-          ButtonBase.this.getElement().focus();
       }
 
       @Override
