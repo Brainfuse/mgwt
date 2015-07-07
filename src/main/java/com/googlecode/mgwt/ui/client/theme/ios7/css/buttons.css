@@ -1,7 +1,9 @@
 
 
 
-.mgwt-Button-active{}
+.mgwt-Button-active{
+	opacity: .75;
+}
 .mgwt-Button-important{}
 .mgwt-Button-disabled{}
 .mgwt-Button-confirm{}

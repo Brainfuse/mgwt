@@ -72,12 +72,12 @@ public abstract class ButtonBase extends TouchWidget implements HasText {
 
       @Override
       public void onTouchEnd(TouchEndEvent event) {
-        event.stopPropagation();
-        event.preventDefault();
-        removeStyleName(active);
-        if (MGWT.getOsDetection().isDesktop()) {
-          DOM.releaseCapture(getElement());
-        }
+          event.stopPropagation();
+//          event.preventDefault(); //<- cause android keyboard up
+          removeStyleName(active);
+          if (MGWT.getOsDetection().isDesktop()) {
+            DOM.releaseCapture(getElement());
+          }
       }
 
       @Override
