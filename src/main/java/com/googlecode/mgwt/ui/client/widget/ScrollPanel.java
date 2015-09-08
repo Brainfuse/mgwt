@@ -16,6 +16,9 @@ package com.googlecode.mgwt.ui.client.widget;
 import java.util.Iterator;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.shared.EventHandler;
+import com.google.gwt.event.shared.GwtEvent;
+import com.google.gwt.event.shared.GwtEvent.Type;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.IsWidget;
@@ -273,6 +276,14 @@ public class ScrollPanel extends Composite implements HasWidgets {
 
   public HandlerRegistration addScrollAnimationEndHandler(ScrollAnimationEndEvent.Handler handler) {
     return impl.addScrollAnimationEndHandler(handler);
+  }
+  
+  public void addHandler(EventHandler handler, Type<EventHandler> type){
+	  impl.addHandler(handler, type);
+  }
+  
+  public void fireEvent(GwtEvent<?> event){
+	  impl.fireEvent(event);
   }
 
   public int getY() {
