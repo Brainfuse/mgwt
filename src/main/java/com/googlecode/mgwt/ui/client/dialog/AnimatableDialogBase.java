@@ -424,5 +424,9 @@ public abstract class AnimatableDialogBase implements HasWidgets, HasTouchHandle
 		display.asWidget().fireEvent(event);
 
 	}
+	
+	public boolean isShown(){
+		return isVisible;
+	}
 
 }
