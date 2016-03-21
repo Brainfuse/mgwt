@@ -5,16 +5,6 @@
 	background-color: #f8f8f8;
 }
 
-@if phonegap.env yes {
-	@if ios.version ios7_higher {
-		.mgwt-HeaderPanel {
-			padding-top: 20px;
-		}
-	}
-}
-
-
-
 .mgwt-HeaderPanel-left {
 	position: absolute;
 	left:0px;
