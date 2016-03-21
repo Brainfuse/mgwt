@@ -136,9 +136,9 @@ public class LongTapRecognizer implements TouchHandler {
   @Override
   public void onTouchStart(TouchStartEvent event) {
 
-    LightArray<Touch> touches = event.getTouches();
+    final LightArray<Touch> touches = event.getTouches();
     touchCount++;
-
+    
     switch (state) {
       case INVALID:
         break;
@@ -166,7 +166,7 @@ public class LongTapRecognizer implements TouchHandler {
             return;
           }
 
-          getEventPropagator().fireEvent(source, new LongTapEvent(source, numberOfFingers, time, startPositions));
+          getEventPropagator().fireEvent(source, new LongTapEvent(source, touches.length(), time, startPositions));
           reset();
 
         }
