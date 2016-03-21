@@ -29,6 +29,11 @@ public class MGWTUtil {
 		$wnd.console.log("MGWT Log: "+s);
 	}-*/;
 	
+	public static native void log(String s, Object obj)/*-{
+		$wnd.console.log("MGWT Log: "+s, obj);
+	}-*/;
+
+	
 	/**
 	 * This function is to test if the cssFeature is supported in the current browser
 	 * return true if supported.
