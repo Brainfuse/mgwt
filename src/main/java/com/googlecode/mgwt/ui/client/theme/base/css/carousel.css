@@ -98,7 +98,7 @@
 .mgwt-Carousel-Indicator {
 	width: 8px;
 	height: 8px;
-	background-color: #757575;
+	background-color: #d3d3d3;
 	border-radius: 4px;
 	margin: 4px;
 }
@@ -110,7 +110,7 @@
 }
 
 .mgwt-Carousel-Indicator-active {
-	background-color: #d3d3d3;
+	background-color: #757575;
 }
 
 .mgwt-Carousel-Holder {
