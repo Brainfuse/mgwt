@@ -167,4 +167,47 @@
 	}
 }
 
+.mgwt-Carousel-Indicator-Container .indicatorWrapper {
+	right: 0;
+    bottom: 0;
+    display: -webkit-box;
+    -webkit-box-pack: center;
+}
+
+.mgwt-Carousel-Indicator-Container .indicatorButton {
+ 	background-image: none;
+    padding: 0px;
+    margin: 0px;
+    margin-bottom: 5px;
+    position: relative;
+    width: 12px;
+    height: 12px;
+    border-width: 0 0 4px 4px;
+    border-style: solid;
+    border-color: #757575;
+    border-radius: 0px;
+    background-color: transparent;
+}
+	
+.mgwt-Carousel-Indicator-Container .indicatorButtonPrevious {
+	transform:rotate(45deg);
+    -webkit-transform: rotate(45deg);
+}
+	
+.mgwt-Carousel-Indicator-Container .indicatorButtonNext{
+	transform:rotate(225deg);
+    -webkit-transform: rotate(225deg);
+}
+
+.mgwt-Carousel-Indicator-Container .indicatorButton.indicatorButtonDisable {
+	 border-color: #d3d3d3;
+}
+
+.mgwt-Carousel-Indicator-Container.paginationEnable {
+	right: 15px;
+    bottom: 15px;
+}
+
+}
+
 
