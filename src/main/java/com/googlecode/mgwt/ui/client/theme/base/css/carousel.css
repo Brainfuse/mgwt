@@ -74,14 +74,16 @@
 }
 
 @if user.agent safari {
-	.mgwt-Carousel-Indicator-Container {
+	.mgwt-Carousel-Indicator-Container,
+	.mgwt-Carousel-Indicator-Container .indicatorWrapper {
 		display: \-webkit-box;
 		\-webkit-box-pack: center;
 	}
 }
 
 @if user.agent gecko1_8 {
-	.mgwt-Carousel-Indicator-Container {
+	.mgwt-Carousel-Indicator-Container,
+	.mgwt-Carousel-Indicator-Container .indicatorWrapper {
 		display: \-moz-box;
 		\-moz-box-pack: center;
 		justify-content: center !important;
@@ -89,8 +91,17 @@
 	}
 }
 
+@if user.agent ie10 {
+	.mgwt-Carousel-Indicator-Container,
+	.mgwt-Carousel-Indicator-Container .indicatorWrapper {
+		display: \-ms-flexbox;
+		justify-content: center;
+	}
+}
+
 @if user.agent ie9	{
-	.mgwt-Carousel-Indicator-Container {
+	.mgwt-Carousel-Indicator-Container,
+	.mgwt-Carousel-Indicator-Container .indicatorWrapper {
 		left:50% !important;
 	}
 }
@@ -170,8 +181,6 @@
 .mgwt-Carousel-Indicator-Container .indicatorWrapper {
 	right: 0;
     bottom: 0;
-    display: -webkit-box;
-    -webkit-box-pack: center;
 }
 
 .mgwt-Carousel-Indicator-Container .indicatorButton {
