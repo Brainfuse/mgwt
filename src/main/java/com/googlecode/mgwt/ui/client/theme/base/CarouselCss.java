@@ -40,4 +40,15 @@ public interface CarouselCss extends CssResource {
 	@ClassName("mgwt-Carousel-Holder")
 	String carouselHolder();
 
+	String indicatorWrapper();
+	
+	String indicatorButton();
+	
+	String indicatorButtonPrevious();
+	
+	String indicatorButtonNext();
+	
+	String indicatorButtonDisable();
+	
+	String paginationEnable();
 }
