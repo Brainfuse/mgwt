@@ -29,17 +29,38 @@ public class Html5HistorianImpl implements Html5Historian {
 
 	private native void bind() /*-{
 		var that = this;
-
+		
+		
 		var f = function(event) {
 			var data = "";
-			if (event.state != null) {
-				data = event.state;
-			}
-			that.@com.googlecode.mgwt.mvp.client.history.Html5HistorianImpl::onPopState(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)(data, event.title, event.url);
+			var srcLoc = event.srcElement.location;
+			var targetLoc = event.target.location;
+			// This will be handled by the hashChange.
+			that.popStateEvent = {state : event.state, url: event.url, title: event.title};
+			if (event.state == null && event.url == null )
+			   return ;
+			
+			
 
 		};
-
+		var hashChange = function(event){
+			var url = event.newURL;
+			var popStateEvent = that.popStateEvent;
+			if ( popStateEvent && popStateEvent.state  ) {
+				that.@com.googlecode.mgwt.mvp.client.history.Html5HistorianImpl::onPopState(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)(popStateEvent.state, popStateEvent.title, popStateEvent.url);
+				return;
+			}
+			var data = "";
+			var indexOfHash = url.indexOf("#");
+			if ( indexOfHash > -1 && indexOfHash < url.length -1)
+				data = url.substring(indexOfHash+1);
+			that.@com.googlecode.mgwt.mvp.client.history.Html5HistorianImpl::onPopState(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)(data, event.title, url);
+			
+			
+		}
 		$wnd.addEventListener('popstate', $entry(f));
+
+		$wnd.addEventListener('hashchange', $entry(hashChange));
 
 	}-*/;
 
