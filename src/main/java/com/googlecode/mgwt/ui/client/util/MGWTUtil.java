@@ -62,4 +62,13 @@ public class MGWTUtil {
 	    }
 	    return feature; 
 	}-*/;
+	
+	public static native boolean isIEEdge()/*-{
+		var ua = window.navigator.userAgent.toLowerCase();
+		if (ua.indexOf('edge') != -1) {
+			return true;
+		} else {
+			return false;
+		}
+	}-*/;
 }
