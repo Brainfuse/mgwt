@@ -50,7 +50,8 @@ public abstract class ButtonBase extends TouchWidget implements HasText {
   }
 
   private final String active;
-
+  private int tabIndex = 0;
+  
   /**
    * Construct a button with a given element and css
    * 
@@ -62,7 +63,7 @@ public abstract class ButtonBase extends TouchWidget implements HasText {
     css.ensureInjected();
     this.active = css.active();
     setRole("button");
-    element.setAttribute("tabindex", "0");
+    setTabEnabled(true);
     
     addTouchHandler(new TouchHandler() {
 
@@ -135,7 +136,7 @@ public abstract class ButtonBase extends TouchWidget implements HasText {
   
   public void setTabEnabled(boolean enabled){
 	  if(enabled){
-		  getElement().setAttribute("tabindex","0");
+		  getElement().setAttribute("tabindex",String.valueOf(tabIndex));
 	  }else {
 		  getElement().removeAttribute("tabindex");
 	  }
