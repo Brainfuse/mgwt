@@ -14,8 +14,12 @@
 package com.googlecode.mgwt.ui.client.widget.base;
 
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.event.dom.client.KeyCodes;
+import com.google.gwt.event.dom.client.KeyDownEvent;
+import com.google.gwt.event.dom.client.KeyDownHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.DOM;
+import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.ui.HasText;
 import com.googlecode.mgwt.dom.client.event.tap.TapEvent;
 import com.googlecode.mgwt.dom.client.event.tap.TapHandler;
@@ -57,7 +61,9 @@ public abstract class ButtonBase extends TouchWidget implements HasText {
     setElement(element);
     css.ensureInjected();
     this.active = css.active();
-
+    element.setAttribute("role", "button");
+    element.setAttribute("tabindex", "0");
+    
     addTouchHandler(new TouchHandler() {
 
       @Override
@@ -106,9 +112,35 @@ public abstract class ButtonBase extends TouchWidget implements HasText {
 
       }
     });
+    
+    this.sinkEvents(Event.ONKEYDOWN);
+    addHandler(new KeyDownHandler() {
+		@Override
+		public void onKeyDown(KeyDownEvent event) {
+			int keyCode = event.getNativeKeyCode();
+			
+			switch(keyCode){
+			case KeyCodes.KEY_ENTER:
+			case KeyCodes.KEY_SPACE:
+				ButtonBase.this.fireEvent(new TapEvent(this, 0, 0));
+				break;
+			default:
+				break;
+			}
+			
+		}
+	}, KeyDownEvent.getType());
 
   }
-
+  
+  public void setTabEnabled(boolean enabled){
+	  if(enabled){
+		  getElement().setAttribute("tabindex","0");
+	  }else {
+		  getElement().removeAttribute("tabindex");
+	  }
+  }
+  
   /*
    * (non-Javadoc)
    * 
