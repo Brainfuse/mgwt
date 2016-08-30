@@ -61,7 +61,7 @@ public abstract class ButtonBase extends TouchWidget implements HasText {
     setElement(element);
     css.ensureInjected();
     this.active = css.active();
-    element.setAttribute("role", "button");
+    setRole("button");
     element.setAttribute("tabindex", "0");
     
     addTouchHandler(new TouchHandler() {
@@ -139,6 +139,10 @@ public abstract class ButtonBase extends TouchWidget implements HasText {
 	  }else {
 		  getElement().removeAttribute("tabindex");
 	  }
+  }
+  
+  public void setRole(String role){
+	  getElement().setAttribute("role",role);
   }
   
   /*
