@@ -21,6 +21,7 @@ import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.EventTarget;
 import com.google.gwt.dom.client.Node;
+import com.google.gwt.dom.client.NodeList;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.safehtml.client.SafeHtmlTemplates;
 import com.google.gwt.safehtml.shared.SafeHtml;
@@ -38,6 +39,7 @@ import com.googlecode.mgwt.dom.client.recognizer.EventPropagator;
 import com.googlecode.mgwt.ui.client.MGWT;
 import com.googlecode.mgwt.ui.client.MGWTStyle;
 import com.googlecode.mgwt.ui.client.theme.base.ListCss;
+import com.googlecode.mgwt.ui.client.util.Accessibility.Role;
 import com.googlecode.mgwt.ui.client.widget.celllist.Cell;
 import com.googlecode.mgwt.ui.client.widget.celllist.CellSelectedEvent;
 import com.googlecode.mgwt.ui.client.widget.celllist.CellSelectedHandler;
@@ -100,11 +102,19 @@ public class CellList<T> extends Composite implements HasCellSelectedHandler {
     SafeHtml li(int idx, String classes, SafeHtml cellContents);
 
   }
-
+  
+  public interface TemplateWithRole extends SafeHtmlTemplates {
+	    @SafeHtmlTemplates.Template("<li __idx=\"{0}\" class=\"{1}\" role=\"{2}\">{3}</li>")
+		SafeHtml li(int idx, String classes, String role, SafeHtml cellContents);
+  }
+  
+  public static final TemplateWithRole LI_TEMPLATE_WITH_ROLE = GWT.create(TemplateWithRole.class);
   /**
    * the li template instance
    */
   public static final Template LI_TEMPLATE = GWT.create(Template.class);
+  
+  private Role role = null;
 
   private static class UlTouchWidget extends TouchWidget {
 
@@ -262,6 +272,14 @@ public class CellList<T> extends Composite implements HasCellSelectedHandler {
 
     setStylePrimaryName(css.listCss());
   }
+  
+ /**
+ * this sets the aria role to the list as well as the list items
+ */
+public void setRole(Role role){
+	  this.role = role;
+	  getElement().setAttribute("role", role.getRole());
+  }
 
   /**
    * Should the CellList be rendered with rounded corners
@@ -339,8 +357,10 @@ public class CellList<T> extends Composite implements HasCellSelectedHandler {
       SafeHtmlBuilder cellBuilder = new SafeHtmlBuilder();
 
       String clazz = "";
+      String itemRole = "";
       if (cell.canBeSelected(model)) {
         clazz = css.canbeSelected() + " ";
+        if(role != null) itemRole = role.getChildRole(); 
       }
 
       if (group) {
@@ -357,7 +377,12 @@ public class CellList<T> extends Composite implements HasCellSelectedHandler {
 
       cell.render(cellBuilder, model);
 
-      sb.append(LI_TEMPLATE.li(i, clazz, cellBuilder.toSafeHtml()));
+      if(!itemRole.equals("")){
+    	  sb.append(LI_TEMPLATE_WITH_ROLE.li(i,clazz,itemRole,cellBuilder.toSafeHtml()));
+      }else {
+    	  sb.append(LI_TEMPLATE.li(i, clazz, cellBuilder.toSafeHtml()));
+      }
+      
     }
 
     final String html = sb.toSafeHtml().asString();
@@ -380,6 +405,12 @@ public class CellList<T> extends Composite implements HasCellSelectedHandler {
    * @param selected true to select the element, false to deselect
    */
   public void setSelectedIndex(int index, boolean selected) {
+	
+	if(role != null){
+		setSelectedIndexWithRole(index, selected);
+		return;
+	}
+	  
     Node node = getElement().getChild(index);
     Element li = Element.as(node);
     if (selected) {
@@ -388,6 +419,21 @@ public class CellList<T> extends Composite implements HasCellSelectedHandler {
       li.removeClassName(css.selected());
     }
   }
+  
+	private void setSelectedIndexWithRole(int index, boolean selected) {
+		NodeList<Node> children = getElement().getChildNodes();
+		String selectedAttribute = role.getSelected();
+		for (int i = 0; i < children.getLength(); i++) {
+			Element el = ((Element) children.getItem(i));
+			if (i == index) {
+				el.addClassName(css.selected());
+				el.setAttribute(selectedAttribute, "true");
+			} else {
+				el.removeClassName(css.selected());
+				el.setAttribute(selectedAttribute, "false");
+			}
+		}
+	}
 
   /**
    * set this widget a group (by default rendered with an arrow)
