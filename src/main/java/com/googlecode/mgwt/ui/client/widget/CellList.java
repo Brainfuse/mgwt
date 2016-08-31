@@ -96,7 +96,7 @@ public class CellList<T> extends Composite implements HasCellSelectedHandler {
      * @param cellContents
      * @return the safe html with values
      */
-    @SafeHtmlTemplates.Template("<li __idx=\"{0}\" class=\"{1}\" role=\"listitem\">{2}</li>")
+    @SafeHtmlTemplates.Template("<li __idx=\"{0}\" class=\"{1}\">{2}</li>")
     SafeHtml li(int idx, String classes, SafeHtml cellContents);
 
   }
@@ -111,7 +111,6 @@ public class CellList<T> extends Composite implements HasCellSelectedHandler {
     public UlTouchWidget() {
       super();
       setElement(Document.get().createULElement());
-      getElement().setAttribute("role","list");
     }
 
   }
