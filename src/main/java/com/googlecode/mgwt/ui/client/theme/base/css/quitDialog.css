@@ -39,8 +39,6 @@
 	.mgwt-BottomPanel div {
 		color: #026fff !important;
 		font-size: 18px !important;
-		font-family: HelveticaNeue, "Helvetica Neue", Helvetica, Arial,
-			"BBAlpha Sans";
 		border-bottom: 1px solid #dcdcdc;
 	}
 	.mgwt-BottomPanel div:nth-last-child\(2\) {
@@ -141,8 +139,6 @@
 		padding-bottom: 5px;
 		color: #000;
 		font-size: 18px;
-		font-family: HelveticaNeue, "Helvetica Neue", Helvetica, Arial,
-			"BBAlpha Sans";
 		font-weight: bold;
 		text-shadow: none;
 	}
