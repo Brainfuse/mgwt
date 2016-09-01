@@ -152,6 +152,10 @@ public class MValueBoxBase<T> extends Composite implements HasBlurHandlers, HasT
 		});
 
 	}
+	
+	public void setTitle(String label){
+		box.getElement().setAttribute("aria-label",label);
+	}
 
 	/*
 	 * (non-Javadoc)
