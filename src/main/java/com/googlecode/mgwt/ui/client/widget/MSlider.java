@@ -52,249 +52,306 @@ import com.googlecode.mgwt.ui.client.widget.touch.TouchWidget;
  * </pre>
  * 
  * 
- * The pointer element is moved along the bar element to represent the value of the Slider
+ * The pointer element is moved along the bar element to represent the value of
+ * the Slider
  * 
  * 
  * @author Daniel Kurka
  */
-public class MSlider extends Composite implements HasValue<Integer>, LeafValueEditor<Integer> {
+public class MSlider extends Composite
+		implements HasValue<Integer>, LeafValueEditor<Integer> {
 
-  private static class SliderWidget extends TouchWidget {
+	protected static class SliderWidget extends TouchWidget {
 
-    private Element slider;
-    private Element progress;
-    private Element bar;
+		private Element slider;
+		private Element progress;
+		protected Element bar;
 
-    public SliderWidget(SliderCss css) {
-      setElement(DOM.createDiv());
-      progress = DOM.createSpan();
-      bar = DOM.createDiv();
-      bar.setClassName(css.bar());
-      progress.addClassName(css.progress());
-      slider = DOM.createDiv();
-      slider.setClassName(css.pointer());
-      bar.appendChild(progress);
-      bar.appendChild(slider);
+		public SliderWidget(SliderCss css) {
+			setElement(DOM.createDiv());
+			progress = DOM.createSpan();
+			bar = DOM.createDiv();
+			bar.setClassName(css.bar());
+			progress.addClassName(css.progress());
+			slider = DOM.createDiv();
+			slider.setClassName(css.pointer());
+			slider.setAttribute("role", "slider");
+			slider.setAttribute("tabindex", "0");
+			slider.setAttribute("aria-valuemin", "0");
+			bar.appendChild(progress);
+			bar.appendChild(slider);
 
-      getElement().appendChild(bar);
-  
-    }
+			getElement().appendChild(bar);
+		}
 
-    public void setPos(int x) {
-      CssUtil.translate(slider, x, 0);
-      progress.getStyle().setWidth(x, Unit.PX);
-    }
-  }
+		public void updateAriaValueMax(String value) {
+			slider.setAttribute("aria-valuemax", value);
+		}
 
-  private class SliderTouchHandler implements TouchHandler {
+		public void updateAriaValueNow(String value) {
+			slider.setAttribute("aria-valuenow", value);
+		}
 
-    @Override
-    public void onTouchStart(TouchStartEvent event) {
-      setValueContrained(event.getTouches().get(0).getPageX());
-      if (MGWT.getOsDetection().isDesktop()) {
-        DOM.setCapture(getElement());
-      }
-      event.stopPropagation();
-      event.preventDefault();
-    }
+		public void setPos(int x) {
+			CssUtil.translate(slider, x, 0);
+			progress.getStyle().setWidth(x, Unit.PX);
+		}
 
-    @Override
-    public void onTouchMove(TouchMoveEvent event) {
+		public Element getSlider() {
+			return slider;
+		}
+	}
 
-      setValueContrained(event.getTouches().get(0).getPageX());
-      event.stopPropagation();
-      event.preventDefault();
-    }
+	protected class SliderTouchHandler implements TouchHandler {
 
-    @Override
-    public void onTouchEnd(TouchEndEvent event) {
-      if (MGWT.getOsDetection().isDesktop()) {
-        DOM.releaseCapture(getElement());
-      }
-      event.stopPropagation();
-      event.preventDefault();
-    }
+		@Override
+		public void onTouchStart(TouchStartEvent event) {
+			setValueContrained(event.getTouches().get(0).getPageX());
+			if (MGWT.getOsDetection().isDesktop()) {
+				DOM.setCapture(getElement());
+			}
+			event.stopPropagation();
+			event.preventDefault();
+		}
 
-    @Override
-    public void onTouchCanceled(TouchCancelEvent event) {
-      if (MGWT.getOsDetection().isDesktop()) {
-        DOM.releaseCapture(getElement());
-      }
-    }
+		@Override
+		public void onTouchMove(TouchMoveEvent event) {
 
-  }
+			setValueContrained(event.getTouches().get(0).getPageX());
+			event.stopPropagation();
+			event.preventDefault();
+		}
 
-  private int value;
-  private SliderWidget sliderWidget;
-  private int max;
+		@Override
+		public void onTouchEnd(TouchEndEvent event) {
+			if (MGWT.getOsDetection().isDesktop()) {
+				DOM.releaseCapture(getElement());
+			}
+			event.stopPropagation();
+			event.preventDefault();
+		}
 
-  /**
-   * Construct a slider
-   */
-  public MSlider() {
-    this(MGWTStyle.getTheme().getMGWTClientBundle().getSliderCss());
-  }
+		@Override
+		public void onTouchCanceled(TouchCancelEvent event) {
+			if (MGWT.getOsDetection().isDesktop()) {
+				DOM.releaseCapture(getElement());
+			}
+		}
 
-  /**
-   * Construct a slider with a given css
-   * 
-   * @param css the css to use
-   */
-  public MSlider(SliderCss css) {
-    css.ensureInjected();
-    sliderWidget = new SliderWidget(css);
-    initWidget(sliderWidget);
-    setStylePrimaryName(css.slider());
+	}
 
-    sliderWidget.addTouchHandler(new SliderTouchHandler());
+	protected int value;
+	private SliderWidget sliderWidget;
+	protected int max;
+	private SliderCss css;
 
-    max = 100;
-    value = 0;
-  }
+	/**
+	 * Construct a slider
+	 */
+	public MSlider() {
+		this(MGWTStyle.getTheme().getMGWTClientBundle().getSliderCss());
+	}
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see
-   * com.google.gwt.event.logical.shared.HasValueChangeHandlers#addValueChangeHandler(com.google
-   * .gwt.event.logical.shared.ValueChangeHandler)
-   */
-  /** {@inheritDoc} */
-  @Override
-  public HandlerRegistration addValueChangeHandler(ValueChangeHandler<Integer> handler) {
-    return addHandler(handler, ValueChangeEvent.getType());
-  }
+	/**
+	 * Construct a slider with a given css
+	 * 
+	 * @param css
+	 *            the css to use
+	 */
+	public MSlider(SliderCss css) {
+		this.css = css;
+		css.ensureInjected();
+		sliderWidget = getSliderWidget();
+		initWidget(sliderWidget);
+		setStylePrimaryName(css.slider());
 
-  /**
-   * Set the maximum of the slider
-   * 
-   * @param max the maximum to use
-   */
-  public void setMax(int max) {
-    if (max <= 0) {
-      throw new IllegalArgumentException("max > 0");
-    }
-    this.max = max;
-  }
+		sliderWidget.addTouchHandler(new SliderTouchHandler());
 
-  /**
-   * get the maximum of the slider
-   * 
-   * @return the maximum of the slider
-   */
-  public int getMax() {
-    return max;
-  }
+		max = 100;
+		value = 0;
+		addKeyDown(sliderWidget.getSlider());
+	}
+	
+	protected SliderWidget getSliderWidget(){
+		if(sliderWidget == null){
+			sliderWidget = new SliderWidget(css);
+		}
+		return sliderWidget;
+	}
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see com.google.gwt.user.client.ui.HasValue#getValue()
-   */
-  /** {@inheritDoc} */
-  @Override
-  public Integer getValue() {
-    return value;
-  }
+	protected native void addKeyDown(Element el)/*-{
+		var self = this;
+		el.onkeydown = function(e) {
+			switch (e.keyCode) {
+			case 37: //left
+				self.@com.googlecode.mgwt.ui.client.widget.MSlider::previous()();
+				break;
+			case 39: //right
+				self.@com.googlecode.mgwt.ui.client.widget.MSlider::next()();
+				break;
+			}
+		};
+	}-*/;
+	
+	protected void previous(){
+		int preValue = getValue() -1;
+		if(preValue < 0) preValue = 0;
+		setValue(preValue);
+	}
+	
+	protected void next(){
+		int nextValue = getValue() + 1;
+		if(nextValue >= getMax()) nextValue = getMax() -1;
+		setValue(nextValue);
+	}
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see com.google.gwt.user.client.ui.HasValue#setValue(java.lang.Object)
-   */
-  /** {@inheritDoc} */
-  @Override
-  public void setValue(Integer value) {
-    setValue(value, true);
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.google.gwt.event.logical.shared.HasValueChangeHandlers#
+	 * addValueChangeHandler(com.google
+	 * .gwt.event.logical.shared.ValueChangeHandler)
+	 */
+	/** {@inheritDoc} */
+	@Override
+	public HandlerRegistration addValueChangeHandler(
+			ValueChangeHandler<Integer> handler) {
+		return addHandler(handler, ValueChangeEvent.getType());
+	}
 
-  }
+	/**
+	 * Set the maximum of the slider
+	 * 
+	 * @param max
+	 *            the maximum to use
+	 */
+	public void setMax(int max) {
+		if (max <= 0) {
+			throw new IllegalArgumentException("max > 0");
+		}
+		this.max = max;
+	}
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see com.google.gwt.user.client.ui.Composite#onAttach()
-   */
-  /** {@inheritDoc} */
-  @Override
-  protected void onAttach() {
-    super.onAttach();
-    Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+	/**
+	 * get the maximum of the slider
+	 * 
+	 * @return the maximum of the slider
+	 */
+	public int getMax() {
+		return max;
+	}
 
-      @Override
-      public void execute() {
-        setSliderPos(value);
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.google.gwt.user.client.ui.HasValue#getValue()
+	 */
+	/** {@inheritDoc} */
+	@Override
+	public Integer getValue() {
+		return value;
+	}
 
-      }
-    });
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.google.gwt.user.client.ui.HasValue#setValue(java.lang.Object)
+	 */
+	/** {@inheritDoc} */
+	@Override
+	public void setValue(Integer value) {
+		setValue(value, true);
 
-  }
+	}
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see com.google.gwt.user.client.ui.HasValue#setValue(java.lang.Object, boolean)
-   */
-  /** {@inheritDoc} */
-  @Override
-  public void setValue(Integer value, boolean fireEvents) {
-    setValue(value, fireEvents, true);
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.google.gwt.user.client.ui.Composite#onAttach()
+	 */
+	/** {@inheritDoc} */
+	@Override
+	protected void onAttach() {
+		super.onAttach();
+		Scheduler.get().scheduleDeferred(new ScheduledCommand() {
 
-  }
+			@Override
+			public void execute() {
+				setSliderPos(value);
 
-  protected void setValue(Integer value, boolean fireEvents, boolean updateSlider) {
-    if (value == null) {
-      throw new IllegalArgumentException("value can not be null");
-    }
+			}
+		});
 
-    if (value < 0) {
-      throw new IllegalArgumentException("value >= 0");
-    }
+	}
 
-    if (value >= max) {
-      throw new IllegalArgumentException("value >= max");
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.google.gwt.user.client.ui.HasValue#setValue(java.lang.Object,
+	 * boolean)
+	 */
+	/** {@inheritDoc} */
+	@Override
+	public void setValue(Integer value, boolean fireEvents) {
+		setValue(value, fireEvents, true);
 
-    int oldValue = this.value;
-    this.value = value;
-    if (updateSlider) {
-      setSliderPos(value);
-    }
+	}
 
-    if (fireEvents) {
-      ValueChangeEvent.fireIfNotEqual(this, oldValue, value);
-    }
+	protected void setValue(Integer value, boolean fireEvents,
+			boolean updateSlider) {
+		if (value == null) {
+			throw new IllegalArgumentException("value can not be null");
+		}
 
-  }
+		if (value < 0) {
+			throw new IllegalArgumentException("value >= 0");
+		}
 
-  private void setSliderPos(int value) {
+		if (value >= max) {
+			throw new IllegalArgumentException("value >= max");
+		}
 
-    if (!isAttached()) {
-      return;
-    }
+		int oldValue = this.value;
+		this.value = value;
+		if (updateSlider) {
+			setSliderPos(value);
+		}
 
-    int width = sliderWidget.getOffsetWidth();
-    int sliderPos = value * width / max;
-    sliderWidget.setPos(sliderPos);
+		if (fireEvents) {
+			ValueChangeEvent.fireIfNotEqual(this, oldValue, value);
+		}
 
-  }
+	}
 
-  private void setValueContrained(int x) {
-    x = x - MSlider.this.getAbsoluteLeft();
-    int width = sliderWidget.getOffsetWidth();
+	protected void setSliderPos(int value) {
 
-    if (x < 0) {
-      x = 0;
-    }
+		if (!isAttached()) {
+			return;
+		}
 
-    if (x > (width - 1)) {
-      x = width - 1;
-    }
+		int width = sliderWidget.getOffsetWidth();
+		int sliderPos = value * width / max;
+		sliderWidget.setPos(sliderPos);
 
-    // scale it to max
-    int componentValue = x * max / width;
-    setValue(componentValue, true, false);
+	}
 
-    sliderWidget.setPos(x);
-  }
+	private void setValueContrained(int x) {
+		x = x - MSlider.this.getAbsoluteLeft();
+		int width = sliderWidget.getOffsetWidth();
+
+		if (x < 0) {
+			x = 0;
+		}
+
+		if (x > (width - 1)) {
+			x = width - 1;
+		}
+
+		// scale it to max
+		int componentValue = x * max / width;
+		setValue(componentValue, true, false);
+
+		sliderWidget.setPos(x);
+	}
 
 }
