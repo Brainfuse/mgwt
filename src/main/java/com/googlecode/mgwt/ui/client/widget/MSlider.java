@@ -172,6 +172,10 @@ public class MSlider extends Composite
 		addKeyDown(sliderWidget.getSlider());
 	}
 	
+	public void setSliderTitle(String title){
+		sliderWidget.getSlider().setTitle(title);
+	}
+	
 	protected SliderWidget getSliderWidget(){
 		if(sliderWidget == null){
 			sliderWidget = new SliderWidget(css);
