@@ -33,6 +33,7 @@ import com.googlecode.mgwt.ui.client.MGWT;
 import com.googlecode.mgwt.ui.client.MGWTStyle;
 import com.googlecode.mgwt.ui.client.theme.base.SliderCss;
 import com.googlecode.mgwt.ui.client.util.CssUtil;
+import com.googlecode.mgwt.ui.client.util.MGWTUtil;
 import com.googlecode.mgwt.ui.client.widget.touch.TouchWidget;
 
 /**
@@ -165,11 +166,19 @@ public class MSlider extends Composite
 		initWidget(sliderWidget);
 		setStylePrimaryName(css.slider());
 
-		sliderWidget.addTouchHandler(new SliderTouchHandler());
+		sliderWidget.addTouchHandler(getTouchHandler());
 
 		max = 100;
 		value = 0;
 		addKeyDown(sliderWidget.getSlider());
+	}
+	
+	public HandlerRegistration addTouchHandler(TouchHandler handler){
+		return sliderWidget.addTouchHandler(handler);
+	}
+	
+	protected TouchHandler getTouchHandler(){
+		return new SliderTouchHandler();
 	}
 	
 	public void setSliderTitle(String title){
@@ -197,18 +206,24 @@ public class MSlider extends Composite
 		};
 	}-*/;
 	
-	protected void previous(){
-		int preValue = getValue() -1;
-		if(preValue < 0) preValue = 0;
+	protected void previous() {
+		int preValue = getValue() - getInterval();
+		if (preValue < 0)
+			preValue = 0;
 		setValue(preValue);
 	}
-	
-	protected void next(){
-		int nextValue = getValue() + 1;
-		if(nextValue >= getMax()) nextValue = getMax() -1;
+
+	protected void next() {
+		int nextValue = getValue() + getInterval();
+		if (nextValue >= getMax())
+			nextValue = getMax() - getInterval();
 		setValue(nextValue);
 	}
 
+	protected int getInterval(){
+		return 1;
+	}
+	
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -234,6 +249,7 @@ public class MSlider extends Composite
 			throw new IllegalArgumentException("max > 0");
 		}
 		this.max = max;
+		sliderWidget.updateAriaValueMax(getFormatedValueText(max));
 	}
 
 	/**
@@ -324,7 +340,13 @@ public class MSlider extends Composite
 		if (fireEvents) {
 			ValueChangeEvent.fireIfNotEqual(this, oldValue, value);
 		}
+		
+		sliderWidget.updateAriaValueNow(getFormatedValueText(value));
 
+	}
+	
+	protected String getFormatedValueText(int value){
+		return String.valueOf(value);
 	}
 
 	protected void setSliderPos(int value) {
@@ -338,8 +360,8 @@ public class MSlider extends Composite
 		sliderWidget.setPos(sliderPos);
 
 	}
-
-	private void setValueContrained(int x) {
+	
+	protected void setValueContrained(int x) {
 		x = x - MSlider.this.getAbsoluteLeft();
 		int width = sliderWidget.getOffsetWidth();
 
@@ -356,6 +378,11 @@ public class MSlider extends Composite
 		setValue(componentValue, true, false);
 
 		sliderWidget.setPos(x);
+		onUpdateValueContrained(x, componentValue);
+	}
+	
+	protected void onUpdateValueContrained(int x, int componentValue){
+		
 	}
 
 }

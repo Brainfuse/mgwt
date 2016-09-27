@@ -199,6 +199,7 @@ public class AnimatingActivityManager implements PlaceChangeEvent.Handler, Place
 		try {
 			currentActivity.start(new ProtectedDisplay(currentActivity), stopperedEventBus);
 		} catch (Throwable t) {
+			
 			caughtOnStart = t;
 		}
 
