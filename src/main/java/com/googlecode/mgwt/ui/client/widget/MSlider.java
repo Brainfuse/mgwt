@@ -324,10 +324,12 @@ public class MSlider extends Composite
 		}
 
 		if (value < 0) {
+//			value = 0;
 			throw new IllegalArgumentException("value >= 0");
 		}
 
-		if (value >= max) {
+		if (value > max) {
+			//value = max;
 			throw new IllegalArgumentException("value >= max");
 		}
 
@@ -369,12 +371,15 @@ public class MSlider extends Composite
 			x = 0;
 		}
 
-		if (x > (width - 1)) {
-			x = width - 1;
+		if (x > (width )) {
+			x = width ;
 		}
 
 		// scale it to max
+		
 		int componentValue = x * max / width;
+//		MGWTUtil.log("value=" + x + ",width=" + width + ",componentValue=" 
+//		+ componentValue + ",max=" + max);
 		setValue(componentValue, true, false);
 
 		sliderWidget.setPos(x);
