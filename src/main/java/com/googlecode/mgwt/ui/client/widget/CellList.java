@@ -142,7 +142,8 @@ public class CellList<T> extends Composite implements HasCellSelectedHandler {
 
     @Override
     public void onTouchMove(TouchMoveEvent event) {
-      Touch touch = event.getTouches().get(0);
+     
+    	Touch touch = event.getTouches().get(0);
       if (Math.abs(touch.getPageX() - x) > Tap.RADIUS || Math.abs(touch.getPageY() - y) > Tap.RADIUS) {
         moved = true;
         // deselect
@@ -157,6 +158,7 @@ public class CellList<T> extends Composite implements HasCellSelectedHandler {
 
     @Override
     public void onTouchEnd(TouchEndEvent event) {
+    	
       if (node != null) {
         node.removeClassName(css.selected());
         stopTimer();
@@ -171,6 +173,7 @@ public class CellList<T> extends Composite implements HasCellSelectedHandler {
 
     @Override
     public void onTouchStart(TouchStartEvent event) {
+    	
       started = true;
 
       x = event.getTouches().get(0).getPageX();
@@ -261,17 +264,27 @@ public class CellList<T> extends Composite implements HasCellSelectedHandler {
    * @param css the css to use
    */
   public CellList(Cell<T> cell, ListCss css) {
-    css.ensureInjected();
-    this.cell = cell;
-    this.css = css;
-    main = new UlTouchWidget();
-
-    initWidget(main);
-
-    internalTouchHandler = new InternalTouchHandler();
-
-    setStylePrimaryName(css.listCss());
+	  this(cell,css,false);
   }
+  
+  public CellList(Cell<T> cell, boolean textSelectable) {
+	  this(cell,MGWTStyle.getTheme().getMGWTClientBundle().getListCss(),textSelectable);
+  }
+  
+	public CellList(Cell<T> cell, ListCss css, boolean textSelectable) {
+		css.ensureInjected();
+		this.cell = cell;
+		this.css = css;
+		main = new UlTouchWidget();
+
+		initWidget(main);
+		
+		if(!textSelectable){
+			internalTouchHandler = new InternalTouchHandler();
+		}
+		
+		setStylePrimaryName(css.listCss());
+	}
   
  /**
  * this sets the aria role to the list as well as the list items
@@ -317,11 +330,13 @@ public void setRole(Role role){
 
     super.onAttach();
 
-    handlers.add(main.addTouchCancelHandler(internalTouchHandler));
-    handlers.add(main.addTouchEndHandler(internalTouchHandler));
-    handlers.add(main.addTouchStartHandler(internalTouchHandler));
-    handlers.add(main.addTouchMoveHandler(internalTouchHandler));
-
+    if(internalTouchHandler != null){
+    	 handlers.add(main.addTouchCancelHandler(internalTouchHandler));
+    	 handlers.add(main.addTouchEndHandler(internalTouchHandler));
+    	 handlers.add(main.addTouchStartHandler(internalTouchHandler));
+    	 handlers.add(main.addTouchMoveHandler(internalTouchHandler));
+    }
+    
   }
 
   /*
