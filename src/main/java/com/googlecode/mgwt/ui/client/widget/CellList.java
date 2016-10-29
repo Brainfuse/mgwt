@@ -134,6 +134,11 @@ public class CellList<T> extends Composite implements HasCellSelectedHandler {
     private int y;
     private boolean started;
     private Element originalElement;
+    private boolean textSelectable;
+    
+    public InternalTouchHandler(boolean textSelectable) {
+    	this.textSelectable = textSelectable;
+	}
 
     @Override
     public void onTouchCanceled(TouchCancelEvent event) {
@@ -195,7 +200,9 @@ public class CellList<T> extends Composite implements HasCellSelectedHandler {
         return;
       }
 
-      event.preventDefault();
+      if(!textSelectable){
+    	  event.preventDefault();
+      }
 
       // text node use the parent..
       if (Node.is(eventTarget) && !Element.is(eventTarget)) {
@@ -279,9 +286,7 @@ public class CellList<T> extends Composite implements HasCellSelectedHandler {
 
 		initWidget(main);
 		
-		if(!textSelectable){
-			internalTouchHandler = new InternalTouchHandler();
-		}
+		internalTouchHandler = new InternalTouchHandler(textSelectable);
 		
 		setStylePrimaryName(css.listCss());
 	}
@@ -328,14 +333,12 @@ public void setRole(Role role){
   @Override
   protected void onAttach() {
 
-    super.onAttach();
+		super.onAttach();
 
-    if(internalTouchHandler != null){
-    	 handlers.add(main.addTouchCancelHandler(internalTouchHandler));
-    	 handlers.add(main.addTouchEndHandler(internalTouchHandler));
-    	 handlers.add(main.addTouchStartHandler(internalTouchHandler));
-    	 handlers.add(main.addTouchMoveHandler(internalTouchHandler));
-    }
+		handlers.add(main.addTouchCancelHandler(internalTouchHandler));
+		handlers.add(main.addTouchEndHandler(internalTouchHandler));
+		handlers.add(main.addTouchStartHandler(internalTouchHandler));
+		handlers.add(main.addTouchMoveHandler(internalTouchHandler));
     
   }
 
