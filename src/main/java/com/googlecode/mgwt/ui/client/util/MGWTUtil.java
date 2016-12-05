@@ -64,11 +64,31 @@ public class MGWTUtil {
 	}-*/;
 	
 	public static native boolean isIEEdge()/*-{
-		var ua = window.navigator.userAgent.toLowerCase();
+		var ua = $wnd.navigator.userAgent.toLowerCase();
 		if (ua.indexOf('edge') != -1) {
 			return true;
 		} else {
 			return false;
 		}
 	}-*/;
+	
+	public static native int getIEVersion()/*-{
+		var ua = $wnd.navigator.userAgent;
+	    var ieold = (/MSIE (\d+\.\d+);/.test(ua));
+	    if(ieold){
+	    	return new Number(RegExp.$1);
+	    }
+	    if ($wnd.navigator.appVersion.indexOf("MSIE 10") != -1){
+	     	return 10;
+	    }
+	    
+	    var trident = !!ua.match(/Trident\/7.0/);
+	    var rv=ua.indexOf("rv:11.0");
+	    if (trident&&rv!=-1){
+	    	return 11;
+	    }
+	
+	    return -1;  
+	}-*/;
+	
 }
