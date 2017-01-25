@@ -168,6 +168,12 @@ public abstract class ButtonBase extends TouchWidget implements HasText {
     getElement().setInnerText(text);
 
   }
+  
+  @Override
+	public void setTitle(String title) {
+		super.setTitle(title);
+		getElement().setAttribute("aria-label", title);
+	}
 
   /*
    * (non-Javadoc)
