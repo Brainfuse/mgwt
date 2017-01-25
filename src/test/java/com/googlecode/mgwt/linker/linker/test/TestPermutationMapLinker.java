@@ -12,8 +12,6 @@ import java.util.SortedSet;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
-import junit.framework.Assert;
-
 import org.apache.commons.io.IOUtils;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,6 +28,8 @@ import com.google.gwt.dev.util.log.PrintWriterTreeLogger;
 import com.googlecode.mgwt.linker.linker.PermutationArtifact;
 import com.googlecode.mgwt.linker.linker.PermutationMapLinker;
 import com.googlecode.mgwt.linker.server.BindingProperty;
+
+import junit.framework.Assert;
 
 public class TestPermutationMapLinker {
 
@@ -180,7 +180,6 @@ public class TestPermutationMapLinker {
 			return name;
 		}
 
-		@Override
 		public String getValue() {
 
 			return null;

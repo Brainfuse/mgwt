@@ -407,4 +407,10 @@ public class MockServletContext implements ServletContext {
 		
 	}
 
+	@Override
+	public String getVirtualServerName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
