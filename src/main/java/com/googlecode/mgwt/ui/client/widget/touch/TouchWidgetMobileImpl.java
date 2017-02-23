@@ -17,6 +17,7 @@ package com.googlecode.mgwt.ui.client.widget.touch;
 
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.Widget;
+import com.googlecode.mgwt.dom.client.event.mouse.HandlerRegistrationCollection;
 import com.googlecode.mgwt.dom.client.event.touch.TouchCancelEvent;
 import com.googlecode.mgwt.dom.client.event.touch.TouchCancelHandler;
 import com.googlecode.mgwt.dom.client.event.touch.TouchEndEvent;
@@ -25,6 +26,7 @@ import com.googlecode.mgwt.dom.client.event.touch.TouchMoveEvent;
 import com.googlecode.mgwt.dom.client.event.touch.TouchMoveHandler;
 import com.googlecode.mgwt.dom.client.event.touch.TouchStartEvent;
 import com.googlecode.mgwt.dom.client.event.touch.TouchStartHandler;
+import com.googlecode.mgwt.ui.client.util.MGWTUtil;
 
 /**
  * The implementation for touch devices of {@link TouchWidgetImpl}
@@ -34,6 +36,20 @@ import com.googlecode.mgwt.dom.client.event.touch.TouchStartHandler;
  */
 public class TouchWidgetMobileImpl implements TouchWidgetImpl {
 
+	private TouchWidgetDesktopImpl mouseImpl;
+	private boolean mouseEnabled = false;
+	
+	public TouchWidgetMobileImpl() {
+		mouseEnabled = MGWTUtil.isChromeOnWindowTouchDevice();
+	} 
+	
+	
+	private TouchWidgetDesktopImpl getMouseImpl(){
+		if(mouseImpl == null){
+			mouseImpl = new TouchWidgetDesktopImpl();
+		}
+		return mouseImpl;
+	}
 	/*
 	 * (non-Javadoc)
 	 * @see com.googlecode.mgwt.ui.client.widget.touch.TouchWidgetImpl#addTouchStartHandler(com.google.gwt.user.client.ui.Widget, com.googlecode.mgwt.dom.client.event.touch.TouchStartHandler)
@@ -41,7 +57,12 @@ public class TouchWidgetMobileImpl implements TouchWidgetImpl {
 	/** {@inheritDoc} */
 	@Override
 	public HandlerRegistration addTouchStartHandler(Widget w, TouchStartHandler handler) {
-		return w.addDomHandler(handler, TouchStartEvent.getType());
+		HandlerRegistrationCollection handlers = new HandlerRegistrationCollection();
+		handlers.addHandlerRegistration(w.addDomHandler(handler, TouchStartEvent.getType()));
+		if(mouseEnabled){
+			handlers.addHandlerRegistration(getMouseImpl().addTouchStartHandler(w, handler));
+		}
+		return handlers;
 	}
 
 	/*
@@ -51,7 +72,12 @@ public class TouchWidgetMobileImpl implements TouchWidgetImpl {
 	/** {@inheritDoc} */
 	@Override
 	public HandlerRegistration addTouchMoveHandler(Widget w, TouchMoveHandler handler) {
-		return w.addDomHandler(handler, TouchMoveEvent.getType());
+		HandlerRegistrationCollection handlers = new HandlerRegistrationCollection();
+		handlers.addHandlerRegistration(w.addDomHandler(handler, TouchMoveEvent.getType()));
+		if(mouseEnabled){
+			handlers.addHandlerRegistration(getMouseImpl().addTouchMoveHandler(w, handler));
+		}
+		return handlers;
 	}
 
 	/*
@@ -61,7 +87,12 @@ public class TouchWidgetMobileImpl implements TouchWidgetImpl {
 	/** {@inheritDoc} */
 	@Override
 	public HandlerRegistration addTouchCancelHandler(Widget w, TouchCancelHandler handler) {
-		return w.addDomHandler(handler, TouchCancelEvent.getType());
+		HandlerRegistrationCollection handlers = new HandlerRegistrationCollection();
+		handlers.addHandlerRegistration(w.addDomHandler(handler, TouchCancelEvent.getType()));
+		if(mouseEnabled){
+			handlers.addHandlerRegistration(getMouseImpl().addTouchCancelHandler(w, handler));
+		}
+		return handlers;
 	}
 
 	/*
@@ -71,7 +102,12 @@ public class TouchWidgetMobileImpl implements TouchWidgetImpl {
 	/** {@inheritDoc} */
 	@Override
 	public HandlerRegistration addTouchEndHandler(Widget w, TouchEndHandler handler) {
-		return w.addDomHandler(handler, TouchEndEvent.getType());
+		HandlerRegistrationCollection handlers = new HandlerRegistrationCollection();
+		handlers.addHandlerRegistration(w.addDomHandler(handler, TouchEndEvent.getType()));
+		if(mouseEnabled){
+			handlers.addHandlerRegistration(getMouseImpl().addTouchEndHandler(w, handler));
+		}
+		return handlers;
 	}
 
 }
