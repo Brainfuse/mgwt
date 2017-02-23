@@ -112,31 +112,43 @@ public class DOMImplSafariWithTransistion extends DOMImplWebkit {
     if (chMask & 0x80000) elem.onpaste       = (bits & 0x80000) ? 
         @com.google.gwt.user.client.impl.DOMImplStandard::dispatchEvent : null;
     if (chMask & 0x100000) {
-//	    	if (bits & 0x100000)
-//	    		elem.addEventListener('touchstart', @com.google.gwt.user.client.impl.DOMImplStandard::dispatchEvent, false);
-	    	elem.ontouchstart = (bits & 0x100000) ? 
-	        @com.google.gwt.user.client.impl.DOMImplStandard::dispatchEvent : null;
+	    	if (bits & 0x100000)
+	    		elem.addEventListener('touchstart', @com.google.gwt.user.client.impl.DOMImplStandard::dispatchEvent, false);
+//	    	elem.ontouchstart = (bits & 0x100000) ? 
+//	        @com.google.gwt.user.client.impl.DOMImplStandard::dispatchEvent : null;
 	    }
 	    if (chMask & 0x200000) {
-//	    	if (bits & 0x200000)
-//	    		elem.addEventListener('touchmove', @com.google.gwt.user.client.impl.DOMImplStandard::dispatchEvent, false);
-	    	elem.ontouchmove  = (bits & 0x200000) ? 
-	        @com.google.gwt.user.client.impl.DOMImplStandard::dispatchEvent : null;
+	    	if (bits & 0x200000)
+	    		elem.addEventListener('touchmove', @com.google.gwt.user.client.impl.DOMImplStandard::dispatchEvent, false);
+//	    	elem.ontouchmove  = (bits & 0x200000) ? 
+//	        @com.google.gwt.user.client.impl.DOMImplStandard::dispatchEvent : null;
 	    }
 	    if (chMask & 0x400000) {
-//	    	if (bits & 0x400000)
-//	    		elem.addEventListener('touchend', @com.google.gwt.user.client.impl.DOMImplStandard::dispatchEvent, false);
-	    	elem.ontouchend   = (bits & 0x400000) ? 
-	        @com.google.gwt.user.client.impl.DOMImplStandard::dispatchEvent : null;
+	    	if (bits & 0x400000)
+	    		elem.addEventListener('touchend', @com.google.gwt.user.client.impl.DOMImplStandard::dispatchEvent, false);
+//	    	elem.ontouchend   = (bits & 0x400000) ? 
+//	        @com.google.gwt.user.client.impl.DOMImplStandard::dispatchEvent : null;
 	    }
-    if (chMask & 0x800000) elem.ontouchcancel= (bits & 0x800000) ? 
-        @com.google.gwt.user.client.impl.DOMImplStandard::dispatchEvent : null;
-    if (chMask & 0x1000000) elem.ongesturestart  =(bits & 0x1000000) ? 
-        @com.google.gwt.user.client.impl.DOMImplStandard::dispatchEvent : null;
-    if (chMask & 0x2000000) elem.ongesturechange =(bits & 0x2000000) ? 
-        @com.google.gwt.user.client.impl.DOMImplStandard::dispatchEvent : null;
-    if (chMask & 0x4000000) elem.ongestureend    = (bits & 0x4000000) ? 
-        @com.google.gwt.user.client.impl.DOMImplStandard::dispatchEvent : null;
+    if (chMask & 0x800000)
+    	if (bits & 0x800000)
+	    		elem.addEventListener('touchcancel', @com.google.gwt.user.client.impl.DOMImplStandard::dispatchEvent, false);
+//     elem.ontouchcancel= (bits & 0x800000) ? 
+//        @com.google.gwt.user.client.impl.DOMImplStandard::dispatchEvent : null;
+    if (chMask & 0x1000000) 
+		if (bits & 0x1000000)
+	    		elem.addEventListener('gesturestart', @com.google.gwt.user.client.impl.DOMImplStandard::dispatchEvent, false);
+//    	elem.ongesturestart  =(bits & 0x1000000) ? 
+//        @com.google.gwt.user.client.impl.DOMImplStandard::dispatchEvent : null;
+    if (chMask & 0x2000000) 
+    	if (bits & 0x2000000)
+	    		elem.addEventListener('gesturechange', @com.google.gwt.user.client.impl.DOMImplStandard::dispatchEvent, false);
+//    	elem.ongesturechange =(bits & 0x2000000) ? 
+//        @com.google.gwt.user.client.impl.DOMImplStandard::dispatchEvent : null;
+    if (chMask & 0x4000000) 
+    	if (bits & 0x4000000)
+	    		elem.addEventListener('ngestureend', @com.google.gwt.user.client.impl.DOMImplStandard::dispatchEvent, false);
+//    	elem.ongestureend    = (bits & 0x4000000) ? 
+//        @com.google.gwt.user.client.impl.DOMImplStandard::dispatchEvent : null;
     
 	//transistion end
 	if (chMask & 0x8000000) {
