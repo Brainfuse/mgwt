@@ -95,5 +95,14 @@ public class MGWTUtil {
 		 return (($wnd.navigator.maxTouchPoints > 0)||($wnd.navigator.msMaxTouchPoints > 0));
 	}-*/;
 	
+	public static native boolean isChromeOnWindowTouchDevice()/*-{
+		var user_agent = $wnd.navigator.userAgent;
+		var exclude = /\b(Edge|Trident|android|iphone|ipod|ipad)\b/i.test(user_agent);
+		var maxTouchPoints = $wnd.navigator.maxTouchPoints;
+		if(!exclude && maxTouchPoints >=1){
+			return true;
+		}
+		return false;
+	}-*/;
 	
 }
