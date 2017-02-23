@@ -32,17 +32,36 @@
 
     <inherits name='com.googlecode.mgwt.MGWTMin'/>
 
+   
     <set-property name="mobile.user.agent" value="mobilesafari,not_mobile" />
     <set-property name="mobile.user.agent" value="not_mobile" >
       <none>
         <when-property-is name="user.agent" value="safari" />
       </none>
     </set-property>
-    <property-provider name="mobile.user.agent">
-      <![CDATA[
-        return /(android|iphone|ipod|ipad)/i.test(window.navigator.userAgent) 
-          ? 'mobilesafari': 'not_mobile';
-      ]]>
-    </property-provider>
+
+    <property-provider name="mobile.user.agent"><![CDATA[
+      {
+	        var user_agent = window.navigator.userAgent;
+	        var include = /\b(android|iphone|ipod|ipad)\b/i.test(user_agent);
+	        var exclude = /\b(Edge|Trident)\b/i.test(user_agent);
+	          
+	        if(include && !exclude){
+	        	return 'mobilesafari';
+	        }else {
+	        	
+		      	var maxTouchPoints = window.navigator.maxTouchPoints;
+	        	if(!exclude && maxTouchPoints >= 1){
+	        		//this is chrome on windows tablet
+	        		return 'mobilesafari';
+	        	}
+	        	/**
+	        	Not mobile will detect edge and use pointer events.
+	        	**/
+	        	return 'not_mobile';
+	        }
+      }    
+      ]]></property-provider>
+      
 
 </module>

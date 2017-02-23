@@ -74,7 +74,7 @@
     <!-- not mobile -->
     <set-property name="mobile.user.agent" value="not_mobile" >
       <any>
-        <when-property-is name="mgwt.os" value="desktop" />
+        <!-- <when-property-is name="mgwt.os" value="desktop" /> -->
         <when-property-is name="mgwt.os" value="blackberry" />
       </any>
     </set-property>
