@@ -91,4 +91,9 @@ public class MGWTUtil {
 	    return -1;  
 	}-*/;
 	
+	public static native boolean is_win_touch_device()/*-{
+		 return (($wnd.navigator.maxTouchPoints > 0)||($wnd.navigator.msMaxTouchPoints > 0));
+	}-*/;
+	
+	
 }
