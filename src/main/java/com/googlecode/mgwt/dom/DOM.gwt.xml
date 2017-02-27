@@ -34,17 +34,11 @@
         }
         
         if(ua.indexOf('ipad') != -1) {
-          if(window.devicePixelRatio >= 2) {
             return "ipad_retina";
-          }
-          return "ipad";
         }
         
         if(ua.indexOf('iphone') != -1 || ua.indexOf('ipod') != -1) {
-          if(window.devicePixelRatio >= 2) {
             return "retina";
-          }
-          return "iphone";
         }
         
         if(ua.indexOf('blackberry') != -1) {
@@ -58,6 +52,9 @@
       return mgwt_os;
     }
     ]]></property-provider>
+    
+    <!-- removes iphone, ipad and blackberry permutations by setting the property here again.  -->
+    <set-property name="mgwt.os" value="retina, ipad_retina, android, android_tablet, desktop" />
 
     <!-- non-safari browsers are always desktop -->
     <set-property name="mgwt.os" value="desktop" >
@@ -78,12 +75,14 @@
         <when-property-is name="mgwt.os" value="blackberry" />
       </any>
     </set-property>
-     <set-property name="mobile.user.agent" value="mobilesafari">
+    <set-property name="mobile.user.agent" value="mobilesafari">
 		<any><!-- Actually means NOR, in this case "not safari" -->
 			<when-property-is name="mgwt.os" value="ipad" />
 			<when-property-is name="mgwt.os" value="iphone" />
 			<when-property-is name="mgwt.os" value="ipad_retina" />
 			<when-property-is name="mgwt.os" value="retina" />
+			<when-property-is name="mgwt.os" value="android" />
+			<when-property-is name="mgwt.os" value="android_tablet" />
 		</any>
 	</set-property>
 

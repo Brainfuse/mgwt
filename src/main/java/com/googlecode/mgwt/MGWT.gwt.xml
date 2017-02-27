@@ -39,6 +39,16 @@
         <when-property-is name="user.agent" value="safari" />
       </none>
     </set-property>
+    <set-property name="mobile.user.agent" value="mobilesafari">
+		<any><!-- Actually means NOR, in this case "not safari" -->
+			<when-property-is name="mgwt.os" value="ipad" />
+			<when-property-is name="mgwt.os" value="iphone" />
+			<when-property-is name="mgwt.os" value="ipad_retina" />
+			<when-property-is name="mgwt.os" value="retina" />
+			<when-property-is name="mgwt.os" value="android" />
+			<when-property-is name="mgwt.os" value="android_tablet" />
+		</any>
+	</set-property>
 
     <property-provider name="mobile.user.agent"><![CDATA[
       {
