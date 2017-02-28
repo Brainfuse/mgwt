@@ -105,4 +105,8 @@ public class MGWTUtil {
 		return false;
 	}-*/;
 	
+	public static native boolean isPointerEventSupported()/*-{
+		return $wnd.PointerEvent || $wnd.MSPointerEvent;
+	}-*/;
+	
 }
