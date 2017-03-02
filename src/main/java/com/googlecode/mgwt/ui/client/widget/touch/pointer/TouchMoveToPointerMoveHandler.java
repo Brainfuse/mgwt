@@ -28,26 +28,59 @@ public class TouchMoveToPointerMoveHandler implements PointerMoveEvent.PointerMo
 	
 	private native void _onPointerMove(NativeEvent event)/*-{
 		var self = this;
-		
 		if(!self.touchEvents){
 			self.touchEvents = [];
-			self.touchEventTimer = null;
 		}
 		
-		var isPrimary = event.isPrimary;
-		if(isPrimary){
-			self.touchEvents = [];
-			self.touchEvents.push(event);
-		}else {
-			self.touchEvents.push(event);
+		var pointerId = event.pointerId;
+		var touchEvents = self.touchEvents;
+		if(!touchEvents[pointerId]){
+			touchEvents[pointerId]=[];
 		}
 		
-		self.touchEventTimer = $wnd.setTimeout(function(){
-				fireEvents(self.touchEvents);
-		},10);
+		touchEvents[pointerId].push(event);
+		
+		self.touchEventTimer = $wnd.setTimeout(fireEvents,10);
 
-		function fireEvents(events){
+		function fireEvents(){
+			
+			if(self.touchEvents.length < 1) return;
+			var max = getMaxArraySize();
+			
+			for(var i=0; i<max; i++){
+				var events = [];
+				for(var key in self.touchEvents){
+					var arr = self.touchEvents[key];
+					var event;
+					if(i<arr.length){
+						event = arr[i];
+					}else {
+						event = arr[arr.length-1];
+					}
+					events.push(event);
+				}
+//			log(events);
 			self.@com.googlecode.mgwt.ui.client.widget.touch.pointer.TouchMoveToPointerMoveHandler::handleEvent(Lcom/google/gwt/core/client/JsArray;)(events);
+			}
+			self.touchEvents = [];
+		}
+		
+		function log(events){
+			var log = "";
+			for(var i=0; i<events.length; i++){
+				var event = events[i];
+				log += " id "+event.pointerId +" x "+event.clientX +" y "+event.clientY +", ";
+			}
+			$wnd.console.log("fireEvent size "+events.length+" LOG: "+log);
+		}
+		
+		function getMaxArraySize(){
+			var max = 0;
+			for(var key in self.touchEvents){
+				var arr = self.touchEvents[key];
+				max = Math.max(max,arr.length);
+			}
+			return max;
 		}
 		
 	}-*/;
@@ -59,6 +92,7 @@ public class TouchMoveToPointerMoveHandler implements PointerMoveEvent.PointerMo
 		private JsArray<NativeEvent> events;
 		
 		public SimulatedTouchMoveEvent(JsArray<NativeEvent> events){
+			
 			this.events = events;
 			touches = CollectionFactory.constructArray();
 			for(int i=0; i<events.length(); i++){
