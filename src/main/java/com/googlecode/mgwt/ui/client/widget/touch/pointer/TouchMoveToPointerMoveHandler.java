@@ -7,8 +7,9 @@ import com.googlecode.mgwt.collection.shared.LightArray;
 import com.googlecode.mgwt.dom.client.event.touch.Touch;
 import com.googlecode.mgwt.dom.client.event.touch.TouchMoveEvent;
 import com.googlecode.mgwt.dom.client.event.touch.TouchMoveHandler;
+import com.googlecode.mgwt.ui.client.widget.touch.pointer.PointerCancelEvent.PointerCancelHandler;
 
-public class TouchMoveToPointerMoveHandler implements PointerMoveEvent.PointerMoveHandler{
+public class TouchMoveToPointerMoveHandler implements PointerMoveEvent.PointerMoveHandler, PointerUpEvent.PointerUpHandler, PointerCancelHandler{
 
 	private final TouchMoveHandler handler;
 	
@@ -42,7 +43,7 @@ public class TouchMoveToPointerMoveHandler implements PointerMoveEvent.PointerMo
 		
 		self.touchEventTimer = $wnd.setTimeout(fireEvents,10);
 
-		function fireEvents(){
+		self.fireEvents = function fireEvents(){
 			
 			if(self.touchEvents.length < 1) return;
 			var max = getMaxArraySize();
@@ -85,6 +86,25 @@ public class TouchMoveToPointerMoveHandler implements PointerMoveEvent.PointerMo
 		
 	}-*/;
 	
+	
+	@Override
+	public void onPointerCancel(PointerCancelEvent event) {
+		_clear();
+	}
+
+	@Override
+	public void onPointerUp(PointerUpEvent event) {
+		_clear();
+	}
+
+	private native void _clear()/*-{
+		var self = this;
+		self.fireEvents();
+		if(self.touchEventTimer != null){
+			$wnd.clearTimeout(self.touchEventTimer);
+			self.touchEventTimer = null;
+		}
+	}-*/;
 	
 	private class SimulatedTouchMoveEvent extends TouchMoveEvent{
 		
