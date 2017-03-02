@@ -23,31 +23,28 @@ public class TouchWidgetPointerImpl implements TouchWidgetImpl {
 	@Override
 	public HandlerRegistration addTouchStartHandler(Widget w,
 			TouchStartHandler handler) {
-		return w.addBitlessDomHandler(
-				new TouchStartToPointerDownHandler(handler),
+		return w.addDomHandler(new TouchStartToPointerDownHandler(handler),
 				PointerDownEvent.getType());
 	}
 
 	@Override
 	public HandlerRegistration addTouchMoveHandler(Widget w,
 			TouchMoveHandler handler) {
-		return w.addBitlessDomHandler(
-				new TouchMoveToPointerMoveHandler(handler),
+		return w.addDomHandler(new TouchMoveToPointerMoveHandler(handler),
 				PointerMoveEvent.getType());
 	}
 
 	@Override
 	public HandlerRegistration addTouchCancelHandler(Widget w,
 			TouchCancelHandler handler) {
-		return w.addBitlessDomHandler(
-				new TouchCancelToPointerCancelHandler(handler),
+		return w.addDomHandler(new TouchCancelToPointerCancelHandler(handler),
 				PointerCancelEvent.getType());
 	}
 
 	@Override
 	public HandlerRegistration addTouchEndHandler(Widget w,
 			TouchEndHandler handler) {
-		return w.addBitlessDomHandler(new TouchEndToPointerUpHandler(handler),
+		return w.addDomHandler(new TouchEndToPointerUpHandler(handler),
 				PointerUpEvent.getType());
 	}
 
