@@ -15,20 +15,13 @@
  */
 package com.googlecode.mgwt.ui.client.widget.touch;
 
-import com.google.gwt.event.dom.client.MouseDownEvent;
-import com.google.gwt.event.dom.client.MouseMoveEvent;
-import com.google.gwt.event.dom.client.MouseUpEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.Widget;
-import com.googlecode.mgwt.dom.client.event.mouse.HandlerRegistrationCollection;
-import com.googlecode.mgwt.dom.client.event.mouse.TouchEndToMouseUpHandler;
-import com.googlecode.mgwt.dom.client.event.mouse.TouchMoveToMouseMoveHandler;
-import com.googlecode.mgwt.dom.client.event.mouse.TouchStartToMouseDownHandler;
 import com.googlecode.mgwt.dom.client.event.touch.TouchCancelHandler;
 import com.googlecode.mgwt.dom.client.event.touch.TouchEndHandler;
 import com.googlecode.mgwt.dom.client.event.touch.TouchMoveHandler;
 import com.googlecode.mgwt.dom.client.event.touch.TouchStartHandler;
-import com.googlecode.mgwt.ui.client.util.NoopHandlerRegistration;
+import com.googlecode.mgwt.ui.client.util.MGWTUtil;
 
 /**
  * The implementation for mouse devices of {@link TouchWidgetImpl}
@@ -38,49 +31,40 @@ import com.googlecode.mgwt.ui.client.util.NoopHandlerRegistration;
  */
 public class TouchWidgetDesktopImpl implements TouchWidgetImpl {
 
-	/*
-	 * (non-Javadoc)
-	 * @see com.googlecode.mgwt.ui.client.widget.touch.TouchWidgetImpl#addTouchStartHandler(com.google.gwt.user.client.ui.Widget, com.googlecode.mgwt.dom.client.event.touch.TouchStartHandler)
-	 */
-	/** {@inheritDoc} */
-	@Override
-	public HandlerRegistration addTouchStartHandler(Widget w, TouchStartHandler handler) {
-		return w.addDomHandler(new TouchStartToMouseDownHandler(handler), MouseDownEvent.getType());
+	
+	private final TouchWidgetImpl desktopImpl;
+	
+	public TouchWidgetDesktopImpl(){
+		if ((MGWTUtil.isIEEdge() || MGWTUtil.getIEVersion() > -1)
+				&& MGWTUtil.isPointerEventSupported()) {
+			desktopImpl = new TouchWidgetPointerImpl();
+		}else {
+			desktopImpl = new TouchWidgetMouseImpl();
+		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see com.googlecode.mgwt.ui.client.widget.touch.TouchWidgetImpl#addTouchMoveHandler(com.google.gwt.user.client.ui.Widget, com.googlecode.mgwt.dom.client.event.touch.TouchMoveHandler)
-	 */
-	/** {@inheritDoc} */
 	@Override
-	public HandlerRegistration addTouchMoveHandler(Widget w, TouchMoveHandler handler) {
-		TouchMoveToMouseMoveHandler touchMoveToMouseMoveHandler = new TouchMoveToMouseMoveHandler(handler);
-		HandlerRegistrationCollection handlerRegistrationCollection = new HandlerRegistrationCollection();
-		handlerRegistrationCollection.addHandlerRegistration(w.addDomHandler(touchMoveToMouseMoveHandler, MouseDownEvent.getType()));
-		handlerRegistrationCollection.addHandlerRegistration(w.addDomHandler(touchMoveToMouseMoveHandler, MouseUpEvent.getType()));
-		handlerRegistrationCollection.addHandlerRegistration(w.addDomHandler(touchMoveToMouseMoveHandler, MouseMoveEvent.getType()));
-		return handlerRegistrationCollection;
+	public HandlerRegistration addTouchStartHandler(Widget w,
+			TouchStartHandler handler) {
+		return desktopImpl.addTouchStartHandler(w, handler);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see com.googlecode.mgwt.ui.client.widget.touch.TouchWidgetImpl#addTouchCancelHandler(com.google.gwt.user.client.ui.Widget, com.googlecode.mgwt.dom.client.event.touch.TouchCancelHandler)
-	 */
-	/** {@inheritDoc} */
 	@Override
-	public HandlerRegistration addTouchCancelHandler(Widget w, TouchCancelHandler handler) {
-		return new NoopHandlerRegistration();
+	public HandlerRegistration addTouchMoveHandler(Widget w,
+			TouchMoveHandler handler) {
+		return desktopImpl.addTouchMoveHandler(w, handler);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see com.googlecode.mgwt.ui.client.widget.touch.TouchWidgetImpl#addTouchEndHandler(com.google.gwt.user.client.ui.Widget, com.googlecode.mgwt.dom.client.event.touch.TouchEndHandler)
-	 */
-	/** {@inheritDoc} */
 	@Override
-	public HandlerRegistration addTouchEndHandler(Widget w, TouchEndHandler handler) {
-		return w.addDomHandler(new TouchEndToMouseUpHandler(handler), MouseUpEvent.getType());
+	public HandlerRegistration addTouchCancelHandler(Widget w,
+			TouchCancelHandler handler) {
+		return desktopImpl.addTouchCancelHandler(w, handler);
 	}
 
+	@Override
+	public HandlerRegistration addTouchEndHandler(Widget w,
+			TouchEndHandler handler) {
+		return desktopImpl.addTouchEndHandler(w, handler);
+	}
+	
 }
