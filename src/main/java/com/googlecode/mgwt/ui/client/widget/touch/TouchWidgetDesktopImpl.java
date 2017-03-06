@@ -35,12 +35,12 @@ public class TouchWidgetDesktopImpl implements TouchWidgetImpl {
 	private final TouchWidgetImpl desktopImpl;
 	
 	public TouchWidgetDesktopImpl(){
-		if ((MGWTUtil.isIEEdge() || MGWTUtil.getIEVersion() > -1)
-				&& MGWTUtil.isPointerEventSupported()) {
-			desktopImpl = new TouchWidgetPointerImpl();
-		}else {
+//		if ((MGWTUtil.isIEEdge() || MGWTUtil.getIEVersion() > -1)
+//				&& MGWTUtil.isPointerEventSupported()) {
+//			desktopImpl = new TouchWidgetPointerImpl();
+//		}else {
 			desktopImpl = new TouchWidgetMouseImpl();
-		}
+//		}
 	}
 
 	@Override

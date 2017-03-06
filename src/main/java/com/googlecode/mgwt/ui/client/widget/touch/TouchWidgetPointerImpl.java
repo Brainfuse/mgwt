@@ -17,6 +17,8 @@ import com.googlecode.mgwt.ui.client.widget.touch.pointer.TouchMoveToPointerMove
 import com.googlecode.mgwt.ui.client.widget.touch.pointer.TouchStartToPointerDownHandler;
 
 /**
+ * THIS IMPL IS NOT BEING CURRENTLY.
+ * 
  * The implementation for window tablets and adds multi-touch. For Edge, IE
  */
 public class TouchWidgetPointerImpl implements TouchWidgetImpl {
