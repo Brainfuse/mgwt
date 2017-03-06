@@ -30,8 +30,9 @@ public class TouchStartToPointerDownHandler implements PointerDownHandler{
 	}
 	
 	private native void _onPointerDown(NativeEvent event)/*-{
-		var self = this;
+		event.preventDefault();
 		
+		var self = this;
 		if(self.touchEventTimer){
 			$wnd.clearTimeout(self.touchEventTimer);
 			self.touchEventTimer = null;

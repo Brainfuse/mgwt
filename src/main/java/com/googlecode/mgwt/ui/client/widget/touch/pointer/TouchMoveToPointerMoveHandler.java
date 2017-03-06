@@ -8,17 +8,21 @@ import com.googlecode.mgwt.dom.client.event.touch.Touch;
 import com.googlecode.mgwt.dom.client.event.touch.TouchMoveEvent;
 import com.googlecode.mgwt.dom.client.event.touch.TouchMoveHandler;
 import com.googlecode.mgwt.ui.client.widget.touch.pointer.PointerCancelEvent.PointerCancelHandler;
+import com.googlecode.mgwt.ui.client.widget.touch.pointer.PointerDownEvent.PointerDownHandler;
 
-public class TouchMoveToPointerMoveHandler implements PointerMoveEvent.PointerMoveHandler, PointerUpEvent.PointerUpHandler, PointerCancelHandler{
+public class TouchMoveToPointerMoveHandler implements PointerMoveEvent.PointerMoveHandler, PointerUpEvent.PointerUpHandler, PointerCancelHandler, PointerDownHandler{
 
 	private final TouchMoveHandler handler;
+	private boolean ignoreEvent;
 	
 	public TouchMoveToPointerMoveHandler(TouchMoveHandler handler){
 		this.handler = handler;
+		ignoreEvent = true;
 	}
 	
 	@Override
 	public void onPointerMove(PointerMoveEvent event) {
+		if(ignoreEvent) return;
 		_onPointerMove(event.getNativeEvent());
 	}
 
@@ -28,6 +32,7 @@ public class TouchMoveToPointerMoveHandler implements PointerMoveEvent.PointerMo
 	}
 	
 	private native void _onPointerMove(NativeEvent event)/*-{
+		
 		var self = this;
 		if(!self.touchEvents){
 			self.touchEvents = [];
@@ -90,11 +95,18 @@ public class TouchMoveToPointerMoveHandler implements PointerMoveEvent.PointerMo
 	@Override
 	public void onPointerCancel(PointerCancelEvent event) {
 		_clear();
+		ignoreEvent = true;
 	}
 
 	@Override
 	public void onPointerUp(PointerUpEvent event) {
 		_clear();
+		ignoreEvent = true;
+	}
+	
+	@Override
+	public void onPointerDown(PointerDownEvent event) {
+		ignoreEvent = false;
 	}
 
 	private native void _clear()/*-{
@@ -172,5 +184,6 @@ public class TouchMoveToPointerMoveHandler implements PointerMoveEvent.PointerMo
 		}
 		
 	}
+
 
 }
