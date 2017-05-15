@@ -43,6 +43,8 @@ import com.googlecode.mgwt.dom.client.event.touch.TouchStartHandler;
 import com.googlecode.mgwt.mvp.client.AnimatableDisplay;
 import com.googlecode.mgwt.mvp.client.Animation;
 import com.googlecode.mgwt.mvp.client.AnimationEndCallback;
+import com.googlecode.mgwt.mvp.client.MGWTAnimationEndEvent;
+import com.googlecode.mgwt.mvp.client.MGWTAnimationEndHandler;
 import com.googlecode.mgwt.ui.client.theme.base.DialogCss;
 import com.googlecode.mgwt.ui.client.util.MGWTUtil;
 import com.googlecode.mgwt.ui.client.widget.touch.TouchDelegate;
@@ -384,10 +386,14 @@ public abstract class AnimatableDialogBase implements HasWidgets, HasTouchHandle
 
 			@Override
 			public void onAnimationEnd() {
-
+				container.fireEvent(new MGWTAnimationEndEvent());
 			}
 		});
 
+	}
+	
+	public HandlerRegistration addAnimationEndHandler(MGWTAnimationEndHandler handler){
+		return container.addHandler(handler, MGWTAnimationEndEvent.getType());
 	}
 
 	/**

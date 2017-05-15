@@ -1,9 +1,11 @@
 package com.googlecode.mgwt.ui.client.dialog;
 
 import com.google.gwt.core.shared.GWT;
+import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.Widget;
+import com.googlecode.mgwt.mvp.client.MGWTAnimationEndHandler;
 import com.googlecode.mgwt.ui.client.dialog.ConfirmDialog.ConfirmCallback;
 import com.googlecode.mgwt.ui.client.theme.base.DialogCss;
 
@@ -102,6 +104,11 @@ public class BfConfirmDialog extends Widget{
 	protected void onDetach() {
 		cancelTimer();
 		super.onDetach();
+	}
+	
+	
+	public HandlerRegistration addAnimationEndHandler(MGWTAnimationEndHandler handler){
+		return dialog.addAnimationEndHandler(handler);
 	}
 	
 	public interface BfConfirmDialogBundle extends ClientBundle{

@@ -13,10 +13,12 @@
  */
 package com.googlecode.mgwt.ui.client.dialog;
 
+import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.Label;
 import com.googlecode.mgwt.dom.client.event.tap.TapEvent;
 import com.googlecode.mgwt.dom.client.event.tap.TapHandler;
+import com.googlecode.mgwt.mvp.client.MGWTAnimationEndHandler;
 import com.googlecode.mgwt.ui.client.MGWTStyle;
 import com.googlecode.mgwt.ui.client.theme.base.DialogCss;
 
@@ -188,5 +190,10 @@ public class ConfirmDialog implements HasText, HasTitleText, Dialog {
   public DialogPanel getDialogPanel(){
 	  return this.dialogPanel1;
   }
+  
+  public HandlerRegistration addAnimationEndHandler(MGWTAnimationEndHandler handler){
+	  return popinDialog.addAnimationEndHandler(handler);
+  }
+  
 
 }
