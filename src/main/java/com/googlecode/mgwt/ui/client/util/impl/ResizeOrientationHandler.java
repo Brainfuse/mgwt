@@ -9,10 +9,6 @@ import com.googlecode.mgwt.ui.client.util.OrientationHandler;
 public class ResizeOrientationHandler extends BaseOrientationHandler implements
 		OrientationHandler {
 
-	private interface DeviceOrientationChangeCallback {
-		void onOrientationChange();
-	}
-	
 	@Override
 	public ORIENTATION getOrientation() {
 		if(currentOrientation == null){
@@ -29,10 +25,13 @@ public class ResizeOrientationHandler extends BaseOrientationHandler implements
 	protected void doSetupOrientation() {
 		
 		if(isDeviceOrientationSupported()){
-			addDeviceOrientationChangeHandler(new DeviceOrientationChangeCallback() {
-				
+			/**
+			 * This fixed incorrect orientation due to some android versions/devices fires
+			 * orientation-change event before orientation change
+			 */	
+			Window.addResizeHandler(new ResizeHandler() {
 				@Override
-				public void onOrientationChange() {
+				public void onResize(ResizeEvent event) {
 					ORIENTATION orientation = getOrientationByMatchMedia();
 					handleOrientationChange(orientation);
 				}
@@ -60,15 +59,8 @@ public class ResizeOrientationHandler extends BaseOrientationHandler implements
 		fireOrientationChangedEvent(orientation);
 	}
 	
-	private native void addDeviceOrientationChangeHandler(DeviceOrientationChangeCallback callback)/*-{
-		var func = $entry(function(){
-			callback.@com.googlecode.mgwt.ui.client.util.impl.ResizeOrientationHandler.DeviceOrientationChangeCallback::onOrientationChange()();
-		});
-		$wnd.onorientationchange = func;
-	}-*/;
-	
 	private native boolean isDeviceOrientationSupported()/*-{
-		return ($wnd.orientation == null) ? false : true;
+		return ($wnd.matchMedia == null) ? false : true;
 	}-*/;
 	
 	private ORIENTATION getOrientationByMatchMedia(){
