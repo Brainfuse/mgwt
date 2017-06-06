@@ -36,6 +36,7 @@ public abstract class BaseOrientationHandler implements OrientationHandler {
 		
 		currentOrientation = getOrientation();
 		orientationInitialized = true;
+		setClasses(currentOrientation);
 	}
 	
 	protected abstract void doSetupOrientation();
