@@ -85,7 +85,7 @@ public class ResizeOrientationHandler extends BaseOrientationHandler implements
 	}
 	
 	private native boolean isDeviceOrientationSupported()/*-{
-		return ($wnd.matchMedia == null) ? false : true;
+		return "onorientationchange" in $wnd;
 	}-*/;
 	
 	private ORIENTATION getOrientationByMatchMedia(){
