@@ -15,13 +15,9 @@ package com.googlecode.mgwt.mvp.client.display;
 
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.SimplePanel;
-import com.google.gwt.user.client.ui.Widget;
 import com.googlecode.mgwt.dom.client.event.animation.AnimationEndEvent;
 import com.googlecode.mgwt.dom.client.event.animation.AnimationEndHandler;
-import com.googlecode.mgwt.mvp.client.AnimatableDisplay;
-import com.googlecode.mgwt.mvp.client.AnimationEndCallback;
 import com.googlecode.mgwt.mvp.client.resources.AnimationCss;
 import com.googlecode.mgwt.mvp.client.resources.AnimationSelector;
 
@@ -31,13 +27,7 @@ import com.googlecode.mgwt.mvp.client.resources.AnimationSelector;
  * @author Daniel Kurka
  * @version $Id: $
  */
-public abstract class AnimatableDisplayBaseImpl implements AnimatableDisplay {
-
-  protected FlowPanel main;
-
-  protected SimplePanel first;
-
-  protected SimplePanel second;
+public abstract class AnimatableDisplayBaseImpl extends AnimatableDisplayCommonImpl {
 
   protected boolean isReverse;
 
@@ -94,18 +84,6 @@ public abstract class AnimatableDisplayBaseImpl implements AnimatableDisplay {
 
   }
 
-  /** {@inheritDoc} */
-  @Override
-  public void setFirstWidget(IsWidget w) {
-    first.setWidget(w);
-  }
-
-  /** {@inheritDoc} */
-  @Override
-  public void setSecondWidget(IsWidget w) {
-    second.setWidget(w);
-  }
-
   /**
    * <p>
    * removeAllStyles
@@ -146,12 +124,9 @@ public abstract class AnimatableDisplayBaseImpl implements AnimatableDisplay {
    */
   protected abstract void onAnimationEnd();
 
-  protected boolean showFirst;
   protected HandlerRegistration animationEnd;
 
   protected AnimationEndListener listener;
-
-  protected AnimationEndCallback lastCallback;
 
   /**
    * <p>
@@ -168,17 +143,6 @@ public abstract class AnimatableDisplayBaseImpl implements AnimatableDisplay {
 
 		}
   }-*/;
-
-  /*
-   * (non-Javadoc)
-   * 
-   * @see com.google.gwt.user.client.ui.IsWidget#asWidget()
-   */
-  /** {@inheritDoc} */
-  @Override
-  public Widget asWidget() {
-    return main;
-  }
 
   abstract protected void onDeattach();
 

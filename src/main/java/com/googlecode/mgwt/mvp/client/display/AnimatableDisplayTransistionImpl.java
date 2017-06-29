@@ -19,12 +19,9 @@ import com.google.gwt.dom.client.Style.Display;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.SimplePanel;
-import com.google.gwt.user.client.ui.Widget;
 import com.googlecode.mgwt.dom.client.event.animation.TransitionEndEvent;
 import com.googlecode.mgwt.dom.client.event.animation.TransitionEndHandler;
-import com.googlecode.mgwt.mvp.client.AnimatableDisplay;
 import com.googlecode.mgwt.mvp.client.Animation;
 import com.googlecode.mgwt.mvp.client.AnimationEndCallback;
 import com.googlecode.mgwt.mvp.client.resources.AnimationSelector;
@@ -36,12 +33,7 @@ import com.googlecode.mgwt.mvp.client.resources.TransistionCss;
  * @author Daniel Kurka
  * @version $Id: $
  */
-public class AnimatableDisplayTransistionImpl implements AnimatableDisplay {
-	protected FlowPanel main;
-
-	protected SimplePanel first;
-
-	protected SimplePanel second;
+public class AnimatableDisplayTransistionImpl extends AnimatableDisplayCommonImpl {
 
 	protected boolean lastDir;
 
@@ -110,18 +102,6 @@ public class AnimatableDisplayTransistionImpl implements AnimatableDisplay {
 
 	}
 
-	/** {@inheritDoc} */
-	@Override
-	public void setFirstWidget(IsWidget w) {
-		first.setWidget(w);
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setSecondWidget(IsWidget w) {
-		second.setWidget(w);
-	}
-
 	/**
 	 * <p>
 	 * removeAllStyles
@@ -159,12 +139,9 @@ public class AnimatableDisplayTransistionImpl implements AnimatableDisplay {
 
 	}
 
-	protected boolean showFirst;
 	protected HandlerRegistration animationEnd;
 
 	protected TransistionEndListener listener;
-
-	protected AnimationEndCallback lastCallback;
 
 	private boolean animationRunning;
 
@@ -186,18 +163,9 @@ public class AnimatableDisplayTransistionImpl implements AnimatableDisplay {
 
 	/** {@inheritDoc} */
 	@Override
-	public Widget asWidget() {
-		return main;
-	}
+	public void doAnimate(Animation animation, boolean currentIsFirst, AnimationEndCallback callback) {
 
-	/** {@inheritDoc} */
-	@Override
-	public void animate(Animation animation, boolean currentIsFirst, AnimationEndCallback callback) {
-
-		lastCallback = callback;
 		blurBeforeAnimation();
-
-		showFirst = currentIsFirst;
 
 		if (animation == null) {
 			if (showFirst) {

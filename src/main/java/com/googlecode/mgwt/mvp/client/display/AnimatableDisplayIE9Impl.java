@@ -2,6 +2,7 @@ package com.googlecode.mgwt.mvp.client.display;
 
 import com.google.gwt.animation.client.AnimationScheduler;
 import com.google.gwt.animation.client.AnimationScheduler.AnimationCallback;
+import com.google.gwt.dom.client.Style.Display;
 import com.google.gwt.dom.client.Style.Overflow;
 import com.google.gwt.dom.client.Style.Position;
 import com.google.gwt.dom.client.Style.Unit;
@@ -133,15 +134,7 @@ public class AnimatableDisplayIE9Impl implements AnimatableDisplay {
       if (now > endTime) {
         // render end position and quit
 
-        if (animateToFirst) {
-          second.removeFromParent();
-        } else {
-          first.removeFromParent();
-        }
-
-        // fire animation end
-        callback.onAnimationEnd();
-
+    	onAnimationFrameEnd(animateToFirst, callback);
         return;
       }
 
@@ -159,10 +152,31 @@ public class AnimatableDisplayIE9Impl implements AnimatableDisplay {
     }
 
   }
+  
+  private void onAnimationFrameEnd(boolean animateToFirst, AnimationEndCallback callback){
+      if (animateToFirst) {
+          second.removeFromParent();
+        } else {
+          first.removeFromParent();
+        }
+
+        // fire animation end
+        callback.onAnimationEnd();
+  }
 
   @Override
   public void animate(Animation animation, boolean animateToFirst, AnimationEndCallback callback) {
 
+	if(!main.isAttached()){
+		if(animateToFirst){
+			first.getElement().getStyle().setDisplay(Display.BLOCK);
+		}else{
+			second.getElement().getStyle().setDisplay(Display.BLOCK);
+		}
+		onAnimationFrameEnd(animateToFirst, callback);
+		return;
+	}
+	  
     AnimationFrame frame = new AnimationFrame(System.currentTimeMillis(), System.currentTimeMillis() + 300, animation, callback, animateToFirst);
 
     AnimationScheduler.get().requestAnimationFrame(frame);

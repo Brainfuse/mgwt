@@ -71,15 +71,11 @@ public class AnimatableDisplayIphoneImpl extends AnimatableDisplayBaseImpl {
 			lastCallback = null;
 		}
 	}
-
-	/** {@inheritDoc} */
+	
 	@Override
-	public void animate(Animation animation, boolean currentIsFirst, AnimationEndCallback callback) {
-
-		lastCallback = callback;
+	public void doAnimate(Animation animation, boolean currentIsFirst, AnimationEndCallback callback) {
+		
 		blurBeforeAnimation();
-
-		showFirst = currentIsFirst;
 
 		if (animation == null) {
 			if (showFirst) {
@@ -141,5 +137,6 @@ public class AnimatableDisplayIphoneImpl extends AnimatableDisplayBaseImpl {
 		}
 
 	}
+
 
 }
