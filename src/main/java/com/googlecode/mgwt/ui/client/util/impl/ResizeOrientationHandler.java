@@ -51,7 +51,7 @@ public class ResizeOrientationHandler extends BaseOrientationHandler implements
 									ORIENTATION orientation = getOrientationByMatchMedia();
 									handleOrientationChange(orientation);
 								}
-							}.schedule(200);
+							}.schedule(500);
 						}
 					});
 			
@@ -85,7 +85,7 @@ public class ResizeOrientationHandler extends BaseOrientationHandler implements
 	}
 	
 	private native boolean isDeviceOrientationSupported()/*-{
-		return "onorientationchange" in $wnd;
+		return (typeof $wnd.orientation != 'undefined');
 	}-*/;
 	
 	private ORIENTATION getOrientationByMatchMedia(){
