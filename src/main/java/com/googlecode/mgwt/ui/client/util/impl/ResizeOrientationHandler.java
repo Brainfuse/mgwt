@@ -5,6 +5,7 @@ import com.google.gwt.event.logical.shared.ResizeHandler;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.googlecode.mgwt.dom.client.event.orientation.OrientationChangeEvent.ORIENTATION;
+import com.googlecode.mgwt.ui.client.MGWT;
 import com.googlecode.mgwt.ui.client.util.OrientationHandler;
 
 public class ResizeOrientationHandler extends BaseOrientationHandler implements
@@ -41,6 +42,12 @@ public class ResizeOrientationHandler extends BaseOrientationHandler implements
 					
 						@Override
 						public void onOrientationChange() {
+							
+							/**
+							 * hide keyboard (because it changes window size) before checking orientation 
+							 */
+							MGWT.hideKeyBoard();
+							
 							/**
 							 * use a timer to fix incorrect orientation due to some android versions/devices fires
 							 * orientation-change event before the orientation has actually changed
