@@ -62,7 +62,7 @@ public interface MGWTBundleBaseIOS7 extends MGWTClientBundle{
 	ImageResource getButtonBarPlusImage();
 	
 	@Source("css/resources/editIcon2.png")
-	ImageResource getButtonBarOrganizeImage();
+	ImageResource getButtonBarComposeImage();
 	
 	@Source("css/resources/cameraIcon.png")
 	ImageResource getButtonBarCameraImage();
