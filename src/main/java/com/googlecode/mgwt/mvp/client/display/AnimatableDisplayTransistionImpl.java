@@ -145,6 +145,8 @@ public class AnimatableDisplayTransistionImpl extends AnimatableDisplayCommonImp
 
 	private boolean animationRunning;
 
+	private Timer onTransitionEndTimer;
+
 	/**
 	 * <p>
 	 * blurBeforeAnimation
@@ -226,6 +228,19 @@ public class AnimatableDisplayTransistionImpl extends AnimatableDisplayCommonImp
 
 			}
 		}.schedule(10);
+		/**
+		 * This done due to a bug on Android sometimes does not fire transictionEnd event
+		 * 
+		 */
+		this.onTransitionEndTimer = new Timer() {
+
+			@Override
+			public void run() {
+				onAnimationEnd();
+
+			}
+		};
+		this.onTransitionEndTimer.schedule(400);
 
 	}
 
@@ -236,6 +251,10 @@ public class AnimatableDisplayTransistionImpl extends AnimatableDisplayCommonImp
 	 */
 	protected void onAnimationEnd() {
 		animationRunning = false;
+		if ( this.onTransitionEndTimer!= null){
+			this.onTransitionEndTimer.cancel();
+			this.onTransitionEndTimer = null;
+		}
 		if (showFirst) {
 
 			second.getElement().getStyle().setDisplay(Display.NONE);
