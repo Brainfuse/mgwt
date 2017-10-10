@@ -170,16 +170,19 @@ public class MGWTPlaceHistoryHandler {
 	protected void pushToken(String token) {
 		historian.pushState(token, Window.getTitle(), "#" + token);
 	}
-
-	public void handleCurrentHistory() {
-		Place place = getPlaceForToken(GWT_historian.getToken());
-
+	
+	public void handleCurrentHistory(Place place){
 		historyObserver.onAppStarted(place, defaultHistoryHandler);
 		if (defaultPlace.equals(place)) {
 			ignore = true;
 		}
 
 		placeController.goTo(place);
+	}
+
+	public void handleCurrentHistory() {
+		Place place = getPlaceForToken(GWT_historian.getToken());
+		handleCurrentHistory(place);
 	}
 
 	private Place defaultPlace = Place.NOWHERE;
