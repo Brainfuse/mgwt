@@ -66,8 +66,11 @@
 .mgwt-Scrollbar {
 	position: absolute;
 	z-index: 100;
-	pointer-events: none;
 	overflow: hidden;
+}
+
+.mgwt-Scrollbar:hover {
+	cursor: pointer;
 }
 
 @if user.agent safari {

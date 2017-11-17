@@ -109,4 +109,9 @@ public class MGWTUtil {
 		return $wnd.PointerEvent || $wnd.MSPointerEvent;
 	}-*/;
 	
+	public static native boolean isSafari()/*-{
+		var isSafari = /^((?!chrome|android).)*safari/i.test($wnd.navigator.userAgent);
+		return isSafari;
+	}-*/;
+	
 }
