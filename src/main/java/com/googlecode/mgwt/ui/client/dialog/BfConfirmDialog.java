@@ -30,6 +30,11 @@ public class BfConfirmDialog extends Widget{
 		dialog = new ConfirmDialog(css, title, message, createCallback(callBack));
 	}
 	
+	public BfConfirmDialog(String title, String text, ConfirmCallback callback, String okButtonText,
+			String cancelButtonText) {
+		dialog = new ConfirmDialog(css, title, text, callback, okButtonText, cancelButtonText);
+	}
+	
 	/**
 	 * using this constructor, the dialog will ONLY show the OK button
 	 * and this will hide the dialog once it is timeout.
