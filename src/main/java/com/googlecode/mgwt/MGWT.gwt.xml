@@ -37,6 +37,7 @@
     <set-property name="mobile.user.agent" value="not_mobile" >
       <none>
         <when-property-is name="user.agent" value="safari" />
+        <when-property-is name="user.agent" value="gecko1_8" />
       </none>
     </set-property>
     <set-property name="mobile.user.agent" value="mobilesafari">
