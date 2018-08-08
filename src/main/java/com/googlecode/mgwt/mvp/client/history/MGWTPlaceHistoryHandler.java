@@ -145,8 +145,10 @@ public class MGWTPlaceHistoryHandler {
 		Place newPlace = event.getNewPlace();
 
 		historyObserver.onPlaceChange(newPlace, defaultHistoryHandler);
-
-		pushToken(tokenForPlace(newPlace));
+		if(event instanceof PlaceReplaceEvent)
+			replaceToken(tokenForPlace(newPlace));
+		else
+			pushToken(tokenForPlace(newPlace));
 	}
 
 	protected void onPopStateEventOccured(String token) {
