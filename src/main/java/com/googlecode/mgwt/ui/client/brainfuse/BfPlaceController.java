@@ -1,4 +1,5 @@
-package com.brainfuse.graphics.client;
+package com.googlecode.mgwt.ui.client.brainfuse;
+
 
 import java.util.logging.Logger;
 

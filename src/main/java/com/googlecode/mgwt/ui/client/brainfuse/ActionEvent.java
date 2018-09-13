@@ -1,4 +1,5 @@
-package com.brainfuse.graphics.client;
+package com.googlecode.mgwt.ui.client.brainfuse;
+
 
 import com.google.web.bindery.event.shared.Event;
 import com.google.web.bindery.event.shared.EventBus;

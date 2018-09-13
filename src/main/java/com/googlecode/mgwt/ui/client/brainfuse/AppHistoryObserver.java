@@ -1,4 +1,4 @@
-package com.brainfuse.graphics.client;
+package com.googlecode.mgwt.ui.client.brainfuse;
 
 
 import com.google.gwt.place.shared.Place;
