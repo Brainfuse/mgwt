@@ -1,0 +1,32 @@
+@defmixin displayFlex() {
+	display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+@defmixin flex(VALUE) {
+	-webkit-box-flex: VALUE;
+	-moz-box-flex: VALUE;
+	-webkit-flex: VALUE;
+	-ms-flex: VALUE;
+	flex: VALUE;
+}
+
+@defmixin flexDirectionColumn(){
+	flex-direction: column;
+	-webkit-flex-direction: column;
+	/*
+		for android 4.3 and below
+	*/
+	-webkit-box-orient: vertical;
+}
+
+@defmixin flexDirectionRow(){
+	flex-direction: row;
+	-webkit-flex-direction: row;
+	/*
+		for android 4.3 and below
+	*/
+	-webkit-box-orient: horizontal;
+}
