@@ -6,6 +6,9 @@ import com.googlecode.mgwt.ui.client.MGWT;
 import com.googlecode.mgwt.ui.client.OsDetection;
 
 public class MGWTUtil {
+	
+	private static Boolean isAndroidLegacyWebview;
+	
 	public static void forceFullRepaint(){
 		OsDetection d = MGWT.getOsDetection();
 		if(d.isAndroid()){
@@ -112,6 +115,24 @@ public class MGWTUtil {
 	public static native boolean isSafari()/*-{
 		var isSafari = /^((?!chrome|android).)*safari/i.test($wnd.navigator.userAgent);
 		return isSafari;
+	}-*/;
+	
+	public static boolean isAndroidWithLegacyWebview() {
+		if(isAndroidLegacyWebview == null) {
+			isAndroidLegacyWebview = _isAndroidWithLegacyWebview();
+		}
+		return isAndroidLegacyWebview;
+	}
+	
+	private static native boolean _isAndroidWithLegacyWebview()/*-{
+	  var ua = $wnd.navigator.userAgent.toLowerCase();
+	    if(ua.indexOf('android') != -1) {
+	    	var androidVersion = parseFloat(ua.match(/android\s+([\d\.]+)/)[1]);
+	  		if(androidVersion < 4.4) {
+	  			return true;
+	  		}
+	  	}
+	  	return false;
 	}-*/;
 	
 }
