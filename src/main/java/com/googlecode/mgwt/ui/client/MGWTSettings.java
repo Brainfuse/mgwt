@@ -72,17 +72,34 @@ public class MGWTSettings {
         return value;
       }
     };
+    
+    public enum FIT {
+    	AUTO("auto"), CONTAIN("contain"), COVER("cover");
+    	private String value;
+    	private FIT(String value) {
+    		this.value = value;
+    	}
+    	public String getValue() {
+			return value;
+		}
+    }
 
     private String width;
     private String height;
-
+    private String fit;
+    
     private double initialScale = 1;
     private double minimumScale = 1;
     private double maximumScale = 1;
     private boolean userScaleAble = false;
+   
 
     private String targetDensity;
 
+    public void setFit(FIT fit) {
+		this.fit = fit.getValue();
+	}
+    
     /**
      * Set the width of the viewport
      * 
@@ -225,6 +242,10 @@ public class MGWTSettings {
       // height
       if (height != null) {
         buffer.append(",height=" + height);
+      }
+      
+      if(fit != null) {
+    	  buffer.append(",viewport-fit="+fit);
       }
 
       // user scaleable
