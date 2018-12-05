@@ -83,6 +83,6 @@
 	border-top-right-radius: 16px 16px;
 }
 
-.mgwt-Button-disabled {   
-   color: #808080;   
+.mgwt-Button-disabled {
+	opacity: 0.5;
 }

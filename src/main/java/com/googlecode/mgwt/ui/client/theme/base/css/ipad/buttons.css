@@ -140,5 +140,5 @@
 }
 
 .mgwt-Button-disabled {   
-   color: #808080;   
+   opacity: 0.5;   
 }
