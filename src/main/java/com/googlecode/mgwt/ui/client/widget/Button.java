@@ -16,6 +16,7 @@
 package com.googlecode.mgwt.ui.client.widget;
 
 import com.google.gwt.event.shared.GwtEvent;
+import com.googlecode.mgwt.dom.client.event.tap.TapEvent;
 import com.googlecode.mgwt.ui.client.MGWTStyle;
 import com.googlecode.mgwt.ui.client.theme.base.ButtonCss;
 import com.googlecode.mgwt.ui.client.widget.base.ButtonBase;
@@ -216,9 +217,10 @@ public class Button extends ButtonBase {
 	 */
 	@Override
 	public void fireEvent(GwtEvent<?> event) {
-	   if(!disabled) {
-	      // only fire events if the button is currently enabled
-	      super.fireEvent(event);
-	   }
+		// only fire events if the button is currently enabled
+		if(disabled && event instanceof TapEvent)
+			return;
+	    super.fireEvent(event);
+		
 	}
 }
