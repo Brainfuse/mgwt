@@ -30,3 +30,24 @@
 	*/
 	-webkit-box-orient: horizontal;
 }
+
+@defmixin translate(X, Y){
+	-webkit-transform: translate(X,Y);
+	-moz-transform: translate(X,Y);
+	-ms-transform:  translate(X,Y);
+	transform: translate(X,Y);
+}
+
+@defmixin translateY(Y){
+	-webkit-transform: translateY(Y);
+	-moz-transform: translateY(Y);
+	-ms-transform:  translateY(Y);
+	transform: translateY(Y);
+}
+
+@defmixin animation(NAME,DURATION,ITERATION){
+	-webkit-animation: NAME DURATION ITERATION;
+	-moz-animation: NAME DURATION ITERATION;
+	-ms-animation:  NAME DURATION ITERATION;
+	animation: NAME DURATION ITERATION;
+}
