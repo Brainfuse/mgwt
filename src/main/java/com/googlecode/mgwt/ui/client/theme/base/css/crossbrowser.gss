@@ -14,21 +14,21 @@
 }
 
 @defmixin flexDirectionColumn(){
-	flex-direction: column;
 	-webkit-flex-direction: column;
 	/*
 		for android 4.3 and below
 	*/
 	-webkit-box-orient: vertical;
+	flex-direction: column;
 }
 
 @defmixin flexDirectionRow(){
-	flex-direction: row;
 	-webkit-flex-direction: row;
 	/*
 		for android 4.3 and below
 	*/
 	-webkit-box-orient: horizontal;
+	flex-direction: row;
 }
 
 @defmixin translate(X, Y){
