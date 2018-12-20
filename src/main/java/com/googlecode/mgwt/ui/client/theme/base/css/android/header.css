@@ -78,3 +78,8 @@
 		background: literal('linear-gradient(to top, rgb(42, 123, 156), rgb(32, 113, 146))');
 	}
 }
+
+
+.mgwt-DropDownMenu {
+	background-color: #000;
+}
