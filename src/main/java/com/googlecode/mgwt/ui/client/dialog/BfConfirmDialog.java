@@ -46,7 +46,7 @@ public class BfConfirmDialog extends Widget{
 	public BfConfirmDialog(String title,String message,int timeout, ConfirmCallback callBack){
 		setTimeoutInSeconds(timeout);
 		dialog = new ConfirmDialog(css, title, message, createCallback(callBack));
-		dialog.getDialogPanel().showCancelButton(false);
+		dialog.showCancelButton(false);
 	}
 	
 	private ConfirmCallback createCallback(final ConfirmCallback callBack){

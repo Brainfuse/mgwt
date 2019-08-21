@@ -186,10 +186,11 @@
 	}
 	
 	.mgwt-DialogPanel .footer div {
-		border-right: 1px solid #dcdcdc;
+		border-left: 1px solid #dcdcdc;
 	}
-	.mgwt-DialogPanel .footer div:last-child {
-		border-right: none;
+	 
+	.mgwt-DialogPanel .footer div:first-child {
+		border-left: none;
 	}
 	.mgwt-DialogPanel .okbutton, .mgwt-DialogPanel .cancelbutton {
 		display: block;

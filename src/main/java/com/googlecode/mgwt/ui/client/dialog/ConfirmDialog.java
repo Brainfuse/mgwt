@@ -15,11 +15,9 @@ package com.googlecode.mgwt.ui.client.dialog;
 
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.HasText;
-import com.google.gwt.user.client.ui.Label;
-import com.googlecode.mgwt.dom.client.event.tap.TapEvent;
-import com.googlecode.mgwt.dom.client.event.tap.TapHandler;
 import com.googlecode.mgwt.mvp.client.MGWTAnimationEndHandler;
 import com.googlecode.mgwt.ui.client.MGWTStyle;
+import com.googlecode.mgwt.ui.client.dialog.ConfirmDialogBase.ConfirmDialogCallback;
 import com.googlecode.mgwt.ui.client.theme.base.DialogCss;
 
 /**
@@ -46,11 +44,8 @@ public class ConfirmDialog implements HasText, HasTitleText, Dialog {
     public void onCancel();
   }
 
-  private PopinDialog popinDialog;
-  private DialogPanel dialogPanel1;
-  private Label textLabel;
-  private ConfirmCallback callback;
-
+  private ConfirmDialogBase dialog;
+  
   /**
    * Construct a Confirmdialg
    * 
@@ -82,43 +77,23 @@ public class ConfirmDialog implements HasText, HasTitleText, Dialog {
    * @param text - the text of the dialog
    * @param callback - the callback used when a button of the dialog is taped
    */
-  public ConfirmDialog(DialogCss css, String title, String text, ConfirmCallback callback, String okButtonText, String cancelButtonText) {
-    this.callback = callback;
-    popinDialog = new PopinDialog(css);
-    dialogPanel1 = new DialogPanel(css);
-//    dialogPanel1 = new DialogPanel();
-    dialogPanel1.showCancelButton(true);
-    dialogPanel1.showOkButton(true);
+  public ConfirmDialog(DialogCss css, String title, String text, final ConfirmCallback callback, String okButtonText, String cancelButtonText) {
+		String[] buttons = new String[] { okButtonText, cancelButtonText };
+		this.dialog = new ConfirmDialogBase(css, title, text,
+				new ConfirmDialogCallback() {
 
-    textLabel = new Label();
-    dialogPanel1.getContent().add(textLabel);
-    popinDialog.add(dialogPanel1);
-
-    dialogPanel1.getOkButton().addTapHandler(new TapHandler() {
-
-      @Override
-      public void onTap(TapEvent event) {
-        popinDialog.hide();
-        if (ConfirmDialog.this.callback != null)
-          ConfirmDialog.this.callback.onOk();
-      }
-    });
-
-    dialogPanel1.getCancelButton().addTapHandler(new TapHandler() {
-
-      @Override
-      public void onTap(TapEvent event) {
-        popinDialog.hide();
-        if (ConfirmDialog.this.callback != null)
-          ConfirmDialog.this.callback.onCancel();
-      }
-    });
-
-    setText(text);
-    setTitleText(title);
-    dialogPanel1.setCancelButtonText(cancelButtonText);
-    dialogPanel1.setOkButtonText(okButtonText);
-
+					@Override
+					public void onConfirm(int button) {
+						switch(button) {
+						case 0:
+							callback.onOk();
+							break;
+						case 1:
+							callback.onCancel();
+							break;
+						}
+					}
+				}, buttons);
   }
 
   /*
@@ -129,7 +104,7 @@ public class ConfirmDialog implements HasText, HasTitleText, Dialog {
   /** {@inheritDoc} */
   @Override
   public void setTitleText(String title) {
-    dialogPanel1.getDialogTitle().setHTML(title);
+    dialog.setTitleText(title);
 
   }
 
@@ -141,8 +116,7 @@ public class ConfirmDialog implements HasText, HasTitleText, Dialog {
   /** {@inheritDoc} */
   @Override
   public void setText(String text) {
-    textLabel.setText(text);
-
+    dialog.setText(text);
   }
 
   /*
@@ -153,7 +127,7 @@ public class ConfirmDialog implements HasText, HasTitleText, Dialog {
   /** {@inheritDoc} */
   @Override
   public String getTitleText() {
-    return dialogPanel1.getDialogTitle().getHTML();
+	  return dialog.getDialogTitle().getHTML();
   }
 
   /*
@@ -164,7 +138,7 @@ public class ConfirmDialog implements HasText, HasTitleText, Dialog {
   /** {@inheritDoc} */
   @Override
   public String getText() {
-    return textLabel.getText();
+	  return dialog.getText();
   }
 
   /*
@@ -178,21 +152,20 @@ public class ConfirmDialog implements HasText, HasTitleText, Dialog {
    * </p>
    */
   public void show() {
-    popinDialog.center();
+    dialog.show();
   }
 
   @Override
   public void hide() {
-    popinDialog.hide();
-
+    dialog.hide();
   }
   
-  public DialogPanel getDialogPanel(){
-	  return this.dialogPanel1;
+  public void showCancelButton(boolean show) {
+	dialog.getButtons().get(1).setVisible(show);
   }
   
   public HandlerRegistration addAnimationEndHandler(MGWTAnimationEndHandler handler){
-	  return popinDialog.addAnimationEndHandler(handler);
+	  return dialog.addAnimationEndHandler(handler);
   }
   
 
