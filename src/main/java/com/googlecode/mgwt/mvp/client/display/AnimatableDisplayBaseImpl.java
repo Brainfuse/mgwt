@@ -41,6 +41,8 @@ public abstract class AnimatableDisplayBaseImpl extends AnimatableDisplayCommonI
   public AnimatableDisplayBaseImpl() {
     this(AnimationSelector.getBundle().animationCss());
   }
+  
+//  private static int index= 0;
 
   /**
    * <p>
@@ -55,22 +57,25 @@ public abstract class AnimatableDisplayBaseImpl extends AnimatableDisplayCommonI
     css.ensureInjected();
 
     main = new FlowPanel() {
-      protected void onDetach() {
-    	  if(super.isAttached())
-    		  super.onDetach();
-        
-    	  if(isAttached())
-    		  onDeattach();
+			protected void onDetach() {
+				if (!super.isAttached())
+					return;
 
-      };
-    };
+				super.onDetach();
+				onDeattach();
+			};
+		};
 
     main.setStylePrimaryName(this.css.display());
+//    index++;
+//	main.getElement().setId("main-" + index);
 
     first = new SimplePanel();
     first.addStyleName(this.css.displayContainer());
+//    first.getElement().setId("first-" + index);
 
     second = new SimplePanel();
+//    second.getElement().setId("second-" + index);
     second.addStyleName(this.css.displayContainer());
 
     listener = new AnimationEndListener();
