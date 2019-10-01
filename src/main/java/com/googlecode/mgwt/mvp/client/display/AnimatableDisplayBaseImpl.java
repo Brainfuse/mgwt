@@ -56,8 +56,11 @@ public abstract class AnimatableDisplayBaseImpl extends AnimatableDisplayCommonI
 
     main = new FlowPanel() {
       protected void onDetach() {
-        super.onDetach();
-        onDeattach();
+    	  if(super.isAttached())
+    		  super.onDetach();
+        
+    	  if(isAttached())
+    		  onDeattach();
 
       };
     };
