@@ -66,34 +66,6 @@ public class MGWTUtil {
 	    return feature; 
 	}-*/;
 	
-	public static native boolean isIEEdge()/*-{
-		var ua = $wnd.navigator.userAgent.toLowerCase();
-		if (ua.indexOf('edge') != -1) {
-			return true;
-		} else {
-			return false;
-		}
-	}-*/;
-	
-	public static native int getIEVersion()/*-{
-		var ua = $wnd.navigator.userAgent;
-	    var ieold = (/MSIE (\d+\.\d+);/.test(ua));
-	    if(ieold){
-	    	return new Number(RegExp.$1);
-	    }
-	    if ($wnd.navigator.appVersion.indexOf("MSIE 10") != -1){
-	     	return 10;
-	    }
-	    
-	    var trident = !!ua.match(/Trident\/7.0/);
-	    var rv=ua.indexOf("rv:11.0");
-	    if (trident&&rv!=-1){
-	    	return 11;
-	    }
-	
-	    return -1;  
-	}-*/;
-	
 	public static native boolean is_win_touch_device()/*-{
 		 return (($wnd.navigator.maxTouchPoints > 0)||($wnd.navigator.msMaxTouchPoints > 0));
 	}-*/;
@@ -112,6 +84,9 @@ public class MGWTUtil {
 		return $wnd.PointerEvent || $wnd.MSPointerEvent;
 	}-*/;
 	
+	/**
+	 * this is targeting all webkit browsers
+	 */
 	public static native boolean isSafari()/*-{
 		var isSafari = /^((?!chrome|android).)*safari/i.test($wnd.navigator.userAgent);
 		return isSafari;

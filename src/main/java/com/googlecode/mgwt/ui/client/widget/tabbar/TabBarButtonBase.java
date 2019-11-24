@@ -21,7 +21,7 @@ import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Element;
 import com.googlecode.mgwt.ui.client.theme.base.TabBarCss;
-import com.googlecode.mgwt.ui.client.util.MGWTUtil;
+import com.googlecode.mgwt.ui.client.util.Browser;
 import com.googlecode.mgwt.ui.client.widget.base.ButtonBase;
 
 /**
@@ -58,7 +58,7 @@ public class TabBarButtonBase extends ButtonBase {
 			if (imageResource == null)
 				return;
 			
-			if(MGWTUtil.isIEEdge()){
+			if(Browser.isEdge()){
 				element.getStyle().setBackgroundImage("url(" + imageResource.getSafeUri().asString() + ")");
 			}else {
 				element.getStyle().setProperty("WebkitMaskBoxImage", "url(" + imageResource.getSafeUri().asString() + ")");
