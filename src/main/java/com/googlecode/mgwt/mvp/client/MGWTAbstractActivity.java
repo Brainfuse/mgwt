@@ -38,9 +38,15 @@ public abstract class MGWTAbstractActivity extends AbstractActivity {
    * </p>
    */
   public MGWTAbstractActivity() {
-    oldHandlers = new LinkedList<HandlerRegistration>();
-    handlers = new LinkedList<com.google.web.bindery.event.shared.HandlerRegistration>();
+    initAbstractActivityHandlers();
   }
+
+protected void initAbstractActivityHandlers() {
+	if(handlers != null)
+		return;
+	oldHandlers = new LinkedList<HandlerRegistration>();
+    handlers = new LinkedList<com.google.web.bindery.event.shared.HandlerRegistration>();
+}
 
   /**
    * add a {@link HandlerRegistration} to the handler collection
@@ -48,6 +54,10 @@ public abstract class MGWTAbstractActivity extends AbstractActivity {
    * @param handlerRegistration a {@link com.google.gwt.event.shared.HandlerRegistration} object.
    */
   protected void addHandlerRegistration(com.google.web.bindery.event.shared.HandlerRegistration handlerRegistration) {
+	  if(handlers == null) {
+		  handlerRegistration.removeHandler();
+		  throw new IllegalStateException("Activity already stopped");
+	  }
     handlers.add(handlerRegistration);
   }
 
@@ -57,6 +67,10 @@ public abstract class MGWTAbstractActivity extends AbstractActivity {
    * @param handlerRegistration a {@link com.google.gwt.event.shared.HandlerRegistration} object.
    */
   protected void addHandlerRegistration(HandlerRegistration handlerRegistration) {
+	  if(oldHandlers == null) {
+		  handlerRegistration.removeHandler();
+		  throw new IllegalStateException("Activity already stopped");
+	  }
     oldHandlers.add(handlerRegistration);
   }
 
@@ -68,8 +82,11 @@ public abstract class MGWTAbstractActivity extends AbstractActivity {
   @Override
   public void onStop() {
     super.onStop();
+    
 
     cancelAllHandlerRegistrations();
+    this.handlers = null;
+    this.oldHandlers = null;
   }
 
   /**
@@ -89,6 +106,11 @@ public abstract class MGWTAbstractActivity extends AbstractActivity {
 
   @Override
   public void start(AcceptsOneWidget panel, EventBus eventBus) {
+	  /**
+	   * For single instance activities let's reinitialize the handers 
+	   * here.
+	   */
+	initAbstractActivityHandlers();
     start(panel, (com.google.web.bindery.event.shared.EventBus) eventBus);
   }
 
