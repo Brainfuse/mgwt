@@ -56,3 +56,15 @@
 	-ms-animation:  NAME DURATION ITERATION;
 	animation: NAME DURATION ITERATION;
 }
+
+@defmixin transition(PROPERTY,DURATION) {
+	-webkit-transition: PROPERTY DURATION;
+	-moz-transition: PROPERTY DURATION;
+	-o-transition: PROPERTY DURATION;
+	transition: PROPERTY DURATION;
+}
+
+@defmixin flexWrap(){
+	-ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
