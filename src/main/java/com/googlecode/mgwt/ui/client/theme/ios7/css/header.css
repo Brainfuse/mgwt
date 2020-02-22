@@ -1,3 +1,5 @@
+@external electron;
+
 .mgwt-HeaderPanel {
 	position:relative;
 	height: 40px;
@@ -92,11 +94,11 @@
 
 @if user.agent safari {
 	.mgwt-HeaderPanel-left {
-		\-webkit-animation: text_fade 2s;
+		\-webkit-animation: text_fade 1s;
 	}
 	
 	.mgwt-HeaderPanel-right {
-		\-webkit-animation: text_fade 2s;
+		\-webkit-animation: text_fade 1s;
 	}
 	
 	@-webkit-keyframes text_fade {
@@ -113,12 +115,12 @@
 	
 	.mgwt-HeaderPanel-left {
 		animation: text_fade 2s;
-		\-moz-animation: text_fade 2s;
+		\-moz-animation: text_fade 1s;
 	}
 	
 	.mgwt-HeaderPanel-right {
 		animation: text_fade 2s;
-		\-moz-animation: text_fade 2s;
+		\-moz-animation: text_fade 1s;
 	}
 	
 	@-moz-keyframes text_fade{
@@ -294,4 +296,9 @@
 	}
 	.mgwt-HeaderButton-text {
 	}
+}
+
+.electron .mgwt-HeaderPanel-left,
+.electron .mgwt-HeaderPanel-right {
+	animation: unset;
 }
