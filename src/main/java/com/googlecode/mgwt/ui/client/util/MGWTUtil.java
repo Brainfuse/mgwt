@@ -92,6 +92,10 @@ public class MGWTUtil {
 		return isSafari;
 	}-*/;
 	
+	public static native boolean isFirefox()/*-{
+		return $wnd.navigator.userAgent.toLowerCase().indexOf('firefox') > -1
+	}-*/;
+	
 	public static boolean isAndroidWithLegacyWebview() {
 		if(isAndroidLegacyWebview == null) {
 			isAndroidLegacyWebview = _isAndroidWithLegacyWebview();
