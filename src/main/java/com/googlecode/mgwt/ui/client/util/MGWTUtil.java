@@ -85,11 +85,17 @@ public class MGWTUtil {
 	}-*/;
 	
 	/**
-	 * this is targeting all webkit browsers
+	 * check if is safari browser
 	 */
 	public static native boolean isSafari()/*-{
 		var isSafari = /^((?!chrome|android).)*safari/i.test($wnd.navigator.userAgent);
 		return isSafari;
+	}-*/;
+	
+	public static native boolean isWebkitBrowser() /*-{
+		var UA= $wnd.navigator.userAgent;
+		var isWebkit=/\b(iPad|iPhone|iPod)\b/.test(UA) || /WebKit/.test(UA);
+        return isWebkit;
 	}-*/;
 	
 	public static native boolean isFirefox()/*-{
