@@ -42,6 +42,7 @@
 @if user.agent gecko1_8 {
 	.mgwt-Carousel-Scroller {
 		\-moz-box-flex: 1;
+		flex: 1;
 	}
 }
 
@@ -137,6 +138,7 @@
 @if user.agent gecko1_8 {
 	.mgwt-Carousel-Holder {
 		display: \-moz-box;
+		display: flex;
 	}
 }
 

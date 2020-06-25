@@ -23,6 +23,8 @@
 @if user.agent gecko1_8 {
 	.mgwt-ScrollPanel {
 		display: block;
+		display: \-moz-box;
+		display: flex;
 		\-moz-box-orient: vertical;
 		flex-direction: column;
 	}
