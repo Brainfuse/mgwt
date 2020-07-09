@@ -61,6 +61,7 @@
 	-webkit-transition: PROPERTY DURATION;
 	-moz-transition: PROPERTY DURATION;
 	-o-transition: PROPERTY DURATION;
+	-ms-transition: PROPERTY DURATION;
 	transition: PROPERTY DURATION;
 }
 
