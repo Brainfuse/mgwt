@@ -54,7 +54,7 @@
     <property-provider name="mobile.user.agent"><![CDATA[
       {
 	        var user_agent = window.navigator.userAgent;
-	        var include = /\b(android|iphone|ipod|ipad)\b/i.test(user_agent);
+	        var include = /\b(android|iphone|ipod|ipad|brainfuseapp)\b/i.test(user_agent);
 	        var exclude = /\b(Edge|Trident)\b/i.test(user_agent);
 	          
 	        if(include && !exclude){

@@ -37,6 +37,10 @@
             return "ipad_retina";
         }
         
+        if(ua.indexOf('macintosh') != -1 && ua.indexOf('brainfuseapp') != -1){
+        	return "ipad_retina";
+        }
+        
         if(ua.indexOf('iphone') != -1 || ua.indexOf('ipod') != -1) {
             return "retina";
         }

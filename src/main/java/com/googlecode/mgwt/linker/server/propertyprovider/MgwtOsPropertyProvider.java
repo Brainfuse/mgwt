@@ -53,6 +53,11 @@ public class MgwtOsPropertyProvider extends PropertyProviderBaseImpl {
 			}
 
 		}
+		
+		if (userAgent.contains("brainfuseapp")
+				&& userAgent.contains("macintosh")) {
+			return "ipad_retina";
+		}
 
 		if (userAgent.contains("iphone")) {
 			String value = getRetinaCookieValue(req);
