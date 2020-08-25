@@ -52,7 +52,7 @@
 					<uniqueVersion>false</uniqueVersion>
 					<id>dev-maven</id>
 					<name>Dev Machine Repository</name>
-					<url>ftp://dev3.trustforte.com/maven</url>
+					<url>ftp://dev.brainfuse.com/maven</url>
 					<layout>default</layout>
 				</repository>
 				<snapshotRepository>
