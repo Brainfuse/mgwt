@@ -65,7 +65,24 @@
 	transition: PROPERTY DURATION;
 }
 
+@defmixin transitionWithFunc(PROPERTY,DURATION,TIMING_FUNC){
+	-webkit-transition: PROPERTY DURATION TIMING_FUNC;
+	-moz-transition: PROPERTY DURATION TIMING_FUNC;
+	-o-transition: PROPERTY DURATION TIMING_FUNC;
+	-ms-transition: PROPERTY DURATION TIMING_FUNC;
+	transition: PROPERTY DURATION TIMING_FUNC;
+}
+
 @defmixin flexWrap(){
 	-ms-flex-wrap: wrap;
     flex-wrap: wrap;
+}
+
+@defmixin flipHorizontal(){
+	-moz-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+    filter: FlipH;
+    -ms-filter: "FlipH";
 }
