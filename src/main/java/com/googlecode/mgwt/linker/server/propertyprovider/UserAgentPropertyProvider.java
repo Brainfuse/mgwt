@@ -18,7 +18,7 @@ public class UserAgentPropertyProvider extends PropertyProviderBaseImpl {
       return "opera";
     }
 
-    if (userAgent.contains("safari") || userAgent.contains("iphone") || userAgent.contains("ipad")) {
+    if (userAgent.contains("safari") || userAgent.contains("iphone") || userAgent.contains("ipad") || userAgent.contains("brainfuseapp")) {
       return "safari";
     }
 
@@ -34,5 +34,6 @@ public class UserAgentPropertyProvider extends PropertyProviderBaseImpl {
   public String getPropertyName() {
     return "user.agent";
   }
+  
 
 }
