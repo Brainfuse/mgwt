@@ -13,6 +13,14 @@
 	flex: VALUE;
 }
 
+@defmixin flexProp(GROW,SHRINK,BASIS){
+	-webkit-box-flex: GROW SHRINK BASIS;
+	-moz-box-flex: GROW SHRINK BASIS;
+	-webkit-flex: GROW SHRINK BASIS;
+	-ms-flex: GROW SHRINK BASIS;
+	flex: GROW SHRINK BASIS;
+}
+
 @defmixin flexVerticalCenter() {
 	align-items: center;
     justify-content: center;
