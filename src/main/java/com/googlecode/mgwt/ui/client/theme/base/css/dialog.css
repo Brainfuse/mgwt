@@ -11,6 +11,11 @@
 	z-index: 100;
 }
 
+.iosSafeArea {
+	bottom: constant(safe-area-inset-bottom); /* iOS 11.0 */
+	bottom: env(safe-area-inset-bottom); /* iOS 11.2 */	
+}
+
 .mgwt-DialogAnimationContainer-Shadow {
 	z-index: 100;
 	background-color: rgba(0, 0, 0, 0.4);

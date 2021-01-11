@@ -370,6 +370,15 @@ public abstract class AnimatableDialogBase implements HasWidgets, HasTouchHandle
 
 		// add overlay to DOM
 		HasWidgets panel = getPanelToOverlay();
+		
+		/**
+		 * if added to the rootPanel then we need to add the proper css to
+		 * handle ios safe area
+		 */
+		if(panel == RootPanel.get()) {
+			display.asWidget().addStyleName(css.iosSafeArea());
+		}
+		
 		panel.add(display.asWidget());
 
 		if (centerContent) {

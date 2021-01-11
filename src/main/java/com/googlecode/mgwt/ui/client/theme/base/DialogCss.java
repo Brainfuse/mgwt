@@ -119,4 +119,7 @@ public interface DialogCss extends ButtonBaseCss {
 	@ClassName("mgwt-DialogAnimationContainer-center")
 	String animationContainerCenter();
 
+	
+	String iosSafeArea();
+	
 }

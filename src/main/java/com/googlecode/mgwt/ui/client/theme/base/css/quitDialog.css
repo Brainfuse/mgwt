@@ -274,6 +274,9 @@
 	}
 }
 
-
+.iosSafeArea {
+	bottom: constant(safe-area-inset-bottom); /* iOS 11.0 */
+	bottom: env(safe-area-inset-bottom); /* iOS 11.2 */	
+}
 	
 	
