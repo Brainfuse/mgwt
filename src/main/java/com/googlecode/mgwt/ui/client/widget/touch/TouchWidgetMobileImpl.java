@@ -26,6 +26,7 @@ import com.googlecode.mgwt.dom.client.event.touch.TouchMoveEvent;
 import com.googlecode.mgwt.dom.client.event.touch.TouchMoveHandler;
 import com.googlecode.mgwt.dom.client.event.touch.TouchStartEvent;
 import com.googlecode.mgwt.dom.client.event.touch.TouchStartHandler;
+import com.googlecode.mgwt.ui.client.MGWT;
 import com.googlecode.mgwt.ui.client.util.MGWTUtil;
 
 /**
@@ -40,10 +41,11 @@ public class TouchWidgetMobileImpl implements TouchWidgetImpl {
 	private boolean mouseEnabled = false;
 	
 	public TouchWidgetMobileImpl() {
-		mouseEnabled = MGWTUtil.isChromeOnWindowTouchDevice();
+		mouseEnabled = MGWT.getOsDetection().isDesktop()
+				&& MGWTUtil.isChromeOnWindowTouchDevice();
 	} 
 	
-	
+		
 	private TouchWidgetDesktopImpl getMouseImpl(){
 		if(mouseImpl == null){
 			mouseImpl = new TouchWidgetDesktopImpl();
