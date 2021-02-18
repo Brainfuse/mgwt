@@ -37,34 +37,26 @@ import com.googlecode.mgwt.ui.client.util.MGWTUtil;
  */
 public class TouchWidgetMobileImpl implements TouchWidgetImpl {
 
-	private TouchWidgetDesktopImpl mouseImpl;
-	private boolean mouseEnabled = false;
-	
+	private TouchWidgetImpl impl;
 	public TouchWidgetMobileImpl() {
-		mouseEnabled = MGWT.getOsDetection().isDesktop()
+		boolean desktopTouchDevice = MGWT.getOsDetection().isDesktop()
 				&& MGWTUtil.isChromeOnWindowTouchDevice();
-	} 
-	
 		
-	private TouchWidgetDesktopImpl getMouseImpl(){
-		if(mouseImpl == null){
-			mouseImpl = new TouchWidgetDesktopImpl();
+		if(desktopTouchDevice) {
+			impl = new TouchAndMouseImpl();
+		}else {
+			impl = new TouchOnlyImpl();	
 		}
-		return mouseImpl;
-	}
+	} 
+		
 	/*
 	 * (non-Javadoc)
 	 * @see com.googlecode.mgwt.ui.client.widget.touch.TouchWidgetImpl#addTouchStartHandler(com.google.gwt.user.client.ui.Widget, com.googlecode.mgwt.dom.client.event.touch.TouchStartHandler)
 	 */
 	/** {@inheritDoc} */
 	@Override
-	public HandlerRegistration addTouchStartHandler(Widget w, TouchStartHandler handler) {
-		HandlerRegistrationCollection handlers = new HandlerRegistrationCollection();
-		handlers.addHandlerRegistration(w.addDomHandler(handler, TouchStartEvent.getType()));
-		if(mouseEnabled){
-			handlers.addHandlerRegistration(getMouseImpl().addTouchStartHandler(w, handler));
-		}
-		return handlers;
+	public HandlerRegistration addTouchStartHandler(Widget w, final TouchStartHandler handler) {
+		return impl.addTouchStartHandler(w, handler);
 	}
 
 	/*
@@ -74,12 +66,7 @@ public class TouchWidgetMobileImpl implements TouchWidgetImpl {
 	/** {@inheritDoc} */
 	@Override
 	public HandlerRegistration addTouchMoveHandler(Widget w, TouchMoveHandler handler) {
-		HandlerRegistrationCollection handlers = new HandlerRegistrationCollection();
-		handlers.addHandlerRegistration(w.addDomHandler(handler, TouchMoveEvent.getType()));
-		if(mouseEnabled){
-			handlers.addHandlerRegistration(getMouseImpl().addTouchMoveHandler(w, handler));
-		}
-		return handlers;
+		return impl.addTouchMoveHandler(w, handler);
 	}
 
 	/*
@@ -89,12 +76,7 @@ public class TouchWidgetMobileImpl implements TouchWidgetImpl {
 	/** {@inheritDoc} */
 	@Override
 	public HandlerRegistration addTouchCancelHandler(Widget w, TouchCancelHandler handler) {
-		HandlerRegistrationCollection handlers = new HandlerRegistrationCollection();
-		handlers.addHandlerRegistration(w.addDomHandler(handler, TouchCancelEvent.getType()));
-		if(mouseEnabled){
-			handlers.addHandlerRegistration(getMouseImpl().addTouchCancelHandler(w, handler));
-		}
-		return handlers;
+		return impl.addTouchCancelHandler(w, handler);
 	}
 
 	/*
@@ -104,12 +86,97 @@ public class TouchWidgetMobileImpl implements TouchWidgetImpl {
 	/** {@inheritDoc} */
 	@Override
 	public HandlerRegistration addTouchEndHandler(Widget w, TouchEndHandler handler) {
-		HandlerRegistrationCollection handlers = new HandlerRegistrationCollection();
-		handlers.addHandlerRegistration(w.addDomHandler(handler, TouchEndEvent.getType()));
-		if(mouseEnabled){
-			handlers.addHandlerRegistration(getMouseImpl().addTouchEndHandler(w, handler));
-		}
-		return handlers;
+		return impl.addTouchEndHandler(w, handler);
 	}
+	
+	private class TouchOnlyImpl implements TouchWidgetImpl {
+		@Override
+		public HandlerRegistration addTouchStartHandler(Widget w,
+				TouchStartHandler handler) {
+			return w.addDomHandler(handler, TouchStartEvent.getType());
+		}
+
+		@Override
+		public HandlerRegistration addTouchMoveHandler(Widget w,
+				TouchMoveHandler handler) {
+			return w.addDomHandler(handler, TouchMoveEvent.getType());
+		}
+
+		@Override
+		public HandlerRegistration addTouchCancelHandler(Widget w,
+				TouchCancelHandler handler) {
+			return w.addDomHandler(handler, TouchCancelEvent.getType());
+		}
+
+		@Override
+		public HandlerRegistration addTouchEndHandler(Widget w,
+				TouchEndHandler handler) {
+			return w.addDomHandler(handler, TouchEndEvent.getType());
+		}
+
+	}
+	
+	/**
+	 * for desktop device with both a touch screen and a mouse 
+	 */
+	private class TouchAndMouseImpl implements TouchWidgetImpl {
+
+		private TouchWidgetDesktopImpl mouseImpl;
+		public TouchAndMouseImpl() {
+			mouseImpl = new TouchWidgetDesktopImpl();
+		}
+		
+		@Override
+		public HandlerRegistration addTouchStartHandler(Widget w,
+				final TouchStartHandler handler) {
+			HandlerRegistrationCollection handlers = new HandlerRegistrationCollection();
+			
+			handlers.addHandlerRegistration(w.addDomHandler(new TouchStartHandler() {
+				@Override
+				public void onTouchStart(TouchStartEvent event) {
+					handler.onTouchStart(event);
+					/**
+					 * prevent firing another touch start event from the mouseImpl
+					 */
+					event.stopPropagation();
+					event.preventDefault();
+				}
+			}, TouchStartEvent.getType()));
+			
+			handlers.addHandlerRegistration(mouseImpl.addTouchStartHandler(w, handler));
+			return handlers;
+		}
+
+		@Override
+		public HandlerRegistration addTouchMoveHandler(Widget w,
+				TouchMoveHandler handler) {
+			HandlerRegistrationCollection handlers = new HandlerRegistrationCollection();
+			handlers.addHandlerRegistration(w.addDomHandler(handler, TouchMoveEvent.getType()));
+			handlers.addHandlerRegistration(mouseImpl.addTouchMoveHandler(w, handler));
+			return handlers;
+		}
+
+		@Override
+		public HandlerRegistration addTouchCancelHandler(Widget w,
+				TouchCancelHandler handler) {
+			HandlerRegistrationCollection handlers = new HandlerRegistrationCollection();
+			handlers.addHandlerRegistration(
+					w.addDomHandler(handler, TouchCancelEvent.getType()));
+			handlers.addHandlerRegistration(
+					mouseImpl.addTouchCancelHandler(w, handler));
+			return handlers;
+		}
+
+		@Override
+		public HandlerRegistration addTouchEndHandler(Widget w,
+				TouchEndHandler handler) {
+			HandlerRegistrationCollection handlers = new HandlerRegistrationCollection();
+			handlers.addHandlerRegistration(w.addDomHandler(handler, TouchEndEvent.getType()));
+			handlers.addHandlerRegistration(mouseImpl.addTouchEndHandler(w, handler));
+			return handlers;
+		}
+		
+	}
+	
 
 }
