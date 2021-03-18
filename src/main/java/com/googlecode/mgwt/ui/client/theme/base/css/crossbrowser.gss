@@ -94,3 +94,10 @@
     filter: FlipH;
     -ms-filter: "FlipH";
 }
+
+@defmixin boxShadow(H_OFFSET, V_OFFSET, BLUR, SPREAD, COLOR) {
+	-webkit-box-shadow: H_OFFSET V_OFFSET BLUR SPREAD COLOR;
+	-moz-box-shadow: H_OFFSET V_OFFSET BLUR SPREAD COLOR;
+	-ms-box-shadow: H_OFFSET V_OFFSET BLUR SPREAD COLOR;
+	box-shadow: H_OFFSET V_OFFSET BLUR SPREAD COLOR;
+}
