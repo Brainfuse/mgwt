@@ -63,5 +63,19 @@ public class HandlerRegistrationCollection implements HandlerRegistration, com.g
 		collectedHandlers.clear();
 
 	}
+	
+	public HandlerRegistrationCollection with(HandlerRegistration reg) {
+		this.addHandlerRegistration(reg);
+		return this;
+	}
+	
+	public static HandlerRegistrationCollection of(HandlerRegistration... registration) {
+		
+		HandlerRegistrationCollection col = new HandlerRegistrationCollection();
+		for(HandlerRegistration reg : registration) {
+			col.addHandlerRegistration(reg);
+		}
+		return col;
+	}
 
 }
