@@ -35,6 +35,11 @@
 	flex-direction: column;
 }
 
+@defmixin flexDirectionColumnReverse(){
+	-webkit-flex-direction: column-reverse;
+	flex-direction: column-reverse;
+}
+
 @defmixin flexDirectionRow(){
 	-webkit-flex-direction: row;
 	/*
