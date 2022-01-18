@@ -46,8 +46,3 @@ body {
 		position: absolute;
 	}
 }
-@if mgwt.os desktop {
-	body {
-		background-color: #E0E1E5;
-	}
-}
