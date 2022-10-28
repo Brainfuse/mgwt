@@ -39,5 +39,10 @@ public abstract class PointerEvent<H extends EventHandler>
 		var e = this.@com.google.gwt.event.dom.client.DomEvent::nativeEvent;
 		return e.pointerId;
 	}-*/;
+	
+	public final native String getPointerType() /*-{
+		var e = this.@com.google.gwt.event.dom.client.DomEvent::nativeEvent;
+		return e.pointerType;
+	}-*/;
 
 }
