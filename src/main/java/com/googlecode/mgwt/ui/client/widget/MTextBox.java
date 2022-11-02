@@ -115,5 +115,9 @@ public class MTextBox extends MTextBoxBase {
 	private InputElement getInputElement() {
 		return box.getElement().cast();
 	}
+	
+	public void setInputId(String id) {
+		getInputElement().setId(id);
+	}
 
 }
