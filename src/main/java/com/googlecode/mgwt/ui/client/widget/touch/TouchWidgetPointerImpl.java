@@ -37,6 +37,8 @@ public class TouchWidgetPointerImpl implements TouchWidgetImpl {
 				handler);
 		HandlerRegistrationCollection col = new HandlerRegistrationCollection();
 		col.addHandlerRegistration(w.addDomHandler(touchMoveToPointer,
+				PointerDownEvent.getType()));
+		col.addHandlerRegistration(w.addDomHandler(touchMoveToPointer,
 				PointerMoveEvent.getType()));
 		col.addHandlerRegistration(
 				w.addDomHandler(touchMoveToPointer, PointerUpEvent.getType()));

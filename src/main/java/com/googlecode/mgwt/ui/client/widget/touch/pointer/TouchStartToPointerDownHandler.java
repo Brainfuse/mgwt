@@ -31,22 +31,11 @@ public class TouchStartToPointerDownHandler implements PointerDownHandler{
 	
 	private native void _onPointerDown(NativeEvent event)/*-{
 		event.preventDefault();
-		
 		var self = this;
-		if(self.touchEventTimer){
-			$wnd.clearTimeout(self.touchEventTimer);
-			self.touchEventTimer = null;
-		}else {
-			self.touchEvents = [];
-		}
-		
+		self.touchEvents = [];
 		self.touchEvents.push(event);
-		
-		self.touchEventTimer = $wnd.setTimeout(function(){
-			self.@com.googlecode.mgwt.ui.client.widget.touch.pointer.TouchStartToPointerDownHandler::handleEvent(Lcom/google/gwt/core/client/JsArray;)(self.touchEvents);
-			self.touchEvents = [];
-			self.touchEventTimer = null;
-		},50);
+		self.@com.googlecode.mgwt.ui.client.widget.touch.pointer.TouchStartToPointerDownHandler::handleEvent(Lcom/google/gwt/core/client/JsArray;)(self.touchEvents);
+		self.touchEvents = [];
 		
 	}-*/;
 	

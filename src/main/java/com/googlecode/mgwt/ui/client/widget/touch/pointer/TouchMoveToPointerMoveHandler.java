@@ -32,63 +32,8 @@ public class TouchMoveToPointerMoveHandler implements PointerMoveEvent.PointerMo
 	}
 	
 	private native void _onPointerMove(NativeEvent event)/*-{
-		
 		var self = this;
-		if(!self.touchEvents){
-			self.touchEvents = [];
-		}
-		
-		var pointerId = event.pointerId;
-		var touchEvents = self.touchEvents;
-		if(!touchEvents[pointerId]){
-			touchEvents[pointerId]=[];
-		}
-		
-		touchEvents[pointerId].push(event);
-		
-		self.touchEventTimer = $wnd.setTimeout(fireEvents,10);
-
-		self.fireEvents = function fireEvents(){
-			
-			if(self.touchEvents.length < 1) return;
-			var max = getMaxArraySize();
-			
-			for(var i=0; i<max; i++){
-				var events = [];
-				for(var key in self.touchEvents){
-					var arr = self.touchEvents[key];
-					var event;
-					if(i<arr.length){
-						event = arr[i];
-					}else {
-						event = arr[arr.length-1];
-					}
-					events.push(event);
-				}
-//			log(events);
-			self.@com.googlecode.mgwt.ui.client.widget.touch.pointer.TouchMoveToPointerMoveHandler::handleEvent(Lcom/google/gwt/core/client/JsArray;)(events);
-			}
-			self.touchEvents = [];
-		}
-		
-		function log(events){
-			var log = "";
-			for(var i=0; i<events.length; i++){
-				var event = events[i];
-				log += " id "+event.pointerId +" x "+event.clientX +" y "+event.clientY +", ";
-			}
-			$wnd.console.log("fireEvent size "+events.length+" LOG: "+log);
-		}
-		
-		function getMaxArraySize(){
-			var max = 0;
-			for(var key in self.touchEvents){
-				var arr = self.touchEvents[key];
-				max = Math.max(max,arr.length);
-			}
-			return max;
-		}
-		
+		self.@com.googlecode.mgwt.ui.client.widget.touch.pointer.TouchMoveToPointerMoveHandler::handleEvent(Lcom/google/gwt/core/client/JsArray;)([event]);
 	}-*/;
 	
 	
@@ -111,11 +56,7 @@ public class TouchMoveToPointerMoveHandler implements PointerMoveEvent.PointerMo
 
 	private native void _clear()/*-{
 		var self = this;
-		self.fireEvents();
-		if(self.touchEventTimer != null){
-			$wnd.clearTimeout(self.touchEventTimer);
-			self.touchEventTimer = null;
-		}
+		self.touchEvents = [];
 	}-*/;
 	
 	private class SimulatedTouchMoveEvent extends TouchMoveEvent{
