@@ -26,6 +26,8 @@ public final class ScrollPanelMouseWheelHandler implements MouseWheelHandler {
 		}
 		scrollPanel.wheel(wheelDeltaX, wheelDeltaY, event.getClientX(),
 				event.getClientY());
+		
+		event.preventDefault();
 
 	}
 
