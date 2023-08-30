@@ -52,14 +52,14 @@
 					<uniqueVersion>false</uniqueVersion>
 					<id>dev-maven</id>
 					<name>Dev Machine Repository</name>
-					<url>ftp://dev.brainfuse.com/maven</url>
+					<url>ftp://maven.dev.brainfuse.com/maven</url>
 					<layout>default</layout>
 				</repository>
 				<snapshotRepository>
 					<uniqueVersion>false</uniqueVersion>
 					<id>dev-maven</id>
 					<name>Dev Machine Repository</name>
-					<url>ftp://dev.brainfuse.com/maven</url>
+					<url>ftp://maven.dev.brainfuse.com/maven</url>
 					<layout>default</layout>
 				</snapshotRepository>
 			</distributionManagement>
@@ -207,7 +207,7 @@
 				<artifactId>maven-deploy-plugin</artifactId>
 				<version>2.7</version>
 				<configuration>
-					<skip>true</skip>
+					<skip>false</skip>
 				</configuration>
 			</plugin>
 
