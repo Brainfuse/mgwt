@@ -52,14 +52,14 @@
 					<uniqueVersion>false</uniqueVersion>
 					<id>dev-maven</id>
 					<name>Dev Machine Repository</name>
-					<url>ftp://maven.dev.brainfuse.com/maven</url>
+					<url>https://maven.dev.brainfuse.com/</url>
 					<layout>default</layout>
 				</repository>
 				<snapshotRepository>
 					<uniqueVersion>false</uniqueVersion>
 					<id>dev-maven</id>
 					<name>Dev Machine Repository</name>
-					<url>ftp://maven.dev.brainfuse.com/maven</url>
+					<url>https://maven.dev.brainfuse.com/</url>
 					<layout>default</layout>
 				</snapshotRepository>
 			</distributionManagement>
