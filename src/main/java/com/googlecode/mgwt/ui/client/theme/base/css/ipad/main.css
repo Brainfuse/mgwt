@@ -1,15 +1,3 @@
 body {
 }
 
-@if user.agent safari {
-	body {
-		\-webkit-perspective: 800;
-		\-webkit-transform-style: preserve-3d;
-	}
-}
-
-@if user.agent gecko1_8 {
-	body {
-		
-	}
-}
