@@ -55,7 +55,9 @@
       {
 	        var user_agent = window.navigator.userAgent;
 	        var include = /\b(android|iphone|ipod|ipad|brainfuseapp)\b/i.test(user_agent);
-	        var exclude = /\b(Edge|Trident)\b/i.test(user_agent);
+	        // Exclude old Edge browser (EdgeHTML) and IE
+	        // Fixed detection error when device name has the word edge 
+    		var exclude = /\bEdge\/|Trident\b/i.test(user_agent);
 	          
 	        if(include && !exclude){
 	        	return 'mobilesafari';
