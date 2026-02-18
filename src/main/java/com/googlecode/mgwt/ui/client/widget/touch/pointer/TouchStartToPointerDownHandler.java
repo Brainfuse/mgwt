@@ -1,107 +1,80 @@
 package com.googlecode.mgwt.ui.client.widget.touch.pointer;
 
-import com.google.gwt.core.client.JsArray;
 import com.google.gwt.dom.client.NativeEvent;
-import com.googlecode.mgwt.collection.shared.CollectionFactory;
 import com.googlecode.mgwt.collection.shared.LightArray;
 import com.googlecode.mgwt.dom.client.event.touch.Touch;
 import com.googlecode.mgwt.dom.client.event.touch.TouchStartEvent;
 import com.googlecode.mgwt.dom.client.event.touch.TouchStartHandler;
 import com.googlecode.mgwt.ui.client.widget.touch.pointer.PointerDownEvent.PointerDownHandler;
 
-public class TouchStartToPointerDownHandler implements PointerDownHandler{
+/**
+ * Converts pointer down events into simulated touch start events with
+ * multi-touch support. Uses a shared {@link PointerTouchManager} to track
+ * all active pointers across the widget.
+ */
+public class TouchStartToPointerDownHandler implements PointerDownHandler {
 
 	private final TouchStartHandler handler;
-	
-	public TouchStartToPointerDownHandler(TouchStartHandler handler){
+	private final PointerTouchManager manager;
+
+	public TouchStartToPointerDownHandler(TouchStartHandler handler, PointerTouchManager manager) {
 		this.handler = handler;
+		this.manager = manager;
 	}
-	
+
 	@Override
 	public void onPointerDown(PointerDownEvent event) {
-		_onPointerDown(event.getNativeEvent());
-	}
+		int pointerId = event.getPointerId();
+		int pageX = event.getClientX();
+		int pageY = event.getClientY();
+		manager.pointerDown(pointerId, pageX, pageY);
 
-	private void handleEvent(JsArray<NativeEvent> events) {
+		// Capture the pointer so that subsequent pointermove / pointerup
+		// events are delivered to this element even if the pointer leaves
+		// the element bounds (e.g. mouse drag). Without this, pointermove
+		// may never fire on the originating element after pointerdown.
+		capturePointer(event, pointerId);
 
 		SimulatedTouchStartEvent touchStart = new SimulatedTouchStartEvent(
-				events);
+				event.getNativeEvent(),
+				manager.getTouches(),
+				manager.getChangedTouches());
 		handler.onTouchStart(touchStart);
 	}
-	
-	private native void _onPointerDown(NativeEvent event)/*-{
-		event.preventDefault();
-		var self = this;
-		self.touchEvents = [];
-		self.touchEvents.push(event);
-		self.@com.googlecode.mgwt.ui.client.widget.touch.pointer.TouchStartToPointerDownHandler::handleEvent(Lcom/google/gwt/core/client/JsArray;)(self.touchEvents);
-		self.touchEvents = [];
-		
+
+	/**
+	 * Calls Element.setPointerCapture() on the event target so that all
+	 * subsequent pointer events for this pointerId are directed to the
+	 * same element until pointerup or pointercancel.
+	 */
+	private static native void capturePointer(PointerDownEvent event, int pointerId) /*-{
+		var e = event.@com.google.gwt.event.dom.client.DomEvent::nativeEvent;
+		if (e && e.target && e.target.setPointerCapture) {
+			e.target.setPointerCapture(pointerId);
+		}
 	}-*/;
-	
-	
-	private class SimulatedTouchStartEvent extends TouchStartEvent {
-		
-		private LightArray<Touch> touches;
-		private JsArray<NativeEvent> events;
-		
-		public SimulatedTouchStartEvent(JsArray<NativeEvent> events){
-			this.events = events;
-			touches = CollectionFactory.constructArray();
-			for(int i=0; i<events.length(); i++){
-				final NativeEvent e = events.get(i);
-				Touch touch = new Touch() {
-					
-					@Override
-					public int getPageY() {
-						return e.getClientY();
-					}
-					
-					@Override
-					public int getPageX() {
-						return e.getClientX();
-					}
-					
-					@Override
-					public int getIdentifier() {
-						return getPointerId(e);
-					}
-				};
-				touches.push(touch);
-			}
-			NativeEvent nativeEvent = events.get(0);
+
+	private static class SimulatedTouchStartEvent extends TouchStartEvent {
+
+		private final LightArray<Touch> touches;
+		private final LightArray<Touch> changedTouches;
+
+		public SimulatedTouchStartEvent(NativeEvent nativeEvent,
+				LightArray<Touch> touches, LightArray<Touch> changedTouches) {
+			this.touches = touches;
+			this.changedTouches = changedTouches;
 			setNativeEvent(nativeEvent);
 			setSource(nativeEvent);
 		}
-		
-		private final native int getPointerId(NativeEvent event)/*-{
-			return event.pointerId;
-		}-*/;
-		
-		@Override
-		public void preventDefault() {
-			for(int i=0; i<events.length(); i++){
-				NativeEvent event = events.get(i);
-				event.preventDefault();
-			}
-		}
-		
-		@Override
-		public void stopPropagation() {
-			for(int i=0; i<events.length(); i++){
-				NativeEvent event = events.get(i);
-				event.stopPropagation();
-			}
-		}
-		
+
 		@Override
 		public LightArray<Touch> getTouches() {
 			return touches;
 		}
-		
+
 		@Override
 		public LightArray<Touch> getChangedTouches() {
-			return touches;
+			return changedTouches;
 		}
 	}
 

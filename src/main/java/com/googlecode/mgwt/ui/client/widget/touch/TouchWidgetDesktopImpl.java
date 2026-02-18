@@ -21,50 +21,45 @@ import com.googlecode.mgwt.dom.client.event.touch.TouchCancelHandler;
 import com.googlecode.mgwt.dom.client.event.touch.TouchEndHandler;
 import com.googlecode.mgwt.dom.client.event.touch.TouchMoveHandler;
 import com.googlecode.mgwt.dom.client.event.touch.TouchStartHandler;
-import com.googlecode.mgwt.ui.client.util.MGWTUtil;
 
 /**
- * The implementation for mouse devices of {@link TouchWidgetImpl}
+ * The implementation for non-mobile (desktop) user agents of
+ * {@link TouchWidgetImpl}. Delegates all detection logic to
+ * {@link TouchWidgetImplResolver}.
  * 
  * @author Daniel Kurka
  * @version $Id: $
  */
 public class TouchWidgetDesktopImpl implements TouchWidgetImpl {
 
-	
-	private final TouchWidgetImpl desktopImpl;
-	
-	public TouchWidgetDesktopImpl(){
-//		if ((MGWTUtil.isIEEdge() || MGWTUtil.getIEVersion() > -1)
-//				&& MGWTUtil.isPointerEventSupported()) {
-//			desktopImpl = new TouchWidgetPointerImpl();
-//		}else {
-			desktopImpl = new TouchWidgetMouseImpl();
-//		}
+	private final TouchWidgetImpl delegate;
+
+	public TouchWidgetDesktopImpl() {
+		delegate = TouchWidgetImplResolver.resolve(false);
 	}
 
 	@Override
 	public HandlerRegistration addTouchStartHandler(Widget w,
 			TouchStartHandler handler) {
-		return desktopImpl.addTouchStartHandler(w, handler);
+		return delegate.addTouchStartHandler(w, handler);
 	}
 
 	@Override
 	public HandlerRegistration addTouchMoveHandler(Widget w,
 			TouchMoveHandler handler) {
-		return desktopImpl.addTouchMoveHandler(w, handler);
+		return delegate.addTouchMoveHandler(w, handler);
 	}
 
 	@Override
 	public HandlerRegistration addTouchCancelHandler(Widget w,
 			TouchCancelHandler handler) {
-		return desktopImpl.addTouchCancelHandler(w, handler);
+		return delegate.addTouchCancelHandler(w, handler);
 	}
 
 	@Override
 	public HandlerRegistration addTouchEndHandler(Widget w,
 			TouchEndHandler handler) {
-		return desktopImpl.addTouchEndHandler(w, handler);
+		return delegate.addTouchEndHandler(w, handler);
 	}
-	
+
 }

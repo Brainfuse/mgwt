@@ -1,130 +1,70 @@
 package com.googlecode.mgwt.ui.client.widget.touch.pointer;
 
-import com.google.gwt.core.client.JsArray;
 import com.google.gwt.dom.client.NativeEvent;
-import com.googlecode.mgwt.collection.shared.CollectionFactory;
 import com.googlecode.mgwt.collection.shared.LightArray;
 import com.googlecode.mgwt.dom.client.event.touch.Touch;
 import com.googlecode.mgwt.dom.client.event.touch.TouchMoveEvent;
 import com.googlecode.mgwt.dom.client.event.touch.TouchMoveHandler;
-import com.googlecode.mgwt.ui.client.widget.touch.pointer.PointerCancelEvent.PointerCancelHandler;
-import com.googlecode.mgwt.ui.client.widget.touch.pointer.PointerDownEvent.PointerDownHandler;
 
-public class TouchMoveToPointerMoveHandler implements PointerMoveEvent.PointerMoveHandler, PointerUpEvent.PointerUpHandler, PointerCancelHandler, PointerDownHandler{
+/**
+ * Converts pointer move events into simulated touch move events with
+ * multi-touch support. Uses a shared {@link PointerTouchManager} to track
+ * all active pointers across the widget. Only fires move events for
+ * pointers that have been registered via a prior pointerdown.
+ */
+public class TouchMoveToPointerMoveHandler implements PointerMoveEvent.PointerMoveHandler {
 
 	private final TouchMoveHandler handler;
-	private boolean ignoreEvent;
-	
-	public TouchMoveToPointerMoveHandler(TouchMoveHandler handler){
+	private final PointerTouchManager manager;
+
+	public TouchMoveToPointerMoveHandler(TouchMoveHandler handler, PointerTouchManager manager) {
 		this.handler = handler;
-		ignoreEvent = true;
+		this.manager = manager;
 	}
-	
+
 	@Override
 	public void onPointerMove(PointerMoveEvent event) {
-		if(ignoreEvent) return;
-		_onPointerMove(event.getNativeEvent());
-	}
+		int pointerId = event.getPointerId();
+		// Only process moves for pointers we are actively tracking.
+		// pointermove fires on hover (no button pressed) too, so this
+		// check is expected to filter out a large number of events.
+		if (!manager.isTracking(pointerId)) {
+			return;
+		}
+		
+		int pageX = event.getClientX();
+		int pageY = event.getClientY();
+		manager.pointerMove(pointerId, pageX, pageY);
 
-	private void handleEvent(JsArray<NativeEvent> events) {
-		SimulatedTouchMoveEvent touchMove = new SimulatedTouchMoveEvent(events);
+		SimulatedTouchMoveEvent touchMove = new SimulatedTouchMoveEvent(
+				event.getNativeEvent(),
+				manager.getTouches(),
+				manager.getChangedTouches());
 		handler.onTouchMove(touchMove);
 	}
-	
-	private native void _onPointerMove(NativeEvent event)/*-{
-		var self = this;
-		self.@com.googlecode.mgwt.ui.client.widget.touch.pointer.TouchMoveToPointerMoveHandler::handleEvent(Lcom/google/gwt/core/client/JsArray;)([event]);
-	}-*/;
-	
-	
-	@Override
-	public void onPointerCancel(PointerCancelEvent event) {
-		_clear();
-		ignoreEvent = true;
-	}
 
-	@Override
-	public void onPointerUp(PointerUpEvent event) {
-		_clear();
-		ignoreEvent = true;
-	}
-	
-	@Override
-	public void onPointerDown(PointerDownEvent event) {
-		ignoreEvent = false;
-	}
+	private static class SimulatedTouchMoveEvent extends TouchMoveEvent {
 
-	private native void _clear()/*-{
-		var self = this;
-		self.touchEvents = [];
-	}-*/;
-	
-	private class SimulatedTouchMoveEvent extends TouchMoveEvent{
-		
-		private LightArray<Touch> touches;
-		private JsArray<NativeEvent> events;
-		
-		public SimulatedTouchMoveEvent(JsArray<NativeEvent> events){
-			
-			this.events = events;
-			touches = CollectionFactory.constructArray();
-			for(int i=0; i<events.length(); i++){
-				final NativeEvent e = events.get(i);
-				Touch touch = new Touch() {
-					
-					@Override
-					public int getPageY() {
-						return e.getClientY();
-					}
-					
-					@Override
-					public int getPageX() {
-						return e.getClientX();
-					}
-					
-					@Override
-					public int getIdentifier() {
-						return getPointerId(e);
-					}
-				};
-				touches.push(touch);
-			}
-			NativeEvent nativeEvent = events.get(0);
+		private final LightArray<Touch> touches;
+		private final LightArray<Touch> changedTouches;
+
+		public SimulatedTouchMoveEvent(NativeEvent nativeEvent,
+				LightArray<Touch> touches, LightArray<Touch> changedTouches) {
+			this.touches = touches;
+			this.changedTouches = changedTouches;
 			setNativeEvent(nativeEvent);
 			setSource(nativeEvent);
 		}
-		
-		@Override
-		public void preventDefault() {
-			for(int i=0; i<events.length(); i++){
-				NativeEvent event = events.get(i);
-				event.preventDefault();
-			}
-		}
-		
-		@Override
-		public void stopPropagation() {
-			for(int i=0; i<events.length(); i++){
-				NativeEvent event = events.get(i);
-				event.stopPropagation();
-			}
-		}
-		
-		private final native int getPointerId(NativeEvent event)/*-{
-			return event.pointerId;
-		}-*/;
-		
+
 		@Override
 		public LightArray<Touch> getTouches() {
 			return touches;
 		}
-		
+
 		@Override
 		public LightArray<Touch> getChangedTouches() {
-			return touches;
+			return changedTouches;
 		}
-		
 	}
-
 
 }

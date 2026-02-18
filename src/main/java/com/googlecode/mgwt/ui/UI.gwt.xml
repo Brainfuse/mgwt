@@ -27,19 +27,9 @@ under * the License.
 		<when-type-assignable class="com.googlecode.mgwt.ui.client.OsDetection" />
 	</generate-with>
 
-	<replace-with class="com.googlecode.mgwt.ui.client.widget.touch.TouchWidgetDesktopImpl">
+	<replace-with class="com.googlecode.mgwt.ui.client.widget.touch.TouchWidgetImplResolver">
 		<when-type-is class="com.googlecode.mgwt.ui.client.widget.touch.TouchWidgetImpl" />
-		<all>
-			<when-property-is name="mobile.user.agent" value="not_mobile" />
-		</all>
 	</replace-with>
-	<replace-with class="com.googlecode.mgwt.ui.client.widget.touch.TouchWidgetMobileImpl">
-		<when-type-is class="com.googlecode.mgwt.ui.client.widget.touch.TouchWidgetImpl" />
-		<all>
-			<when-property-is name="mobile.user.agent" value="mobilesafari" />
-		</all>
-	</replace-with>
-	
 		
 	<replace-with class="com.googlecode.mgwt.ui.client.widget.impl.ScrollPanelTouchImpl">
 		<when-type-is class="com.googlecode.mgwt.ui.client.widget.impl.ScrollPanelImpl" />
