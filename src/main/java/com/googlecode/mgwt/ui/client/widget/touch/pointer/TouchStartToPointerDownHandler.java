@@ -33,7 +33,9 @@ public class TouchStartToPointerDownHandler implements PointerDownHandler {
 		// events are delivered to this element even if the pointer leaves
 		// the element bounds (e.g. mouse drag). Without this, pointermove
 		// may never fire on the originating element after pointerdown.
-		capturePointer(event, pointerId);
+		if (shouldCapturePointer(event)) {
+			capturePointer(event, pointerId);
+		}
 
 		SimulatedTouchStartEvent touchStart = new SimulatedTouchStartEvent(
 				event.getNativeEvent(),
@@ -52,6 +54,33 @@ public class TouchStartToPointerDownHandler implements PointerDownHandler {
 		if (e && e.target && e.target.setPointerCapture) {
 			e.target.setPointerCapture(pointerId);
 		}
+	}-*/;
+
+	private static native boolean shouldCapturePointer(PointerDownEvent event) /*-{
+		var e = event.@com.google.gwt.event.dom.client.DomEvent::nativeEvent;
+		if (!e) {
+			return false;
+		}
+		var pt = e.pointerType;
+		var isMouse = (pt === "mouse") || (pt === 4);
+		if (isMouse) {
+			var t = e.target;
+			if (t) {
+				if (t.draggable === true) {
+					return false;
+				}
+				if (t.tagName && t.tagName.toLowerCase() === "a" && t.href) {
+					return false;
+				}
+				if (t.closest) {
+					var a = t.closest("a[href]");
+					if (a) {
+						return false;
+					}
+				}
+			}
+		}
+		return true;
 	}-*/;
 
 	private static class SimulatedTouchStartEvent extends TouchStartEvent {
