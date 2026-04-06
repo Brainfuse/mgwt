@@ -29,10 +29,9 @@ public class TouchStartToPointerDownHandler implements PointerDownHandler {
 		int pageY = event.getClientY();
 		manager.pointerDown(pointerId, pageX, pageY);
 
-		// Capture the pointer so that subsequent pointermove / pointerup
-		// events are delivered to this element even if the pointer leaves
-		// the element bounds (e.g. mouse drag). Without this, pointermove
-		// may never fire on the originating element after pointerdown.
+		// Only explicitly capture mouse pointers. Touch and pen already use
+		// direct-manipulation semantics, and explicit capture on iPad Safari
+		// can leave subsequent touches stuck after a hold or retarget.
 		if (shouldCapturePointer(event)) {
 			capturePointer(event, pointerId);
 		}
@@ -63,20 +62,22 @@ public class TouchStartToPointerDownHandler implements PointerDownHandler {
 		}
 		var pt = e.pointerType;
 		var isMouse = (pt === "mouse") || (pt === 4);
-		if (isMouse) {
-			var t = e.target;
-			if (t) {
-				if (t.draggable === true) {
+		if (!isMouse) {
+			return false;
+		}
+
+		var t = e.target;
+		if (t) {
+			if (t.draggable === true) {
+				return false;
+			}
+			if (t.tagName && t.tagName.toLowerCase() === "a" && t.href) {
+				return false;
+			}
+			if (t.closest) {
+				var a = t.closest("a[href]");
+				if (a) {
 					return false;
-				}
-				if (t.tagName && t.tagName.toLowerCase() === "a" && t.href) {
-					return false;
-				}
-				if (t.closest) {
-					var a = t.closest("a[href]");
-					if (a) {
-						return false;
-					}
 				}
 			}
 		}

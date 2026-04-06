@@ -25,6 +25,7 @@ public class TouchCancelToPointerCancelHandler implements PointerCancelHandler {
 	@Override
 	public void onPointerCancel(PointerCancelEvent event) {
 		int pointerId = event.getPointerId();
+		releasePointerCapture(event, pointerId);
 		manager.pointerCancel(pointerId);
 
 		SimulatedTouchCancelEvent touchCancel = new SimulatedTouchCancelEvent(
@@ -33,6 +34,16 @@ public class TouchCancelToPointerCancelHandler implements PointerCancelHandler {
 				manager.getChangedTouches());
 		handler.onTouchCanceled(touchCancel);
 	}
+
+	private static native void releasePointerCapture(PointerCancelEvent event, int pointerId) /*-{
+		var e = event.@com.google.gwt.event.dom.client.DomEvent::nativeEvent;
+		var target = e && e.target;
+		if (target && target.releasePointerCapture) {
+			if (!target.hasPointerCapture || target.hasPointerCapture(pointerId)) {
+				target.releasePointerCapture(pointerId);
+			}
+		}
+	}-*/;
 
 	private static class SimulatedTouchCancelEvent extends TouchCancelEvent {
 

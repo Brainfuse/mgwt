@@ -27,6 +27,7 @@ public class TouchEndToPointerUpHandler implements PointerUpEvent.PointerUpHandl
 		int pointerId = event.getPointerId();
 		int pageX = event.getClientX();
 		int pageY = event.getClientY();
+		releasePointerCapture(event, pointerId);
 		manager.pointerUp(pointerId, pageX, pageY);
 
 		SimulatedTouchEndEvent touchEnd = new SimulatedTouchEndEvent(
@@ -35,6 +36,16 @@ public class TouchEndToPointerUpHandler implements PointerUpEvent.PointerUpHandl
 				manager.getChangedTouches());
 		handler.onTouchEnd(touchEnd);
 	}
+
+	private static native void releasePointerCapture(PointerUpEvent event, int pointerId) /*-{
+		var e = event.@com.google.gwt.event.dom.client.DomEvent::nativeEvent;
+		var target = e && e.target;
+		if (target && target.releasePointerCapture) {
+			if (!target.hasPointerCapture || target.hasPointerCapture(pointerId)) {
+				target.releasePointerCapture(pointerId);
+			}
+		}
+	}-*/;
 
 	private static class SimulatedTouchEndEvent extends TouchEndEvent {
 
