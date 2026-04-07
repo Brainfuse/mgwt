@@ -3,6 +3,7 @@ package com.googlecode.mgwt.ui.client.widget.touch;
 import java.util.IdentityHashMap;
 import java.util.Map;
 
+import com.google.gwt.event.logical.shared.AttachEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.Widget;
 import com.googlecode.mgwt.dom.client.event.touch.TouchCancelHandler;
@@ -39,16 +40,18 @@ import com.googlecode.mgwt.ui.client.widget.touch.pointer.TouchStartToPointerDow
 public class TouchWidgetPointerImpl implements TouchWidgetImpl {
 
 	/**
-	 * Tracks active pointers per widget so a leaked pointer lifecycle on one
-	 * element cannot poison touch state for unrelated widgets.
+	 * Holds per-widget pointer state and the internal cleanup registrations
+	 * needed to keep that state in sync with the widget lifecycle.
 	 */
-	private final Map<Widget, PointerTouchManager> managers = new IdentityHashMap<Widget, PointerTouchManager>();
+	private final Map<Widget, WidgetPointerState> widgetStates = new IdentityHashMap<Widget, WidgetPointerState>();
 
-	/**
-	 * Remembers which widgets already have internal pointer lifecycle cleanup
-	 * handlers installed.
-	 */
-	private final Map<Widget, Boolean> cleanupInstalled = new IdentityHashMap<Widget, Boolean>();
+	private static class WidgetPointerState {
+		final PointerTouchManager manager = new PointerTouchManager();
+		HandlerRegistration pointerUpRegistration;
+		HandlerRegistration pointerCancelRegistration;
+		HandlerRegistration attachRegistration;
+		int handlerCount;
+	}
 
 	/**
 	 * Ensures the widget element has touch-action:none set so the browser
@@ -62,80 +65,127 @@ public class TouchWidgetPointerImpl implements TouchWidgetImpl {
 		}
 	}-*/;
 
-	private PointerTouchManager getManager(Widget w) {
-		PointerTouchManager manager = managers.get(w);
-		if (manager == null) {
-			manager = new PointerTouchManager();
-			managers.put(w, manager);
+	private WidgetPointerState getState(Widget w) {
+		WidgetPointerState state = widgetStates.get(w);
+		if (state == null) {
+			state = new WidgetPointerState();
+			widgetStates.put(w, state);
 		}
-		return manager;
+		return state;
 	}
 
-	private void ensurePointerLifecycleCleanup(Widget w,
-			final PointerTouchManager manager) {
-		if (cleanupInstalled.containsKey(w)) {
+	private void ensurePointerLifecycleCleanup(final Widget w,
+			final WidgetPointerState state) {
+		if (state.pointerUpRegistration != null) {
 			return;
 		}
 
-		w.addDomHandler(new PointerUpEvent.PointerUpHandler() {
+		state.pointerUpRegistration = w.addDomHandler(new PointerUpEvent.PointerUpHandler() {
 			@Override
 			public void onPointerUp(PointerUpEvent event) {
-				manager.pointerUp(event.getPointerId(), event.getClientX(), event.getClientY());
+				state.manager.pointerUp(event.getPointerId(), event.getClientX(), event.getClientY());
 			}
 		}, PointerUpEvent.getType());
 
-		w.addDomHandler(new PointerCancelEvent.PointerCancelHandler() {
+		state.pointerCancelRegistration = w.addDomHandler(new PointerCancelEvent.PointerCancelHandler() {
 			@Override
 			public void onPointerCancel(PointerCancelEvent event) {
-				manager.pointerCancel(event.getPointerId());
+				state.manager.pointerCancel(event.getPointerId());
 			}
 		}, PointerCancelEvent.getType());
 
-		cleanupInstalled.put(w, Boolean.TRUE);
+		state.attachRegistration = w.addAttachHandler(new AttachEvent.Handler() {
+			@Override
+			public void onAttachOrDetach(AttachEvent event) {
+				if (!event.isAttached()) {
+					state.manager.clear();
+				}
+			}
+		});
+	}
+
+	private void releaseStateIfUnused(Widget w, WidgetPointerState state) {
+		if (state.handlerCount != 0) {
+			return;
+		}
+
+		state.manager.clear();
+		if (state.pointerUpRegistration != null) {
+			state.pointerUpRegistration.removeHandler();
+			state.pointerUpRegistration = null;
+		}
+		if (state.pointerCancelRegistration != null) {
+			state.pointerCancelRegistration.removeHandler();
+			state.pointerCancelRegistration = null;
+		}
+		if (state.attachRegistration != null) {
+			state.attachRegistration.removeHandler();
+			state.attachRegistration = null;
+		}
+		widgetStates.remove(w);
+	}
+
+	private HandlerRegistration registerHandler(final Widget w,
+			final WidgetPointerState state, HandlerRegistration registration) {
+		state.handlerCount++;
+		return new HandlerRegistration() {
+			private boolean removed;
+
+			@Override
+			public void removeHandler() {
+				if (removed) {
+					return;
+				}
+				removed = true;
+				registration.removeHandler();
+				state.handlerCount--;
+				releaseStateIfUnused(w, state);
+			}
+		};
 	}
 
 	@Override
 	public HandlerRegistration addTouchStartHandler(Widget w,
 			TouchStartHandler handler) {
-		PointerTouchManager manager = getManager(w);
+		WidgetPointerState state = getState(w);
 		ensureTouchActionNone(w);
-		ensurePointerLifecycleCleanup(w, manager);
-		return w.addDomHandler(
-				new TouchStartToPointerDownHandler(handler, manager),
-				PointerDownEvent.getType());
+		ensurePointerLifecycleCleanup(w, state);
+		return registerHandler(w, state, w.addDomHandler(
+				new TouchStartToPointerDownHandler(handler, state.manager),
+				PointerDownEvent.getType()));
 	}
 
 	@Override
 	public HandlerRegistration addTouchMoveHandler(Widget w,
 			TouchMoveHandler handler) {
-		PointerTouchManager manager = getManager(w);
+		WidgetPointerState state = getState(w);
 		ensureTouchActionNone(w);
-		ensurePointerLifecycleCleanup(w, manager);
-		return w.addDomHandler(
-				new TouchMoveToPointerMoveHandler(handler, manager),
-				PointerMoveEvent.getType());
+		ensurePointerLifecycleCleanup(w, state);
+		return registerHandler(w, state, w.addDomHandler(
+				new TouchMoveToPointerMoveHandler(handler, state.manager),
+				PointerMoveEvent.getType()));
 	}
 
 	@Override
 	public HandlerRegistration addTouchCancelHandler(Widget w,
 			TouchCancelHandler handler) {
-		PointerTouchManager manager = getManager(w);
+		WidgetPointerState state = getState(w);
 		ensureTouchActionNone(w);
-		ensurePointerLifecycleCleanup(w, manager);
-		return w.addDomHandler(
-				new TouchCancelToPointerCancelHandler(handler, manager),
-				PointerCancelEvent.getType());
+		ensurePointerLifecycleCleanup(w, state);
+		return registerHandler(w, state, w.addDomHandler(
+				new TouchCancelToPointerCancelHandler(handler, state.manager),
+				PointerCancelEvent.getType()));
 	}
 
 	@Override
 	public HandlerRegistration addTouchEndHandler(Widget w,
 			TouchEndHandler handler) {
-		PointerTouchManager manager = getManager(w);
+		WidgetPointerState state = getState(w);
 		ensureTouchActionNone(w);
-		ensurePointerLifecycleCleanup(w, manager);
-		return w.addDomHandler(
-				new TouchEndToPointerUpHandler(handler, manager),
-				PointerUpEvent.getType());
+		ensurePointerLifecycleCleanup(w, state);
+		return registerHandler(w, state, w.addDomHandler(
+				new TouchEndToPointerUpHandler(handler, state.manager),
+				PointerUpEvent.getType()));
 	}
 
 }
