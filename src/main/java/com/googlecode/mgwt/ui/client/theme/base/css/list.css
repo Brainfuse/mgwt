@@ -1,4 +1,4 @@
-@url arrowImage listArrow;
+﻿@url arrowImage listArrow;
 @if mgwt.css pretty {
 	@external mgwt-List, mgwt-List-selected, mgwt-List-group, mgwt-List-first, mgwt-List-last, mgwt-List-Header, mgwt-List-round,mgwt-FormList-Element, mgwt-FormList-Element-label, mgwt-FormList-Element-container, mgwt-List-Head-Element, mgwt-List-canbeSelected;
 }
@@ -68,12 +68,6 @@
 	}
 }
 
-@if user.agent ie10 {
-	.mgwt-FormList-Element-label{
-		width: 30%;
-		display: \-ms-flexbox;
-	}
-}
 
 .mgwt-FormList-Element-container{
 	padding: 10px;
@@ -107,7 +101,7 @@
 
 
 /* other browsers */
-@if user.agent ie6 ie8 ie9 ie10 gecko opera {
+@if user.agent gecko opera {
 	.mgwt-List-selected {
 		
 	}

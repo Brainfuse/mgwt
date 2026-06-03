@@ -1,4 +1,4 @@
-@external electron;
+﻿@external electron;
 
 .mgwt-HeaderPanel {
 	position:relative;
@@ -111,7 +111,7 @@
 	}
 }
 
-@if user.agent gecko1_8 ie10 {
+@if user.agent gecko1_8 {
 	
 	.mgwt-HeaderPanel-left {
 		animation: text_fade 2s;
@@ -258,7 +258,7 @@
 
 
 /* other browsers */
-@if user.agent ie6 ie8 ie9 gecko opera {
+@if user.agent gecko opera {
 	.mgwt-HeaderPanel-right {
 		
 	}

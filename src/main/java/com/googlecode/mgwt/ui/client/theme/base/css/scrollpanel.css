@@ -1,4 +1,4 @@
-@if mgwt.css pretty {
+﻿@if mgwt.css pretty {
 	@external mgwt-ScrollPanel, mgwt-ScrollPanel-container, mgwt-Scrollbar, mgwt-Scrollbar-horizontal, mgwt-Scrollbar-vertical, mgwt-Scrollbar-Bar;
 }
 
@@ -53,12 +53,7 @@
 	}
 }
 
-/* @if user.agent ie9 ie10 {
-	.mgwt-ScrollPanel-container {
-		height:100%;
-	}
-}
-
+/* 
  */
 			
 

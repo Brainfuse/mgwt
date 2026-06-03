@@ -1,4 +1,4 @@
-@url checkImage inputCheckImage;
+﻿@url checkImage inputCheckImage;
 @url androidCheckChecked android_check_checked;
 @url androidCheckNotChecked android_check_not_checked;
 @if mgwt.css pretty {
@@ -37,15 +37,6 @@
 	}
 }
 
-@if user.agent ie9 ie10 {
-	.mgwt-TextBox .mgwt-InputBox-box,.mgwt-PasswordTextBox .mgwt-InputBox-box,.mgwt-TextArea .mgwt-InputBox-box {
-		display: -ms-flexbox;
-		\-ms-flex: 1;
-		display: flex;
-		flex: 1;
-		background-color: #FFF;
-	}
-}
 
 .mgwt-TextBox,.mgwt-PasswordTextBox,.mgwt-TextArea {
 	position: relative;
@@ -106,23 +97,6 @@
 	}
 }
 
-@if user.agent ie10 {
-	.mgwt-RadioButton {
-		display: \-ms-flexbox;
-		\-ms-box-orient: horizontal;
-		width: 100%;
-		\-ms-flex: 1;
-		display: flex;
-		flex: 1;
-	}
-	.mgwt-RadioButton>label {
-		position: relative;		
-		display: flex;
-		flex: 1;
-		display: -ms-flexbox;
-	    \-ms-flex: 1;
-	}
-}
 
 /*todo*/
 .mgwt-InputBox-disabled {
@@ -158,9 +132,3 @@
 	}
 }
 
-@if user.agent ie10 {
-	.mgwt-ListBox {
-		display: -ms-flexbox;
-		user-select: text;
-	}
-}

@@ -1,43 +1,10 @@
-.mgwt-DialogPanel {
+﻿.mgwt-DialogPanel {
 	border: solid 1px #72767b;
 	padding: 0px;
 	opacity: 1;
 }
 
 
-@if user.agent ie9 {
-
-	.mgwt-DialogPanel{
-		border:none !important;
-	}
-	.container{
-		padding: 5px;
-		border-radius: 10px;
-		text-align:center;	
-		width:300px;
-		margin:0 auto;
-		position:absolute;
-		top:50%;
-		left:0px;
-		right:0px;
-		background-color:rgba(0, 15, 70, 0.5);
-	}
-	
-	.footer{
-		height:40px;
-	}
-
-	.okbutton, .cancelbutton {
-		width:135px;
-		float:left;
-		background-color:#828BA3;
-		border-radius:8px;
-	}
-	
-	.okbutton:active, .cancelbutton:active{
-		background-color:#4E5362;
-	}
-}
 
 
 @if user.agent safari {
@@ -48,7 +15,7 @@
 	}
 }
 
-@if user.agent gecko1_8 ie10 {
+@if user.agent gecko1_8 {
 	.mgwt-DialogPanel {
 		border-radius: 10px;
 		\-moz-box-shadow: 0px 4px 6px #666666, 0 0 50px rgba(255, 255, 255, 1);
@@ -71,7 +38,7 @@
 	}
 }
 
-@if user.agent gecko1_8 ie10 {
+@if user.agent gecko1_8 {
 	.mgwt-DialogPanel .container {
 		\-moz-border-radius: 10px;
 		border-radius: 10px;
@@ -99,7 +66,7 @@
 	}
 }
 
-@if user.agent gecko1_8 ie10 {
+@if user.agent gecko1_8 {
 	.mgwt-DialogPanel .title {
 		\-moz-border-radius-topright: 10px;
 		\-moz-border-radius-topleft: 10px;
@@ -179,7 +146,7 @@
 	}
 }
 
-@if user.agent gecko1_8 ie10 {
+@if user.agent gecko1_8 {
 	.mgwt-DialogPanel .okbutton {
 		background-image: literal('-moz-linear-gradient(top, #b0b5c5,#7a839b 50%, #515d7c 51%, #636e8a)');
 		background-image: linear-gradient(to top, #b0b5c5,#7a839b 50%, #515d7c 51%, #636e8a);
@@ -194,23 +161,5 @@
 	}
 }
 
-@if user.agent ie10 {
-	
-	.mgwt-DialogPanel .footer {
-		display: -ms-flexbox;
-		\-ms-flex-pack: center;
-		display: -moz-box;
-		\-ms-box-orient: horizontal;
-		box-sizing: border-box;
-		width: 100%;
-		\-ms-flex-direction: row;
-	}
-	
-	.mgwt-DialogPanel .okbutton,.mgwt-DialogPanel .cancelbutton {
-		flex: 2;
-		\-ms-flex: 2;
-		border-radius: 8px;
-	}
-}
 
 

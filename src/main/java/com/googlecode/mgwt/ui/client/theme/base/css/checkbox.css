@@ -1,4 +1,4 @@
-
+﻿
 @if mgwt.css pretty {
 	@external mgwt-CheckBox, mgwt-CheckBox-middle, mgwt-CheckBox-middle-content, mgwt-CheckBox-on, mgwt-CheckBox-off, mgwt-CheckBox-important, mgwt-CheckBox-notchecked, mgwt-CheckBox-checked;
 	
@@ -24,7 +24,7 @@
 	}
 }
 
-@if user.agent gecko1_8 ie10 {
+@if user.agent gecko1_8 {
 	.mgwt-CheckBox {
 		width: 88px;
 		line-height: 27px;
@@ -60,7 +60,7 @@
 	}
 }
 
-@if user.agent gecko1_8 ie10 {
+@if user.agent gecko1_8 {
 	.mgwt-CheckBox-middle {
 		\-moz-transition: all 0.1s ease-in-out;
 		\-moz-border-radius: 6px;
@@ -88,7 +88,7 @@
 	}
 }
 
-@if user.agent gecko1_8 ie10 {
+@if user.agent gecko1_8 {
 	.mgwt-CheckBox-middle-content {
 		\-moz-box-sizing: border-box;
 		box-sizing: border-box;
@@ -131,7 +131,7 @@
 	}
 }
 
-@if user.agent gecko1_8 ie10 {
+@if user.agent gecko1_8 {
 	.mgwt-CheckBox-on {
 		background-image: literal('-moz-linear-gradient(top, #295ab3, #76adfb )');
 		background-image:linear-gradient(to top, #295ab3, #76adfb );
@@ -184,7 +184,7 @@
 	}
 }
 
-@if user.agent gecko1_8 ie10 {
+@if user.agent gecko1_8 {
 	.mgwt-CheckBox-off {
 		background-image: literal('-moz-linear-gradient(top, #b6b6b6, #fff 50% )');
 		background-image: linear-gradient(to top, #b6b6b6, #fff 50% );
@@ -242,7 +242,7 @@
 
 
 
-@if user.agent gecko1_8 ie10 {
+@if user.agent gecko1_8 {
 
 	.mgwt-CheckBox-important .mgwt-CheckBox-on {
 		background-image: literal('-moz-linear-gradient(top, #e75f00, #fe9c12 50% )');
@@ -285,7 +285,7 @@
 
 
 /*TODO add browser....*/
-@if user.agent ie6 ie8 ie9 ie10 gecko opera {
+@if user.agent gecko opera {
 
 	.mgwt-CheckBox-important .mgwt-CheckBox-on {
 		

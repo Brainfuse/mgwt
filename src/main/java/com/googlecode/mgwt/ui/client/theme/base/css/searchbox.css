@@ -1,4 +1,4 @@
-@url searchImage searchSearchImage;
+﻿@url searchImage searchSearchImage;
 @url clearImage searchClearImage;
 @url clearTouchedImage searchClearTouchedImage;
 @if mgwt.css pretty {
@@ -64,11 +64,6 @@
 	}
 }
 
-@if user.agent ie9 {
-	.mgwt-SearchBox-input {
-		top: 5px;
-	}
-}
 
 .mgwt-SearchBox-clear {
 	position: absolute;

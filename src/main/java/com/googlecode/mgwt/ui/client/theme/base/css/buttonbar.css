@@ -1,4 +1,4 @@
-@if mgwt.css pretty {
+﻿@if mgwt.css pretty {
 	@external mgwt-ButtonBar, text, spacer;
 }
 
@@ -26,20 +26,7 @@
 		flex-direction: row;
 	}
 }
-@if user.agent ie10 {
-    .mgwt-ButtonBar {
-        display: -ms-flexbox;
-        \-ms-flex-direction: row;
-        flex-direction: row;
-    }
-}
 
-@if user.agent ie9 {
-	.mgwt-ButtonBar {
-		display: table;
-		
-	}
-}
 
 
 
@@ -56,12 +43,6 @@
 	color: white;
 }
 
-@if user.agent ie9 {
-	.mgwt-ButtonBar-text{
-		display: table-cell;
-		vertical-align: middle;
-	}
-}
 
 
 
@@ -75,12 +56,6 @@
 	}
 }
 
-@if user.agent ie10 {
-	.mgwt-ButtonBar-spacer{
-		\-ms-flex: 1;
-		flex: 1;
-	}
-}
 
 @if user.agent safari {
 	.mgwt-ButtonBar-spacer{
@@ -89,10 +64,3 @@
 	}
 }
 
-@if user.agent ie9 {
-	.mgwt-ButtonBar-spacer{
-		display: table-cell;
-		width: 50%;
-		
-	}
-}

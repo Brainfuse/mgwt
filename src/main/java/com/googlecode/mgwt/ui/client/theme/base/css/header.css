@@ -1,4 +1,4 @@
-@if mgwt.css pretty {
+﻿@if mgwt.css pretty {
 	@external mgwt-HeaderPanel, mgwt-HeaderPanel-left, mgwt-HeaderPanel-right, mgwt-HeaderPanel-center, mgwt-DropDownMenu;
 	@external mgwt-HeaderButton, mgwt-HeaderButton-active, mgwt-HeaderButton-back, mgwt-HeaderButton-forward, mgwt-HeaderButton-round, mgwt-HeaderButton-text, mgwt-HeaderButton-border-content, mgwt-HeaderButton-border-container;
 	@external mgwt-DropDownMenu, mgwt-DropDownMenu-content,  mgwt-DropDownMenu-arrow;
@@ -8,11 +8,6 @@
 	position: relative;
 }
 
-@if user.agent ie9 {
-	.mgwt-HeaderPanel {
-		background-color:#7e838d;
-	}
-}
 
 .mgwt-HeaderPanel-left {
 	position: absolute;
@@ -85,7 +80,7 @@
 	}
 }
 
-@if user.agent gecko1_8 ie10 {
+@if user.agent gecko1_8 {
 	.mgwt-HeaderButton-text {
 		\-moz-border-radius: 4px;
 		border-radius: 4px;
@@ -93,23 +88,11 @@
 	}
 }
 
-@if user.agent ie9 {
-	.mgwt-HeaderButton-text {
-		border-radius: 4px;
-		background-origin: border-box;
-	}
-}
 
 .mgwt-HeaderButton-back .mgwt-HeaderButton-text {
 	border-left: none;
 }
 
-@if user.agent ie9 {
-	.mgwt-HeaderButton-back .mgwt-HeaderButton-text {
-		border: 1px solid rgba(0, 0, 0, 0.5);
-	}
-	
-}
 
 .mgwt-HeaderButton-back .mgwt-HeaderButton-border-container {
 	position: absolute;
@@ -124,7 +107,7 @@
 	}
 }
 
-@if user.agent gecko1_8 ie10 {
+@if user.agent gecko1_8 {
 	.mgwt-HeaderButton-back .mgwt-HeaderButton-border-container {
 		top: 4px;
 		left: -7px;
@@ -152,7 +135,7 @@
 	}
 }
 
-@if user.agent gecko1_8 ie10 {
+@if user.agent gecko1_8 {
 	.mgwt-HeaderButton-back .mgwt-HeaderButton-border-content {
 		\-moz-transform: skew(15deg);
 		\-moz-border-radius: 4px;
@@ -177,17 +160,12 @@
 	}
 }
 
-@if user.agent gecko1_8 ie10 {
+@if user.agent gecko1_8 {
 	.mgwt-HeaderButton-forward .mgwt-HeaderButton-border-container {
 		\-moz-transform: rotate(51deg);
 	}
 }
 
-@if user.agent ie9 {
-	.mgwt-HeaderButton-forward .mgwt-HeaderButton-border-container {
-		
-	}
-}
 
 
 
@@ -287,7 +265,7 @@
 
 
 /* other browsers */
-@if user.agent ie6 ie8 ie9 gecko opera {
+@if user.agent gecko opera {
 	.mgwt-HeaderPanel-right {
 		
 	}

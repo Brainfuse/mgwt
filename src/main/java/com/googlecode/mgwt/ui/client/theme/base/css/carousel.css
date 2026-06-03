@@ -1,4 +1,4 @@
-@if mgwt.css pretty {
+﻿@if mgwt.css pretty {
 	@external mgwt-Carousel, mgwt-Carousel-Scroller, mgwt-Carousel-Container, mgwt-Carousel-Indicator-Container, .mgwt-Carousel-Indicator, mgwt-Carousel-Indicator-active, mgwt-Carousel-Holder;
 }
 
@@ -22,11 +22,6 @@
 	}
 }
 
-@if user.agent ie9	{
-	.mgwt-Carousel {
-		height:100%;
-	}
-}
 
 
 .mgwt-Carousel-Scroller {
@@ -92,20 +87,7 @@
 	}
 }
 
-@if user.agent ie10 {
-	.mgwt-Carousel-Indicator-Container,
-	.mgwt-Carousel-Indicator-Container .indicatorWrapper {
-		display: \-ms-flexbox;
-		justify-content: center;
-	}
-}
 
-@if user.agent ie9	{
-	.mgwt-Carousel-Indicator-Container,
-	.mgwt-Carousel-Indicator-Container .indicatorWrapper {
-		left:50% !important;
-	}
-}
 
 .mgwt-Carousel-Indicator {
 	width: 8px;
@@ -115,11 +97,6 @@
 	margin: 4px;
 }
 
-@if user.agent ie9 {
-	.mgwt-Carousel-Indicator {
-		float: left;
-	}
-}
 
 .mgwt-Carousel-Indicator-active {
 	background-color: #757575;
@@ -142,43 +119,7 @@
 	}
 }
 
-@if user.agent ie9 {
-	.mgwt-Carousel-Holder {
-		float:left;
-	}
-}
 
-@if user.agent ie10 {
-	.mgwt-Carousel {
-		display: flex;
-		flex: 1;
-		display: -ms-flexbox;
-	    \-ms-flex: 1;
-	}
-	
-	.mgwt-Carousel-Scroller {
-		\-ms-flex: 1;
-		flex:1 ;
-	}
-	
-	.mgwt-Carousel-Container {
-		display: flex;
-		flex: 1;
-		display: -ms-flexbox !important;
-	    \-ms-flex: 1 !important;
-	}
-	
-	.mgwt-Carousel-Indicator-Container {
-		display: -ms-flexbox;
-		display: flex;
-		\-ms-flex-pack: center;
-	}
-	
-	.mgwt-Carousel-Holder {
-		display: -ms-flexbox;
-		display: flex;
-	}
-}
 
 .mgwt-Carousel-Indicator-Container .indicatorWrapper {
 	right: 0;

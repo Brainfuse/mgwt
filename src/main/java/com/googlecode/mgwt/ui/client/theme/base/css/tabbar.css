@@ -1,4 +1,4 @@
-@if mgwt.css pretty {
+﻿@if mgwt.css pretty {
 	@external mgwt-TabBar, mgwt-TabPanel;
 	@external mgwt-TabBar-Button, mgwt-TabBar-Button-active, mgwt-TabBar-Button-selected, mgwt-TabBar-Button-icon, mgwt-TabBar-Button-text;
 }
@@ -38,12 +38,6 @@
 	}
 }
 
-@if user.agent ie10 {
-	.mgwt-TabBar {
-		display: \-ms-flexbox;
-		\-ms-box-orient: horizontal;
-	}
-}
 
 .mgwt-TabBar-Button-active {
 	
@@ -73,9 +67,3 @@
 	}
 }
 
-@if user.agent ie10 {
-	.mgwt-TabBar-Button {
-		\-ms-flex: 1;
-		flex: 1;
-	}
-}
