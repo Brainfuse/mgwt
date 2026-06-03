@@ -1,12 +1,12 @@
 /*
  * Copyright 2011 Daniel Kurka
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -22,17 +22,20 @@ import com.google.gwt.resources.client.TextResource;
 import com.googlecode.mgwt.ui.client.theme.MGWTClientBundle;
 
 /**
- * The android client bundle
- * 
- * @author Daniel Kurka
- * 
+ * The unified mgwt base theme bundle.
+ *
+ * <p>Replaces the legacy per-device bundles ({@code MGWTClientBundleBaseThemeAndroid},
+ * {@code *AndroidTablet}, {@code *Blackberry}, {@code *Desktop}, {@code *IPad},
+ * {@code *IPadRetina}, {@code *IPhone}, {@code *Retina}). Modern Cordova/Electron
+ * WebViews and supported desktop browsers all render the same baseline CSS, so a
+ * single bundle is sufficient.
  */
-public interface MGWTClientBundleBaseThemeAndroid extends ClientBundle, MGWTClientBundle {
+public interface MGWTClientBundleBaseTheme extends ClientBundle, MGWTClientBundle {
 
-	@Source({ "css/groupinglist.css", "css/android/groupinglist.css" })
+	@Source({ "css/groupinglist.css", "css/ipad/groupinglist.css" })
 	GroupingList getGroupingList();
 
-	@Source({ "css/progressbar.css", "css/android/progressbar.css" })
+	@Source({ "css/progressbar.css", "css/ipad/progressbar.css" })
 	ProgressBarCss getProgressBarCss();
 
 	// This is a very nasty workaround because GWT CssResource does not support
@@ -45,25 +48,25 @@ public interface MGWTClientBundleBaseThemeAndroid extends ClientBundle, MGWTClie
 	@Source("css/util.css")
 	TextResource utilTextResource();
 
-	@Source({ "css/progressindicator.css", "css/android/progressindicator.css" })
+	@Source({ "css/progressindicator.css", "css/ipad/progressindicator.css" })
 	ProgressIndicatorCss getProgressIndicatorCss();
 
-	@Source({ "css/header.css", "css/android/header.css" })
+	@Source({ "css/header.css", "css/ipad/header.css" })
 	HeaderCss getHeaderCss();
 
-	@Source({ "css/slider.css", "css/android/slider.css" })
+	@Source({ "css/slider.css", "css/ipad/slider.css" })
 	SliderCss getSliderCss();
 
-	@Source({ "css/carousel.css", "css/android/carousel.css" })
+	@Source({ "css/carousel.css", "css/ipad/carousel.css" })
 	CarouselCss getCarouselCss();
 
-	@Source({ "css/list.css", "css/android/list.css" })
+	@Source({ "css/list.css", "css/ipad/list.css" })
 	ListCss getListCss();
 
 	@Source("resources/list/arrow.png")
 	DataResource listArrow();
 
-	@Source({ "css/searchbox.css", "css/android/searchbox.css" })
+	@Source({ "css/searchbox.css", "css/ipad/searchbox.css" })
 	MSearchBoxCss getSearchBoxCss();
 
 	@Source("resources/search/glass.png")
@@ -78,22 +81,22 @@ public interface MGWTClientBundleBaseThemeAndroid extends ClientBundle, MGWTClie
 	@Source("css/checkbox.css")
 	CheckBoxCss getCheckBoxCss();
 
-	@Source({ "css/buttons.css", "css/android/buttons.css" })
+	@Source({ "css/buttons.css", "css/ipad/buttons.css" })
 	ButtonCss getButtonCss();
 
-	@Source({ "css/scrollpanel.css", "css/android/scrollpanel.css" })
+	@Source({ "css/scrollpanel.css", "css/ipad/scrollpanel.css" })
 	ScrollPanelCss getScrollPanelCss();
 
-	@Source({ "css/buttonbar.css", "css/android/buttonbar.css" })
+	@Source({ "css/buttonbar.css", "css/ipad/buttonbar.css" })
 	ButtonBarCss getButtonBarCss();
 
-	@Source({ "css/dialog.css", "css/android/dialog.css" })
+	@Source({ "css/dialog.css", "css/ipad/dialog.css" })
 	DialogCss getDialogCss();
 
-	@Source({ "css/main.css", "css/android/main.css" })
+	@Source("css/main.css")
 	MainCss getMainCss();
 
-	@Source({ "css/input.css", "css/android/input.css" })
+	@Source({ "css/input.css", "css/ipad/input.css" })
 	InputCss getInputCss();
 
 	@Source("resources/input/ios_check.png")
@@ -105,10 +108,10 @@ public interface MGWTClientBundleBaseThemeAndroid extends ClientBundle, MGWTClie
 	@Source("css/layout.css")
 	LayoutCss getLayoutCss();
 
-	@Source({ "css/pulltorefresh.css", "css/android/pulltorefresh.css" })
+	@Source({ "css/pulltorefresh.css", "css/ipad/pulltorefresh.css" })
 	PullToRefreshCss getPullToRefreshCss();
 
-	@Source({ "css/tabbar.css", "css/android/tabbar.css" })
+	@Source({ "css/tabbar.css", "css/ipad/tabbar.css" })
 	TabBarCss getTabBarCss();
 
 	@Source("resources/tabbar/bookmarks.png")

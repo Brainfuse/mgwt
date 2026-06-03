@@ -53,7 +53,6 @@
         <all>
             <when-property-is name="mgwt.os" value="desktop"/>
             <any>
-            	<when-property-is name="user.agent" value="ie10"/>
             	<when-property-is name="user.agent" value="gecko1_8"/>
             	
             </any>
@@ -71,13 +70,6 @@
         <when-type-is class="com.googlecode.mgwt.mvp.client.AnimatableDisplay"/>
         <all>
             <when-property-is name="mgwt.os" value="blackberry"/>
-        </all>
-    </replace-with>
-    
-    <replace-with class="com.googlecode.mgwt.mvp.client.display.AnimatableDisplayWithoutAnimation">
-        <when-type-is class="com.googlecode.mgwt.mvp.client.AnimatableDisplay"/>
-        <all>
-            <when-property-is name="user.agent" value="ie9"/>
         </all>
     </replace-with>
     

@@ -8,7 +8,7 @@ import com.googlecode.mgwt.ui.client.theme.base.HeaderCss;
 import com.googlecode.mgwt.ui.client.theme.base.InputCss;
 import com.googlecode.mgwt.ui.client.theme.base.LayoutCss;
 import com.googlecode.mgwt.ui.client.theme.base.ListCss;
-import com.googlecode.mgwt.ui.client.theme.base.MGWTClientBundleBaseThemeRetina;
+import com.googlecode.mgwt.ui.client.theme.base.MGWTClientBundleBaseTheme;
 import com.googlecode.mgwt.ui.client.theme.base.MSearchBoxCss;
 import com.googlecode.mgwt.ui.client.theme.base.MainCss;
 import com.googlecode.mgwt.ui.client.theme.base.PanelCss;
@@ -19,7 +19,7 @@ import com.googlecode.mgwt.ui.client.theme.base.ScrollPanelCss;
 import com.googlecode.mgwt.ui.client.theme.base.SliderCss;
 import com.googlecode.mgwt.ui.client.theme.base.TabBarCss;
 
-public interface MGWTColorBundleRetina extends MGWTClientBundleBaseThemeRetina {
+public interface MGWTColorBundleRetina extends MGWTClientBundleBaseTheme {
 	@Source({ "color.css", "com/googlecode/mgwt/ui/client/theme/base/css/progressbar.css", "com/googlecode/mgwt/ui/client/theme/mgwt/css/progressbar.css" })
 	ProgressBarCss getProgressBarCss();
 

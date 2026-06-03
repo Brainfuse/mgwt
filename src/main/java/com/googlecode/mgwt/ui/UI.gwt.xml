@@ -37,13 +37,6 @@ under * the License.
 	
 	
 	
-	<replace-with class="com.googlecode.mgwt.ui.client.widget.impl.ScrollPanelIE9Impl">
-		<when-type-is class="com.googlecode.mgwt.ui.client.widget.impl.ScrollPanelImpl" />
-		 <all> 
-   			<when-property-is name="user.agent" value="ie9" />
-  		</all>
-		
-	</replace-with>
 	
 
 	
@@ -76,19 +69,10 @@ under * the License.
 		<when-type-is class="com.googlecode.mgwt.ui.client.util.impl.CssUtilImpl" />
 		 <any> 
    			<when-property-is name="user.agent" value="gecko1_8" />
-   			<when-property-is name="user.agent" value="ie10" />
   		</any>
 		
 	</replace-with>
 	
-	<replace-with class="com.googlecode.mgwt.ui.client.util.impl.CssUtilIE9Impl">
-		<when-type-is class="com.googlecode.mgwt.ui.client.util.impl.CssUtilImpl" />
-		 <any> 
-   			<when-property-is name="user.agent" value="ie9" />
-   			
-  		</any>
-		
-	</replace-with>
 	
 	
 	
@@ -121,12 +105,6 @@ under * the License.
 		<when-type-is class="com.googlecode.mgwt.ui.client.widget.base.MValueBoxBase.MValueBoxBaseImpl" />
 	</replace-with>
 	
-	<replace-with class="com.googlecode.mgwt.ui.client.widget.base.MValueBoxBase.MValueBoxBaseNoOpImpl">
-		<when-type-is class="com.googlecode.mgwt.ui.client.widget.base.MValueBoxBase.MValueBoxBaseImpl" />
-		<all> 
-   			<when-property-is name="user.agent" value="ie9" />
-  		</all>
-	</replace-with>
 	<replace-with class="com.googlecode.mgwt.ui.client.widget.base.MValueBoxBase.MValueBoxBaseNoOpImpl">
 		<when-type-is class="com.googlecode.mgwt.ui.client.widget.base.MValueBoxBase.MValueBoxBaseImpl" />
 		<all> 
@@ -202,12 +180,6 @@ under * the License.
     </replace-with> 
     <replace-with class="com.googlecode.mgwt.ui.client.widget.impl.LayoutPanelDefaultImpl">
 		<when-type-is class="com.googlecode.mgwt.ui.client.widget.impl.LayoutPanelBaseImpl" />
-	</replace-with>
-    <replace-with class="com.googlecode.mgwt.ui.client.widget.impl.LayoutPanelIE9Impl">
-		<when-type-is class="com.googlecode.mgwt.ui.client.widget.impl.LayoutPanelBaseImpl" />
-		 <all> 
-   			<when-property-is name="user.agent" value="ie9" />
-  		</all>
 	</replace-with>
 
 	<source path="client" />
