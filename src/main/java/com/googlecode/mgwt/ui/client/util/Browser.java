@@ -19,10 +19,6 @@ public class Browser {
 		return getName().equals("firefox");
 	}
 	
-	public static boolean isIE() {
-		return getName().equals("ie");
-	}
-	
 	public static boolean isEdge() {
 		return getName().equals("edge");
 	}
@@ -54,9 +50,6 @@ public class Browser {
 		} else if (sUsrAg.indexOf("Opera") > -1 || sUsrAg.indexOf("OPR") > -1) {
 		  sBrowser = "opera";
 		  // "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36 OPR/57.0.3098.106"
-		} else if (sUsrAg.indexOf("Trident") > -1) {
-		  sBrowser = "ie";
-		  // "Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; .NET4.0C; .NET4.0E; Zoom 3.6.0; wbx 1.0.0; rv:11.0) like Gecko"
 		} else if (sUsrAg.indexOf("Edge") > -1) {
 		  sBrowser = "edge";
 		  // "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36 Edge/16.16299"
@@ -70,33 +63,6 @@ public class Browser {
 		  sBrowser = "unknown";
 		}
 		return sBrowser;
-	}-*/;
-	
-	public static int getIEVersion() {
-		if(isIE()) {
-			return _getIEVersion();
-		}else {
-			return -1;
-		}
-	}
-	
-	private static native int _getIEVersion()/*-{
-		var ua = $wnd.navigator.userAgent;
-	    var ieold = (/MSIE (\d+\.\d+);/.test(ua));
-	    if(ieold){
-	    	return new Number(RegExp.$1);
-	    }
-	    if ($wnd.navigator.appVersion.indexOf("MSIE 10") != -1){
-	     	return 10;
-	    }
-	    
-	    var trident = !!ua.match(/Trident\/7.0/);
-	    var rv=ua.indexOf("rv:11.0");
-	    if (trident&&rv!=-1){
-	    	return 11;
-	    }
-	
-	    return -1;  
 	}-*/;
 	
 }

@@ -38,7 +38,7 @@ public class MGWTStyle {
   public static final MGWTTheme getTheme() {
     if (theme == null) {
       theme = new MGWTThemeBaseThemeStandardImpl();
-      theme.getMGWTClientBundle().getMainCss().ensureInjected();
+      ensureCoreCssInjected(theme);
 
     }
     return theme;
@@ -59,7 +59,12 @@ public class MGWTStyle {
       throw new IllegalStateException("can not change default theme if theres already an instance...");
     }
     theme = newTheme;
+    ensureCoreCssInjected(theme);
+  }
+
+  private static void ensureCoreCssInjected(MGWTTheme theme) {
     theme.getMGWTClientBundle().getMainCss().ensureInjected();
+    theme.getMGWTClientBundle().getLayoutCss().ensureInjected();
   }
 
   /**

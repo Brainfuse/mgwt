@@ -104,21 +104,8 @@
 
 .mgwt-Carousel-Holder {
 	position: relative;
+	display: flex;
 }
-
-@if user.agent safari {
-	.mgwt-Carousel-Holder {
-		display: \-webkit-box;
-	}
-}
-
-@if user.agent gecko1_8 {
-	.mgwt-Carousel-Holder {
-		display: \-moz-box;
-		display: flex;
-	}
-}
-
 
 
 .mgwt-Carousel-Indicator-Container .indicatorWrapper {

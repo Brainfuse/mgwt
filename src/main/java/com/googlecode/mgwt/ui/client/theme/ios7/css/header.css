@@ -1,10 +1,9 @@
-﻿@external electron;
+@external electron;
 
 .mgwt-HeaderPanel {
-	position:relative;
+	position: relative;
 	height: 40px;
-	border-bottom: 1px solid #cecece;
-	background-color: #f8f8f8;
+	border-bottom: 1px solid var(--divider-color);
 }
 
 .mgwt-HeaderPanel-left {
@@ -27,7 +26,7 @@
 	text-align: center;
 	font-size: 16px;
 	font-weight: bold;
-	color: #000;
+	color: eval("\"var(--text-primary, #000)\"");
 	width: 50%;
 	margin: 0 auto;
 	padding-top: 12px;
