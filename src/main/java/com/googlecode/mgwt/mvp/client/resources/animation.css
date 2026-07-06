@@ -14,21 +14,12 @@
  * the License.
  */
 
-@if user.agent safari {
 
-@if mgwt.os blackberry {
-	
-	.display {
-		position: relative;
-		min-width: 100%;	
- 	}
- 
-	.displayContainer {
- 		position: relative;
-		min-width: 100%;
-	}
-	
-} @else {
+
+
+
+
+
 
 
 	.displayContainer {
@@ -37,19 +28,6 @@
 		height: 100%;
 		overflow:hidden;
 	}
- 
-	@if mgwt.os iphone {
- 		.displayContainer{
- 			
- 		}	
-	} @elif mgwt.os ipad {
- 		.displayContainer{
- 			
- 		}
-	}@else {
-
- 		
- 	}
  	
  	.display {
 		position: absolute;
@@ -82,16 +60,6 @@
 		    \-webkit-backface-visibility: hidden;
 		}
 	}
-}
- 
-
-
- 
-
-
-
-
-
 
 
 @if user.agent safari {
@@ -398,7 +366,6 @@ key frame for doing nothing
 
 } 
 
-}
 
 
 
