@@ -6,90 +6,29 @@
 	overflow: hidden;
 	position: relative;
 	z-index: 0;
-}
-
-
-
-
-
-
-@if user.agent safari {
-	.mgwt-ScrollPanel {
-		display: \-webkit-box;
-		\-webkit-box-orient: vertical;
-	}
-}
-
-@if user.agent gecko1_8 {
-	.mgwt-ScrollPanel {
-		display: block;
-		display: \-moz-box;
-		display: flex;
-		\-moz-box-orient: vertical;
-		flex-direction: column;
-	}
+	display: flex;
+	flex-direction: column;
 }
 
 .mgwt-ScrollPanel-container {
 	overflow: visible;
+	transition-property: transform;
+	transition-timing-function: cubic-bezier(0, 0, 0.25, 1);
 }
-
-@if user.agent safari {
-	.mgwt-ScrollPanel-container {
-		\-webkit-transition-property: literal('-webkit-transform');
-		\-webkit-transition-timing-function: literal('cubic-bezier(0, 0, 0.25, 1)');
-	}
-}
-
-@if user.agent gecko1_8 {
-	.mgwt-ScrollPanel-container {
-		\-moz-transition-property: literal('-moz-transform');
-		\-moz-transition-timing-function: literal('cubic-bezier(0, 0, 0.25, 1)');
-		transition-property: transform;
-		transition-timing-function: cubic-bezier(0, 0, 0.25, 1);
-		vertical-align: top;
-	/* 	height:100%; */
-		/* flex:1; */
-	}
-}
-
-/* 
- */
-			
-
-			
-
 
 .mgwt-Scrollbar {
 	position: absolute;
 	z-index: 100;
 	overflow: hidden;
+	transition-duration: 300ms;
+	transition-delay: 0ms;
+	transition-property: opacity;
 }
 
 .mgwt-Scrollbar:hover {
 	cursor: pointer;
 }
 
-@if user.agent safari {
-	.mgwt-Scrollbar {
-		\-webkit-transition-duration: 300ms;
-		\-webkit-transition-delay: 0ms;
-		\-webkit-transition-property: opacity;
-	}
-}
-
-@if user.agent gecko1_8 {
-	.mgwt-Scrollbar {
-		\-moz-transition-duration: 300ms;
-		\-moz-transition-delay: 0ms;
-		\-moz-transition-property: opacity;
-		transition-duration: 300ms;
-		transition-delay: 0ms;
-		transition-property: opacity;
-	}
-}
-
-/*TODO build this for ff as well, workaround for position bug?*/
 .mgwt-Scrollbar-horizontal {
 	bottom: 2px;
 	left: 2px;
@@ -102,48 +41,17 @@
 	width: 5px;
 }
 
-
-
-
-
-				
-
 .mgwt-Scrollbar-Bar {
 	position: absolute;
 	z-index: 100;
-	background:rgba(0,0,0,0.5);
+	background: rgba(0, 0, 0, 0.5);
 	border-radius: 3px;
-	pointer-events:none;
-}
-
-@if user.agent safari {
-	.mgwt-Scrollbar-Bar {
-		\-webkit-background-clip:padding-box;
-		\-webkit-box-sizing:border-box;
-		\-webkit-border-radius:3px;
-		\-webkit-transition-property:literal('-webkit-transform');
-		\-webkit-transition-timing-function:cubic-bezier(0.33,0.66,0.66,1);
-		\-webkit-transform: translate3d('0,0, 0');
-		\-webkit-transition-duration:0;
-	}
-}
-
-@if user.agent gecko1_8 {
-	.mgwt-Scrollbar-Bar {
-		\-moz-background-clip:padding-box;
-		\-moz-box-sizing:border-box;
-		\-moz-transition-property:literal('-webkit-transform');
-		\-moz-transition-timing-function:cubic-bezier(0.33,0.66,0.66,1);
-		\-moz-transform: translate('0,0');
-		\-moz-transition-duration:0;
-		
-		background-clip:padding-box;
-		box-sizing:border-box;
-		transition-property:transform;
-		transition-timing-function:cubic-bezier(0.33,0.66,0.66,1);
-		transform: translate('0,0');
-		transition-duration:0;
-	}
+	pointer-events: none;
+	background-clip: padding-box;
+	box-sizing: border-box;
+	transition-duration: 0ms;
+	transition-property: transform;
+	transition-timing-function: cubic-bezier(0.33, 0.66, 0.66, 1);
 }
 
 
