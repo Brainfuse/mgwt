@@ -1,4 +1,4 @@
-﻿
+
 @if user.agent gecko1_8 {
 
 	
@@ -78,7 +78,7 @@
 
 .flip {
 	animation-duration: .65s;
-	\-moz-backface-visibility: hidden;
+	backface-visibility: hidden;
 }
 
 .flip.in {
