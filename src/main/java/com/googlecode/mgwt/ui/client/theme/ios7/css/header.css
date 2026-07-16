@@ -4,6 +4,7 @@
 	position: relative;
 	height: 40px;
 	border-bottom: 1px solid var(--divider-color);
+	margin: 0px 10px;
 }
 
 .mgwt-HeaderPanel-left {
