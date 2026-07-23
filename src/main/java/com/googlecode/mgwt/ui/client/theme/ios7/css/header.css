@@ -4,18 +4,17 @@
 	position: relative;
 	height: 40px;
 	border-bottom: 1px solid var(--divider-color);
-	margin: 0px 10px;
 }
 
 .mgwt-HeaderPanel-left {
 	position: absolute;
-	left:0px;
+	left:10px;
 	bottom: 0px;
 }
 
 .mgwt-HeaderPanel-right {
 	position: absolute;
-	right:0px;
+	right: 10px;
 	bottom: 0px;
 }
 
@@ -40,6 +39,7 @@
 .mgwt-HeaderButton {
 	width: 80px;
 	height: 40px;
+	cursor: pointer;
 }
 
 .mgwt-HeaderButton:active, .mgwt-HeaderButton:hover  {
