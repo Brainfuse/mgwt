@@ -63,6 +63,15 @@ public class ScrollPanelTouchImpl extends ScrollPanelImpl implements ScrollPanel
   private static double ZOOM_MIN = 1;
   private static double ZOOM_MAX = 4;
 
+  /**
+   * Smallest scrollbar indicator, in px — height for the vertical bar, width for the
+   * horizontal one. A CSS min-height/min-width cannot be used here: the indicator is
+   * positioned with a transform whose range is derived from this size, so the size has
+   * to be clamped before {@code scrollbarMaxScroll} and {@code scrollbarProp} are
+   * computed. Clamped again to the track length so a short track cannot overflow.
+   */
+  private static final int MIN_SCROLLBAR_INDICATOR_SIZE = 40;
+
   private class TouchListener implements TouchHandler {
 
     @Override
@@ -464,8 +473,8 @@ public class ScrollPanelTouchImpl extends ScrollPanelImpl implements ScrollPanel
         switch (direction) {
           case HORIZONTAL:
             ScrollPanelTouchImpl.this.scrollBarSize[dir] = ScrollPanelTouchImpl.this.scrollBarWrapper[dir].getClientWidth();
-            ScrollPanelTouchImpl.this.scrollbarIndicatorSize[dir] =
-                (int) Math.max(Math.round((double) (ScrollPanelTouchImpl.this.scrollBarSize[dir] * ScrollPanelTouchImpl.this.scrollBarSize[dir]) / ScrollPanelTouchImpl.this.scrollerWidth), 8);
+            ScrollPanelTouchImpl.this.scrollbarIndicatorSize[dir] = indicatorSize(
+                ScrollPanelTouchImpl.this.scrollBarSize[dir], ScrollPanelTouchImpl.this.scrollerWidth);
             ScrollPanelTouchImpl.this.scrollBarIndicator[dir].getStyle().setWidth(ScrollPanelTouchImpl.this.scrollbarIndicatorSize[dir], Unit.PX);
 
             ScrollPanelTouchImpl.this.scrollbarMaxScroll[dir] = ScrollPanelTouchImpl.this.scrollBarSize[dir] - ScrollPanelTouchImpl.this.scrollbarIndicatorSize[dir];
@@ -474,8 +483,8 @@ public class ScrollPanelTouchImpl extends ScrollPanelImpl implements ScrollPanel
           case VERTICAL:
             ScrollPanelTouchImpl.this.scrollBarSize[dir] = ScrollPanelTouchImpl.this.scrollBarWrapper[dir].getClientHeight();
 
-            ScrollPanelTouchImpl.this.scrollbarIndicatorSize[dir] =
-                (int) Math.max(Math.round((double) (ScrollPanelTouchImpl.this.scrollBarSize[dir] * ScrollPanelTouchImpl.this.scrollBarSize[dir]) / ScrollPanelTouchImpl.this.scrollerHeight), 8);
+            ScrollPanelTouchImpl.this.scrollbarIndicatorSize[dir] = indicatorSize(
+                ScrollPanelTouchImpl.this.scrollBarSize[dir], ScrollPanelTouchImpl.this.scrollerHeight);
             ScrollPanelTouchImpl.this.scrollBarIndicator[dir].getStyle().setHeight(ScrollPanelTouchImpl.this.scrollbarIndicatorSize[dir], Unit.PX);
             ScrollPanelTouchImpl.this.scrollbarMaxScroll[dir] = ScrollPanelTouchImpl.this.scrollBarSize[dir] - ScrollPanelTouchImpl.this.scrollbarIndicatorSize[dir];
             ScrollPanelTouchImpl.this.scrollbarProp[dir] = ((double) (ScrollPanelTouchImpl.this.scrollbarMaxScroll[dir])) / ScrollPanelTouchImpl.this.maxScrollY;
@@ -492,6 +501,19 @@ public class ScrollPanelTouchImpl extends ScrollPanelImpl implements ScrollPanel
       }
     });
 
+  }
+
+  /**
+   * Proportional indicator length, floored at {@link #MIN_SCROLLBAR_INDICATOR_SIZE} so the
+   * bar stays grabbable in a long list, and capped at the track length so a track shorter
+   * than the minimum cannot overflow.
+   *
+   * @param trackSize length of the scrollbar track (px)
+   * @param contentSize length of the scrolled content along the same axis (px)
+   */
+  private int indicatorSize(int trackSize, int contentSize) {
+    int proportional = (int) Math.round((double) (trackSize * trackSize) / contentSize);
+    return Math.min(Math.max(proportional, MIN_SCROLLBAR_INDICATOR_SIZE), trackSize);
   }
 
   private void resize() {
@@ -540,11 +562,13 @@ public class ScrollPanelTouchImpl extends ScrollPanelImpl implements ScrollPanel
 
     pos = this.scrollbarProp[dir] * pos;
 
+    int minSize = Math.min(MIN_SCROLLBAR_INDICATOR_SIZE, this.scrollBarSize[dir]);
+
     if (pos < 0) {
       if (!this.fixedScrollbar) {
         size = (int) (this.scrollbarIndicatorSize[dir] + Math.round(pos * 3));
-        if (size < 8)
-          size = 8;
+        if (size < minSize)
+          size = minSize;
         if (direction == DIRECTION.HORIZONTAL) {
           this.scrollBarIndicator[dir].getStyle().setWidth(size, Unit.PX);
         } else {
@@ -558,8 +582,8 @@ public class ScrollPanelTouchImpl extends ScrollPanelImpl implements ScrollPanel
         if (!this.fixedScrollbar) {
           size = (int) (this.scrollbarIndicatorSize[dir] - Math.round((pos - this.scrollbarMaxScroll[dir]) * 3));
 
-          if (size < 8)
-            size = 8;
+          if (size < minSize)
+            size = minSize;
 
           if (direction == DIRECTION.HORIZONTAL) {
             this.scrollBarIndicator[dir].getStyle().setWidth(size, Unit.PX);
