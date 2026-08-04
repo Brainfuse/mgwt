@@ -1,6 +1,6 @@
 
 .mgwt-ButtonBar {
-	border-top: 1px solid #cecece;
-	background-color: #f8f8f8;
+	border-top: 1px solid eval("\"var(--border-color, #cecece)\"");
+	background-color:  eval("\"var(--bg-primary, #f8f8f8)\""); 
 	height: 45px;
 }
